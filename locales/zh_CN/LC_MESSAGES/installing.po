@@ -19,7 +19,7 @@ msgstr ""
 
 #: ../../installing.rst:4
 msgid "Installing the library"
-msgstr ""
+msgstr "安装库"
 
 #: ../../installing.rst:6
 msgid ""
@@ -28,16 +28,19 @@ msgid ""
 "pybind11 developers recommend one of the first three ways listed here, "
 "submodule, PyPI, or conda-forge, for obtaining pybind11."
 msgstr ""
+"有几种方法可以获得 pybind11 源代码，它位于 `GitHub 上的 pybind/pybind11 <https://github.com/pybind/pybind11>`_。"
+"pybind11 开发人员推荐这里列出的三种方法中的一种，即子模块、PyPI 或 conda-forge 来获取 pybind11。"
 
 #: ../../installing.rst:14
 msgid "Include as a submodule"
-msgstr ""
+msgstr "作为子模块包含"
 
 #: ../../installing.rst:16
 msgid ""
 "When you are working on a project in Git, you can use the pybind11 "
 "repository as a submodule. From your git repository, use:"
 msgstr ""
+"当你在 Git 中做项目时，你可以使用 pybind11 库作为子模块。从你的 git 仓库中，使用："
 
 #: ../../installing.rst:24
 msgid ""
@@ -46,6 +49,9 @@ msgid ""
 "ssh URL instead of the relative URL ``../../pybind/pybind11`` above. Some"
 " other servers also require the ``.git`` extension (GitHub does not)."
 msgstr ""
+"这假设你的依赖放在 ``extern/`` 中，并且你正在使用 GitHub；"
+"如果你不使用 GitHub，使用完整的 https 或 ssh URL，而不是相对 URL ``../../pybind/pybind11``。"
+"其他一些服务器也需要 ``.git`` 扩展名（GitHub 不需要）。"
 
 #: ../../installing.rst:29
 msgid ""
@@ -53,22 +59,26 @@ msgid ""
 "use the various integration tools (see :ref:`compiling`) pybind11 "
 "provides directly from the local folder."
 msgstr ""
+"从这里开始，您现在可以包含 ``extern/pybind11/include``，"
+"或者可以使用 pybind11 直接从本地文件夹提供的各种集成工具（请参阅 :ref:`compiling`）。"
 
 #: ../../installing.rst:34
 msgid "Include with PyPI"
-msgstr ""
+msgstr "使用 PyPI"
 
 #: ../../installing.rst:36
 msgid ""
 "You can download the sources and CMake files as a Python package from "
 "PyPI using Pip. Just use:"
 msgstr ""
+"您可以使用 pip 从 PyPI 下载源代码和 CMake 文件作为 Python 包。只使用："
 
 #: ../../installing.rst:43
 msgid ""
 "This will provide pybind11 in a standard Python package format. If you "
 "want pybind11 available directly in your environment root, you can use:"
 msgstr ""
+"这将以标准 Python 包格式提供 pybind11。如果您希望 pybind11 在您的环境根目录中直接可用，您可以使用："
 
 #: ../../installing.rst:50
 msgid ""
@@ -78,20 +88,25 @@ msgid ""
 "is recommended only for use in virtual environments or your "
 "``pyproject.toml`` file (see :ref:`compiling`)."
 msgstr ""
+"如果您使用系统 Python 进行安装，则不建议这样做，"
+"因为它会将文件添加到 ``/usr/local/include/pybind11`` 和 ``/usr/local/share/cmake/pybind11``，"
+"所以除非这是您想要的，否则建议只在虚拟环境或您的 ``pyproject.toml`` 中使用（参见 :ref:`compiling`）。"
 
 #: ../../installing.rst:57
 msgid "Include with conda-forge"
-msgstr ""
+msgstr "使用 conda-forge"
 
 #: ../../installing.rst:59
 msgid ""
 "You can use pybind11 with conda packaging via `conda-forge "
 "<https://github.com/conda-forge/pybind11-feedstock>`_:"
 msgstr ""
+"您可以使用 pybind11 借助 `conda-forge "
+"<https://github.com/conda-forge/pybind11-feedstock>`_ 打包："
 
 #: ../../installing.rst:68
 msgid "Include with vcpkg"
-msgstr ""
+msgstr "使用 vcpkg 包含"
 
 #: ../../installing.rst:69
 msgid ""

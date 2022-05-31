@@ -37,6 +37,7 @@ extensions = [
     "breathe",
     "sphinxcontrib.rsvgconverter",
     "sphinxcontrib.moderncmakedomain",
+    "sphinx_copybutton",
 ]
 
 breathe_projects = {"pybind11": ".build/doxygenxml/"}

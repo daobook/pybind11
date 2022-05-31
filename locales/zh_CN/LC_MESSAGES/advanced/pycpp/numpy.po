@@ -33,6 +33,9 @@ msgid ""
 "representation. Suppose we want to bind the following simplistic Matrix "
 "class:"
 msgstr ""
+"Python 支持非常通用和方便的方法来在插件库之间交换数据。"
+"类型可以公开 buffer视图 [#f2]_，它提供对原始内部数据表示形式的快速直接访问。"
+"假设想要绑定以下简单的 Matrix 类："
 
 #: ../../advanced/pycpp/numpy.rst:29
 msgid ""
@@ -41,6 +44,8 @@ msgid ""
 " possible to completely avoid copy operations with Python expressions "
 "like ``np.array(matrix_instance, copy = False)``."
 msgstr ""
+"下面的绑定代码将 ``Matrix`` 内容公开为 buffer 对象，使得将 Matrices 转换为 NumPy 数组成为可能。"
+"甚至可以完全避免使用 Python 表达式 ``np.array(matrix_instance, copy = False)`` 进行复制运算。"
 
 #: ../../advanced/pycpp/numpy.rst:49
 msgid ""
@@ -51,6 +56,9 @@ msgid ""
 "given matrix instance. The contents of ``py::buffer_info`` mirror the "
 "Python buffer protocol specification."
 msgstr ""
+"在新类型中支持 buffer protocol 需要在 ``py::class_`` 构造函数中指定特殊的 ``py::buffer_protocol()``  tag，"
+"并使用 lambda 函数调用 ``def_buffer()`` 方法，该方法根据需要创建 ``py::buffer_info`` 描述记录，"
+"描述给定的矩阵实例。``py::buffer_info`` 的内容反映了 Python buffer protocol 规范。"
 
 #: ../../advanced/pycpp/numpy.rst:67
 msgid ""
@@ -62,24 +70,31 @@ msgid ""
 "precision matrix (``Eigen::MatrixXd``) type, which supports "
 "initialization from compatible buffer objects (e.g. a NumPy matrix)."
 msgstr ""
+"要创建可以接受 Python buffer 对象作为参数的 C++ 函数，只需使用 ``py::buffer`` 类型作为它的参数之一。"
+"Buffer 可以存在于各种各样的配置中，因此在函数体中通常需要进行一些安全检查。"
+"下面，你可以看到基本的例子，关于如何为 Eigen 双精度矩阵（``Eigen::MatrixXd``）类型定义自定义构造函数，"
+"它支持从兼容的 buffer 对象（例如 NumPy matrix）初始化。"
 
 #: ../../advanced/pycpp/numpy.rst:107
 msgid ""
 "For reference, the ``def_buffer()`` call for this Eigen data type should "
 "look as follows:"
 msgstr ""
+"为了引用，这个 Eigen 数据类型的 ``def_buffer()`` 调用应该如下所示："
 
 #: ../../advanced/pycpp/numpy.rst:125
 msgid ""
 "For a much easier approach of binding Eigen types (although with some "
 "limitations), refer to the section on :doc:`/advanced/cast/eigen`."
 msgstr ""
+"对于绑定 Eigen 类型（尽管有一些限制）的更简单的方法,请参阅 :doc:`/advanced/cast/eigen` 的章节。"
 
 #: ../../advanced/pycpp/numpy.rst:130
 msgid ""
 "The file :file:`tests/test_buffers.cpp` contains a complete example that "
 "demonstrates using the buffer protocol with pybind11 in more detail."
 msgstr ""
+"文件 :file:`tests/test_buffers.cpp` 包含完整的示例，它更详细地演示了使用 pybind11 的 buffer protocol。"
 
 #: ../../advanced/pycpp/numpy.rst:133
 msgid "http://docs.python.org/3/c-api/buffer.html"
@@ -87,7 +102,7 @@ msgstr ""
 
 #: ../../advanced/pycpp/numpy.rst:136
 msgid "Arrays"
-msgstr ""
+msgstr "数组"
 
 #: ../../advanced/pycpp/numpy.rst:138
 msgid ""
@@ -95,6 +110,8 @@ msgid ""
 "can restrict the function so that it only accepts NumPy arrays (rather "
 "than any type of Python object satisfying the buffer protocol)."
 msgstr ""
+"在上面的代码片段中，通过将 ``py::buffer`` 与 ``py::array`` 互换，"
+"可以限制该函数，使其只接受 NumPy 数组（而不是任何满足 buffer protocol 的 Python 对象类型）。"
 
 #: ../../advanced/pycpp/numpy.rst:142
 msgid ""
@@ -104,6 +121,9 @@ msgid ""
 "requires the argument to be a NumPy array containing double precision "
 "values."
 msgstr ""
+"在许多情况下,希望定义函数,它只接受某个数据类型的 NumPy 数组。"
+"这可能要借助 ``py::array_t<T>`` 模板。"
+"例如，下面的函数要求参数成为包含双精度值的 NumPy 数组。"
 
 #: ../../advanced/pycpp/numpy.rst:151
 msgid ""
@@ -115,6 +135,11 @@ msgid ""
 "can be used without declaring a build-time dependency on NumPy; "
 "NumPy>=1.7.0 is a runtime dependency."
 msgstr ""
+"当它以不同的类型（例如整数或整数列表）调用时，"
+"绑定代码将尝试将 input 输入到请求类型的 NumPy 数组中。"
+"这个特性需要包含 :file:`pybind11/numpy.h`。"
+"注意 :file:`pybind11/numpy.h` 不依赖于 NumPy 头，因此可以在没有声明 NumPy 的构建时依赖的情况下使用；"
+"NumPy>=1.7.0 是运行时依赖。"
 
 #: ../../advanced/pycpp/numpy.rst:158
 msgid ""
@@ -125,6 +150,9 @@ msgid ""
 "ordering. This can be accomplished via a second template argument with "
 "values ``py::array::c_style`` or ``py::array::f_style``."
 msgstr ""
+"在 NumPy 数组中数据不保证以密集的方式填充；此外，条目可以由任意的列和行大步分离。"
+"有时，要求函数只接受密集数组（使用 C（行为主）或 Fortran（列为主）排序）会很有用。"
+"这可以通过第二个模板参数 ``py::array::c_style`` 或 ``py::array::f_style`` 来完成。"
 
 #: ../../advanced/pycpp/numpy.rst:169
 msgid ""
@@ -133,6 +161,8 @@ msgid ""
 "converted into an array satisfying the specified requirements instead of "
 "trying the next function overload."
 msgstr ""
+"``py::array::forcecast`` 参数是第二个模板形参的默认值，"
+"它确保不符合要求的参数被转换为满足指定要求的数组，而不是尝试下一次函数重载。"
 
 #: ../../advanced/pycpp/numpy.rst:174
 msgid ""
@@ -140,22 +170,25 @@ msgid ""
 "references work, as well as the following functions based on the NumPy "
 "API:"
 msgstr ""
+"数组有几种方法；引用下面列出的方法可以工作，以及以下基于 NumPy API 的函数："
 
 #: ../../advanced/pycpp/numpy.rst:177
 msgid "``.dtype()`` returns the type of the contained values."
-msgstr ""
+msgstr "``.dtype()`` 返回所包含值的类型。"
 
 #: ../../advanced/pycpp/numpy.rst:179
 msgid ""
 "``.strides()`` returns a pointer to the strides of the array (optionally "
 "pass an integer axis to get a number)."
 msgstr ""
+"``.strides()`` 返回指向数组步长的指针（可以选择传递整数轴来获得数字）。"
 
 #: ../../advanced/pycpp/numpy.rst:182
 msgid ""
 "``.flags()`` returns the flag settings. ``.writable()`` and "
 "``.owndata()`` are directly available."
 msgstr ""
+"``.flags()`` 返回标志设置。``.writable()`` 和 ``.owndata()`` 是直接可用的。"
 
 #: ../../advanced/pycpp/numpy.rst:185
 msgid "``.offset_at()`` returns the offset (optionally pass indices)."
@@ -183,11 +216,11 @@ msgstr ""
 
 #: ../../advanced/pycpp/numpy.rst:197
 msgid "There are also several methods for getting references (described below)."
-msgstr ""
+msgstr "还有几种获取引用的方法（如下所述）。"
 
 #: ../../advanced/pycpp/numpy.rst:200
 msgid "Structured types"
-msgstr ""
+msgstr "结构化类型"
 
 #: ../../advanced/pycpp/numpy.rst:202
 msgid ""
@@ -196,6 +229,8 @@ msgid ""
 "via ``PYBIND11_NUMPY_DTYPE`` macro, called in the plugin definition code,"
 " which expects the type followed by field names:"
 msgstr ""
+"为了让 ``py::array_t`` 与结构化（记录）类型一起工作，首先需要注册该类型的内存布局。"
+"这可以通过 ``PYBIND11_NUMPY_DTYPE`` 宏来完成，在插件定义代码中调用，它期望类型后面跟着字段名："
 
 #: ../../advanced/pycpp/numpy.rst:228
 msgid ""
@@ -207,10 +242,11 @@ msgid ""
 "structures that can be safely manipulated as raw memory without violating"
 " invariants."
 msgstr ""
+"该结构应该由基本算术类型、``std::complex``、之前注册的子结构和上述任何类型的数组组成。"
 
 #: ../../advanced/pycpp/numpy.rst:236
 msgid "Vectorizing functions"
-msgstr ""
+msgstr "向量化函数"
 
 #: ../../advanced/pycpp/numpy.rst:238
 msgid ""
@@ -218,10 +254,11 @@ msgid ""
 " so that it can process arbitrary NumPy array arguments (vectors, "
 "matrices, general N-D arrays) in addition to its normal arguments:"
 msgstr ""
+"假设想将具有以下签名的函数绑定到 Python，以便它除了处理普通参数外，还可以处理任意 NumPy 数组参数（向量、矩阵、一般的 N-D 数组）："
 
 #: ../../advanced/pycpp/numpy.rst:246
 msgid "After including the ``pybind11/numpy.h`` header, this is extremely simple:"
-msgstr ""
+msgstr "在包含 ``pybind11/numpy.h`` 头之后，这是极其简单的："
 
 #: ../../advanced/pycpp/numpy.rst:252
 msgid ""

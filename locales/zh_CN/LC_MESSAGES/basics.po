@@ -19,7 +19,7 @@ msgstr ""
 
 #: ../../basics.rst:4
 msgid "First steps"
-msgstr ""
+msgstr "第一步"
 
 #: ../../basics.rst:6
 msgid ""
@@ -27,10 +27,12 @@ msgid ""
 " started, make sure that development environment is set up to compile the"
 " included set of test cases."
 msgstr ""
+"本节演示 pybind11 的基本特性。"
+"在开始之前，确保已经设置好开发环境来编译包含的测试用例集。"
 
 #: ../../basics.rst:12
 msgid "Compiling the test cases"
-msgstr ""
+msgstr "编译测试用例"
 
 #: ../../basics.rst:15
 msgid "Linux/macOS"
@@ -42,14 +44,16 @@ msgid ""
 "packages as well as **cmake**. On macOS, the included python version "
 "works out of the box, but **cmake** must still be installed."
 msgstr ""
+"在 Linux 上，你需要安装 **python-dev** 或 **python3-dev** 包以及 **cmake**。"
+"在 macOS 上，包含的 python 版本可以开箱即用，但 **cmake** 仍然必须安装。"
 
 #: ../../basics.rst:21
 msgid "After installing the prerequisites, run"
-msgstr ""
+msgstr "安装好先决条件后，运行"
 
 #: ../../basics.rst:30
 msgid "The last line will both compile and run the tests."
-msgstr ""
+msgstr "最后一行将编译和运行测试。"
 
 #: ../../basics.rst:33
 msgid "Windows"
@@ -57,7 +61,7 @@ msgstr ""
 
 #: ../../basics.rst:35
 msgid "On Windows, only **Visual Studio 2017** and newer are supported."
-msgstr ""
+msgstr "在 Windows 上，只支持 **Visual Studio 2017** 及更新版本。"
 
 #: ../../basics.rst:39
 msgid ""
@@ -66,10 +70,12 @@ msgid ""
 "conformance`_. When building with Visual Studio 2019, this is not "
 "strictly necessary, but still advised."
 msgstr ""
+"要在 Visual Studio 2017 (MSVC 14.1) 中使用 C++ 17, pybind11 要求将 flag ``/permissive-`` 传递给编译器 `to enforce standard conformance`_。"
+"在使用 Visual Studio 2019 构建时，这并不是绝对必要的，但仍然建议。"
 
 #: ../../basics.rst:45
 msgid "To compile and run the tests:"
-msgstr ""
+msgstr "编译和运行测试："
 
 #: ../../basics.rst:54
 msgid ""
@@ -94,41 +100,46 @@ msgstr ""
 
 #: ../../basics.rst:71
 msgid "Header and namespace conventions"
-msgstr ""
+msgstr "头和名称空间约定"
 
 #: ../../basics.rst:73
 msgid ""
 "For brevity, all code examples assume that the following two lines are "
 "present:"
 msgstr ""
+"为了简单起见，所有代码示例都假定存在以下两行代码："
 
 #: ../../basics.rst:81
 msgid ""
 "Some features may require additional headers, but those will be specified"
 " as needed."
 msgstr ""
+"有些功能可能需要额外的 header，但这些将根据需要指定。"
 
 #: ../../basics.rst:86
 msgid "Creating bindings for a simple function"
-msgstr ""
+msgstr "为简单函数创建绑定"
 
 #: ../../basics.rst:88
 msgid ""
 "Let's start by creating Python bindings for an extremely simple function,"
 " which adds two numbers and returns their result:"
 msgstr ""
+"从极其简单的函数创建 Python 绑定开始，该函数将两个数字相加并返回结果："
 
 #: ../../basics.rst:97
 msgid ""
 "For simplicity [#f1]_, we'll put both this function and the binding code "
 "into a file named :file:`example.cpp` with the following contents:"
 msgstr ""
+"为了简单起见 [#f1]_，将把这个函数和绑定代码放入名为 :file:`example.cpp` 的文件中，内容如下："
 
 #: ../../basics.rst:114
 msgid ""
 "In practice, implementation and binding code will generally be located in"
 " separate files."
 msgstr ""
+"在实践中，实现和绑定代码通常位于不同的文件中。"
 
 #: ../../basics.rst:117
 msgid ""
@@ -140,6 +151,10 @@ msgid ""
 "bindings. The method :func:`module_::def` generates binding code that "
 "exposes the ``add()`` function to Python."
 msgstr ""
+":func:`PYBIND11_MODULE` 宏创建了一个函数，当 Python 内部发出 ``import`` 语句时将调用该函数。"
+"模块名（``example``）作为第一个宏参数给出（它不应该在引号中）。"
+"第二个参数（``m``）定义了类型的变量 :class:`py::module_ <module>` ，它是创建绑定的主接口。"
+":func:`module_::def` 方法会生成绑定代码，将 ``add()`` 函数公开给 Python。"
 
 #: ../../basics.rst:126
 msgid ""
@@ -149,6 +164,8 @@ msgid ""
 "approach and the used syntax are borrowed from Boost.Python, though the "
 "underlying implementation is very different."
 msgstr ""
+"请注意，将函数公开给 Python 只需要很少的代码：关于函数参数和返回值的所有细节都是使用模板元编程自动推断出来的。"
+"这种总体方法和使用的语法借鉴自 Boost.Python，尽管底层实现非常不同。"
 
 #: ../../basics.rst:132
 msgid ""
@@ -157,6 +174,8 @@ msgid ""
 "translation steps. On Linux, the above example can be compiled using the "
 "following command:"
 msgstr ""
+"pybind11 是只包含头文件的库，因此不需要链接到任何特殊的库，也没有中间（magic）转换步骤。"
+"在 Linux 上，上面的例子可以用下面的命令编译："
 
 #: ../../basics.rst:142
 msgid ""
@@ -165,6 +184,9 @@ msgid ""
 "instead of ``$(python3 -m pybind11 --includes)`` in the above "
 "compilation, as explained in :ref:`building_manually`."
 msgstr ""
+"如果你使用 :ref:`include_as_a_submodule` 来获取 pybind11 源代码，"
+"那么在上述编译中使用 ``$(python3-config --includes) -Iextern/pybind11/include`` 而不是 ``$(python3 -m pybind11 --includes)``，"
+"如 :ref:`building_manually` 解释的那样。"
 
 #: ../../basics.rst:147
 msgid ""

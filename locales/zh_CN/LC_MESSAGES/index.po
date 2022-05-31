@@ -38,7 +38,7 @@ msgstr ""
 
 #: ../../readme.rst:4
 msgid "**pybind11 — Seamless operability between C++11 and Python**"
-msgstr ""
+msgstr "**pybind11 —— C++ 11 和 Python 之间的无缝可操作性**"
 
 #: ../../readme.rst:6
 msgid ""
@@ -48,11 +48,11 @@ msgstr ""
 
 #: ../../readme.rst
 msgid "Latest Documentation Status"
-msgstr ""
+msgstr "最新的文档状态"
 
 #: ../../readme.rst
 msgid "Stable Documentation Status"
-msgstr ""
+msgstr "稳定的文档状态"
 
 #: ../../readme.rst
 msgid "Gitter chat"
@@ -106,6 +106,10 @@ msgid ""
 "David Abrahams: to minimize boilerplate code in traditional extension "
 "modules by inferring type information using compile-time introspection."
 msgstr ""
+"**pybind11** 是轻量级的头文件库，它在 Python 中公开 C++ 类型，"
+"反之亦然，主要用于创建现有 C++ 代码的 Python 绑定。"
+"它的目标和语法与出色的 `Boost.Python <http://www.boost.org/doc/libs/1_58_0/libs/python/doc/>`_ 库相似，"
+"作者 David Abrahams：通过使用编译时内省推断类型信息来最小化传统扩展模块中的样板代码。"
 
 #: ../../readme.rst:25
 msgid ""
@@ -118,6 +122,10 @@ msgid ""
 " heavy machinery has become an excessively large and unnecessary "
 "dependency."
 msgstr ""
+"创建类似项目的原因是 Boost.Python 的主要问题是非常大且复杂的实用程序库套件，"
+"几乎可以与现有的每一个 C++ 编译器一起工作。"
+"这种兼容性也有其代价：晦涩的模板技巧和变通方法是支持最古老和 bug 最多的编译器样本所必需的。"
+"现在兼容 C++ 11 的编译器已经被广泛使用，这个笨重的机器已经成为了过于庞大和不必要的依赖。"
 
 #: ../../readme.rst:34
 msgid ""
@@ -131,6 +139,11 @@ msgid ""
 "Boost.Python in many ways, leading to dramatically simpler binding code "
 "in many common situations."
 msgstr ""
+"可以将这个库看作 Boost 的小型的自包含版本。"
+"删除与绑定生成无关的所有内容。"
+"如果没有注释，核心头文件只需要大约 4K 行代码，并且依赖于 Python（3.6+ 或 PyPy）和 C++ 标准库。"
+"这种紧凑的实现得益于一些新的 C++ 11 语言特性（特别是元组、lambda 函数和可变参数模板）。"
+"自创建以来，这个库已经超越了 Boost。在许多常见情况下，使用 Python 会大大简化绑定代码。"
 
 #: ../../readme.rst:44
 msgid ""
@@ -141,28 +154,32 @@ msgid ""
 "source code is always available at `github.com/pybind/pybind11 "
 "<https://github.com/pybind/pybind11>`_."
 msgstr ""
+"`pybind11.readthedocs.io <https://pybind11.readthedocs.io/en/latest>`_ 提供了教程和参考文档。"
+"该手册的 PDF 版本可以在这里找到。源代码可以在  `github.com/pybind/pybind11 "
+"<https://github.com/pybind/pybind11>`_。"
 
 #: ../../readme.rst:53
 msgid "Core features"
-msgstr ""
+msgstr "核心特性"
 
 #: ../../readme.rst:56
 msgid "pybind11 can map the following core C++ features to Python:"
-msgstr ""
+msgstr "pybind11 可以将以下 C++ 核心特性映射到 Python："
 
 #: ../../readme.rst:58
 msgid ""
 "Functions accepting and returning custom data structures per value, "
 "reference, or pointer"
 msgstr ""
+"函数接受并返回自定义数据结构的每个值、引用或指针"
 
 #: ../../readme.rst:60
 msgid "Instance methods and static methods"
-msgstr ""
+msgstr "实例方法和静态方法"
 
 #: ../../readme.rst:61
 msgid "Overloaded functions"
-msgstr ""
+msgstr "重载函数"
 
 #: ../../readme.rst:62
 msgid "Instance attributes and static attributes"

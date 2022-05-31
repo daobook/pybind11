@@ -19,11 +19,11 @@ msgstr ""
 
 #: ../../advanced/pycpp/object.rst:2
 msgid "Python types"
-msgstr ""
+msgstr "Python 类型"
 
 #: ../../advanced/pycpp/object.rst:7
 msgid "Available wrappers"
-msgstr ""
+msgstr "可用的包装器"
 
 #: ../../advanced/pycpp/object.rst:9
 msgid ""
@@ -31,6 +31,8 @@ msgid ""
 "can also be used as function parameters -- see "
 ":ref:`python_objects_as_args`."
 msgstr ""
+"所有主要的 Python 类型都可以作为瘦 C++ 包装器类使用。"
+"这些也可以用作函数参数——参见 :ref:`python_objects_as_args`。"
 
 #: ../../advanced/pycpp/object.rst:12
 msgid ""

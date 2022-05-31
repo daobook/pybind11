@@ -19,7 +19,7 @@ msgstr ""
 
 #: ../../advanced/pycpp/index.rst:2
 msgid "Python C++ interface"
-msgstr ""
+msgstr "Python C++ 接口"
 
 #: ../../advanced/pycpp/index.rst:4
 msgid ""
@@ -27,4 +27,5 @@ msgid ""
 "which makes it possible to conveniently call Python code from C++ without"
 " resorting to Python's C API."
 msgstr ""
-
+"pybind11 使用薄 C++ 包装器公开 Python 类型和函数，"
+"这使得从 C++ 调用 Python 代码成为可能，而无需求助于 Python 的 C API。"
