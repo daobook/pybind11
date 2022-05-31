@@ -191,9 +191,7 @@ def test_alias_delay_initialization2(capture):
 def test_move_support():
     class NCVirtExt(m.NCVirt):
         def get_noncopyable(self, a, b):
-            # Constructs and returns a new instance:
-            nc = m.NonCopyable(a * a, b * b)
-            return nc
+            return m.NonCopyable(a * a, b * b)
 
         def get_movable(self, a, b):
             # Return a referenced copy

@@ -389,7 +389,7 @@ def test_pybind11_str_raw_str():
     assert cvt({}) == "{}"
     assert cvt({3: 4}) == "{3: 4}"
     assert cvt(set()) == "set()"
-    assert cvt({3, 3}) == "{3}"
+    assert cvt({3}) == "{3}"
 
     valid_orig = "Ǳ"
     valid_utf8 = valid_orig.encode("utf-8")
@@ -565,13 +565,13 @@ def test_memoryview_from_memory():
 
 
 def test_builtin_functions():
-    assert m.get_len([i for i in range(42)]) == 42
+    assert m.get_len(list(range(42))) == 42
     with pytest.raises(TypeError) as exc_info:
-        m.get_len(i for i in range(42))
-    assert str(exc_info.value) in [
+        m.get_len(iter(range(42)))
+    assert str(exc_info.value) in {
         "object of type 'generator' has no len()",
         "'generator' has no length",
-    ]  # PyPy
+    }
 
 
 def test_isinstance_string_types():

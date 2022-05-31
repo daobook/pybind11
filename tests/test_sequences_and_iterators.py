@@ -19,15 +19,15 @@ def test_slice_constructors_explicit_optional():
 def test_generalized_iterators():
     assert list(m.IntPairs([(1, 2), (3, 4), (0, 5)]).nonzero()) == [(1, 2), (3, 4)]
     assert list(m.IntPairs([(1, 2), (2, 0), (0, 3), (4, 5)]).nonzero()) == [(1, 2)]
-    assert list(m.IntPairs([(0, 3), (1, 2), (3, 4)]).nonzero()) == []
+    assert not list(m.IntPairs([(0, 3), (1, 2), (3, 4)]).nonzero())
 
     assert list(m.IntPairs([(1, 2), (3, 4), (0, 5)]).nonzero_keys()) == [1, 3]
     assert list(m.IntPairs([(1, 2), (2, 0), (0, 3), (4, 5)]).nonzero_keys()) == [1]
-    assert list(m.IntPairs([(0, 3), (1, 2), (3, 4)]).nonzero_keys()) == []
+    assert not list(m.IntPairs([(0, 3), (1, 2), (3, 4)]).nonzero_keys())
 
     assert list(m.IntPairs([(1, 2), (3, 4), (0, 5)]).nonzero_values()) == [2, 4]
     assert list(m.IntPairs([(1, 2), (2, 0), (0, 3), (4, 5)]).nonzero_values()) == [2]
-    assert list(m.IntPairs([(0, 3), (1, 2), (3, 4)]).nonzero_values()) == []
+    assert not list(m.IntPairs([(0, 3), (1, 2), (3, 4)]).nonzero_values())
 
     # __next__ must continue to raise StopIteration
     it = m.IntPairs([(0, 0)]).nonzero()

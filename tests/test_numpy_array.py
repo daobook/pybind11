@@ -558,7 +558,7 @@ def test_argument_conversions(forcecast, contiguity, noconvert):
                     # If noconvert is passed, only float64 and the matching order is accepted.
                     # If at most one dimension has a size greater than 1, the array is also
                     # trivially contiguous.
-                    trivially_contiguous = sum(1 for d in shape if d > 1) <= 1
+                    trivially_contiguous = sum(d > 1 for d in shape) <= 1
                     should_raise = dtype.name != "float64" or (
                         contiguity is not None
                         and contiguity != order
