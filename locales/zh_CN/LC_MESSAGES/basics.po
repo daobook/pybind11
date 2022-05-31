@@ -1,0 +1,281 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2017, Wenzel Jakob
+# This file is distributed under the same license as the pybind11 package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pybind11 2.10.0.dev1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-05-31 12:45+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.10.1\n"
+
+#: ../../basics.rst:4
+msgid "First steps"
+msgstr ""
+
+#: ../../basics.rst:6
+msgid ""
+"This sections demonstrates the basic features of pybind11. Before getting"
+" started, make sure that development environment is set up to compile the"
+" included set of test cases."
+msgstr ""
+
+#: ../../basics.rst:12
+msgid "Compiling the test cases"
+msgstr ""
+
+#: ../../basics.rst:15
+msgid "Linux/macOS"
+msgstr ""
+
+#: ../../basics.rst:17
+msgid ""
+"On Linux  you'll need to install the **python-dev** or **python3-dev** "
+"packages as well as **cmake**. On macOS, the included python version "
+"works out of the box, but **cmake** must still be installed."
+msgstr ""
+
+#: ../../basics.rst:21
+msgid "After installing the prerequisites, run"
+msgstr ""
+
+#: ../../basics.rst:30
+msgid "The last line will both compile and run the tests."
+msgstr ""
+
+#: ../../basics.rst:33
+msgid "Windows"
+msgstr ""
+
+#: ../../basics.rst:35
+msgid "On Windows, only **Visual Studio 2017** and newer are supported."
+msgstr ""
+
+#: ../../basics.rst:39
+msgid ""
+"To use the C++17 in Visual Studio 2017 (MSVC 14.1), pybind11 requires the"
+" flag ``/permissive-`` to be passed to the compiler `to enforce standard "
+"conformance`_. When building with Visual Studio 2019, this is not "
+"strictly necessary, but still advised."
+msgstr ""
+
+#: ../../basics.rst:45
+msgid "To compile and run the tests:"
+msgstr ""
+
+#: ../../basics.rst:54
+msgid ""
+"This will create a Visual Studio project, compile and run the target, all"
+" from the command line."
+msgstr ""
+
+#: ../../basics.rst:59
+msgid ""
+"If all tests fail, make sure that the Python binary and the testcases are"
+" compiled for the same processor type and bitness (i.e. either **i386** "
+"or **x86_64**). You can specify **x86_64** as the target architecture for"
+" the generated Visual Studio project using ``cmake -A x64 ..``."
+msgstr ""
+
+#: ../../basics.rst:66
+msgid ""
+"Advanced users who are already familiar with Boost.Python may want to "
+"skip the tutorial and look at the test cases in the :file:`tests` "
+"directory, which exercise all features of pybind11."
+msgstr ""
+
+#: ../../basics.rst:71
+msgid "Header and namespace conventions"
+msgstr ""
+
+#: ../../basics.rst:73
+msgid ""
+"For brevity, all code examples assume that the following two lines are "
+"present:"
+msgstr ""
+
+#: ../../basics.rst:81
+msgid ""
+"Some features may require additional headers, but those will be specified"
+" as needed."
+msgstr ""
+
+#: ../../basics.rst:86
+msgid "Creating bindings for a simple function"
+msgstr ""
+
+#: ../../basics.rst:88
+msgid ""
+"Let's start by creating Python bindings for an extremely simple function,"
+" which adds two numbers and returns their result:"
+msgstr ""
+
+#: ../../basics.rst:97
+msgid ""
+"For simplicity [#f1]_, we'll put both this function and the binding code "
+"into a file named :file:`example.cpp` with the following contents:"
+msgstr ""
+
+#: ../../basics.rst:114
+msgid ""
+"In practice, implementation and binding code will generally be located in"
+" separate files."
+msgstr ""
+
+#: ../../basics.rst:117
+msgid ""
+"The :func:`PYBIND11_MODULE` macro creates a function that will be called "
+"when an ``import`` statement is issued from within Python. The module "
+"name (``example``) is given as the first macro argument (it should not be"
+" in quotes). The second argument (``m``) defines a variable of type "
+":class:`py::module_ <module>` which is the main interface for creating "
+"bindings. The method :func:`module_::def` generates binding code that "
+"exposes the ``add()`` function to Python."
+msgstr ""
+
+#: ../../basics.rst:126
+msgid ""
+"Notice how little code was needed to expose our function to Python: all "
+"details regarding the function's parameters and return value were "
+"automatically inferred using template metaprogramming. This overall "
+"approach and the used syntax are borrowed from Boost.Python, though the "
+"underlying implementation is very different."
+msgstr ""
+
+#: ../../basics.rst:132
+msgid ""
+"pybind11 is a header-only library, hence it is not necessary to link "
+"against any special libraries and there are no intermediate (magic) "
+"translation steps. On Linux, the above example can be compiled using the "
+"following command:"
+msgstr ""
+
+#: ../../basics.rst:142
+msgid ""
+"If you used :ref:`include_as_a_submodule` to get the pybind11 source, "
+"then use ``$(python3-config --includes) -Iextern/pybind11/include`` "
+"instead of ``$(python3 -m pybind11 --includes)`` in the above "
+"compilation, as explained in :ref:`building_manually`."
+msgstr ""
+
+#: ../../basics.rst:147
+msgid ""
+"For more details on the required compiler flags on Linux and macOS, see "
+":ref:`building_manually`. For complete cross-platform compilation "
+"instructions, refer to the :ref:`compiling` page."
+msgstr ""
+
+#: ../../basics.rst:151
+msgid ""
+"The `python_example`_ and `cmake_example`_ repositories are also a good "
+"place to start. They are both complete project examples with cross-"
+"platform build systems. The only difference between the two is that "
+"`python_example`_ uses Python's ``setuptools`` to build the module, while"
+" `cmake_example`_ uses CMake (which may be preferable for existing C++ "
+"projects)."
+msgstr ""
+
+#: ../../basics.rst:160
+msgid ""
+"Building the above C++ code will produce a binary module file that can be"
+" imported to Python. Assuming that the compiled module is located in the "
+"current directory, the following interactive Python session shows how to "
+"load and execute the example:"
+msgstr ""
+
+#: ../../basics.rst:179
+msgid "Keyword arguments"
+msgstr ""
+
+#: ../../basics.rst:181
+msgid ""
+"With a simple code modification, it is possible to inform Python about "
+"the names of the arguments (\"i\" and \"j\" in this case)."
+msgstr ""
+
+#: ../../basics.rst:189
+msgid ""
+":class:`arg` is one of several special tag classes which can be used to "
+"pass metadata into :func:`module_::def`. With this modified binding code,"
+" we can now call the function using keyword arguments, which is a more "
+"readable alternative particularly for functions taking many parameters:"
+msgstr ""
+
+#: ../../basics.rst:200
+msgid ""
+"The keyword names also appear in the function signatures within the "
+"documentation."
+msgstr ""
+
+#: ../../basics.rst:214
+msgid "A shorter notation for named arguments is also available:"
+msgstr ""
+
+#: ../../basics.rst:224
+msgid ""
+"The :var:`_a` suffix forms a C++11 literal which is equivalent to "
+":class:`arg`. Note that the literal operator must first be made visible "
+"with the directive ``using namespace pybind11::literals``. This does not "
+"bring in anything else from the ``pybind11`` namespace except for "
+"literals."
+msgstr ""
+
+#: ../../basics.rst:232
+msgid "Default arguments"
+msgstr ""
+
+#: ../../basics.rst:234
+msgid "Suppose now that the function to be bound has default arguments, e.g.:"
+msgstr ""
+
+#: ../../basics.rst:242
+msgid ""
+"Unfortunately, pybind11 cannot automatically extract these parameters, "
+"since they are not part of the function's type information. However, they"
+" are simple to specify using an extension of :class:`arg`:"
+msgstr ""
+
+#: ../../basics.rst:251
+msgid "The default values also appear within the documentation."
+msgstr ""
+
+#: ../../basics.rst:265
+msgid "The shorthand notation is also available for default arguments:"
+msgstr ""
+
+#: ../../basics.rst:275
+msgid "Exporting variables"
+msgstr ""
+
+#: ../../basics.rst:277
+msgid ""
+"To expose a value from C++, use the ``attr`` function to register it in a"
+" module as shown below. Built-in types and general objects (more on that "
+"later) are automatically converted when assigned as attributes, and can "
+"be explicitly converted using the function ``py::cast``."
+msgstr ""
+
+#: ../../basics.rst:290
+msgid "These are then accessible from Python:"
+msgstr ""
+
+#: ../../basics.rst:303
+msgid "Supported data types"
+msgstr ""
+
+#: ../../basics.rst:305
+msgid ""
+"A large number of data types are supported out of the box and can be used"
+" seamlessly as functions arguments, return values or with ``py::cast`` in"
+" general. For a full overview, see the :doc:`advanced/cast/index` "
+"section."
+msgstr ""
+

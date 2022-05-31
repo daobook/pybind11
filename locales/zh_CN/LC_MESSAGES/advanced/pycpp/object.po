@@ -1,0 +1,258 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2017, Wenzel Jakob
+# This file is distributed under the same license as the pybind11 package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pybind11 2.10.0.dev1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-05-31 12:45+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.10.1\n"
+
+#: ../../advanced/pycpp/object.rst:2
+msgid "Python types"
+msgstr ""
+
+#: ../../advanced/pycpp/object.rst:7
+msgid "Available wrappers"
+msgstr ""
+
+#: ../../advanced/pycpp/object.rst:9
+msgid ""
+"All major Python types are available as thin C++ wrapper classes. These "
+"can also be used as function parameters -- see "
+":ref:`python_objects_as_args`."
+msgstr ""
+
+#: ../../advanced/pycpp/object.rst:12
+msgid ""
+"Available types include :class:`handle`, :class:`object`, :class:`bool_`,"
+" :class:`int_`, :class:`float_`, :class:`str`, :class:`bytes`, "
+":class:`tuple`, :class:`list`, :class:`dict`, :class:`slice`, "
+":class:`none`, :class:`capsule`, :class:`iterable`, :class:`iterator`, "
+":class:`function`, :class:`buffer`, :class:`array`, and :class:`array_t`."
+msgstr ""
+
+#: ../../advanced/pycpp/object.rst:20
+msgid ""
+"Be sure to review the :ref:`pytypes_gotchas` before using this heavily in"
+" your C++ API."
+msgstr ""
+
+#: ../../advanced/pycpp/object.rst:26
+msgid "Instantiating compound Python types from C++"
+msgstr ""
+
+#: ../../advanced/pycpp/object.rst:28
+msgid "Dictionaries can be initialized in the :class:`dict` constructor:"
+msgstr ""
+
+#: ../../advanced/pycpp/object.rst:35
+msgid ""
+"A tuple of python objects can be instantiated using "
+":func:`py::make_tuple`:"
+msgstr ""
+
+#: ../../advanced/pycpp/object.rst:41
+msgid "Each element is converted to a supported Python type."
+msgstr ""
+
+#: ../../advanced/pycpp/object.rst:43
+msgid "A `simple namespace`_ can be instantiated using"
+msgstr ""
+
+#: ../../advanced/pycpp/object.rst:51
+msgid ""
+"Attributes on a namespace can be modified with the :func:`py::delattr`, "
+":func:`py::getattr`, and :func:`py::setattr` functions. Simple namespaces"
+" can be useful as lightweight stand-ins for class instances."
+msgstr ""
+
+#: ../../advanced/pycpp/object.rst:60
+msgid "Casting back and forth"
+msgstr ""
+
+#: ../../advanced/pycpp/object.rst:62
+msgid ""
+"In this kind of mixed code, it is often necessary to convert arbitrary "
+"C++ types to Python, which can be done using :func:`py::cast`:"
+msgstr ""
+
+#: ../../advanced/pycpp/object.rst:70
+msgid "The reverse direction uses the following syntax:"
+msgstr ""
+
+#: ../../advanced/pycpp/object.rst:77
+msgid ""
+"When conversion fails, both directions throw the exception "
+":class:`cast_error`."
+msgstr ""
+
+#: ../../advanced/pycpp/object.rst:82
+msgid "Accessing Python libraries from C++"
+msgstr ""
+
+#: ../../advanced/pycpp/object.rst:84
+msgid ""
+"It is also possible to import objects defined in the Python standard "
+"library or available in the current Python environment (``sys.path``) and"
+" work with these in C++."
+msgstr ""
+
+#: ../../advanced/pycpp/object.rst:88
+msgid "This example obtains a reference to the Python ``Decimal`` class."
+msgstr ""
+
+#: ../../advanced/pycpp/object.rst:105
+msgid "Calling Python functions"
+msgstr ""
+
+#: ../../advanced/pycpp/object.rst:107
+msgid ""
+"It is also possible to call Python classes, functions and methods via "
+"``operator()``."
+msgstr ""
+
+#: ../../advanced/pycpp/object.rst:122
+msgid ""
+"One can convert the result obtained from Python to a pure C++ version if "
+"a ``py::class_`` or type conversion is defined."
+msgstr ""
+
+#: ../../advanced/pycpp/object.rst:134
+msgid "Calling Python methods"
+msgstr ""
+
+#: ../../advanced/pycpp/object.rst:136
+msgid ""
+"To call an object's method, one can again use ``.attr`` to obtain access "
+"to the Python method."
+msgstr ""
+
+#: ../../advanced/pycpp/object.rst:145
+msgid ""
+"In the example above ``pi.attr(\"exp\")`` is a *bound method*: it will "
+"always call the method for that same instance of the class. Alternately "
+"one can create an *unbound method* via the Python class (instead of "
+"instance) and pass the ``self`` object explicitly, followed by other "
+"arguments."
+msgstr ""
+
+#: ../../advanced/pycpp/object.rst:160
+msgid "Keyword arguments"
+msgstr ""
+
+#: ../../advanced/pycpp/object.rst:162
+msgid ""
+"Keyword arguments are also supported. In Python, there is the usual call "
+"syntax:"
+msgstr ""
+
+#: ../../advanced/pycpp/object.rst:172
+msgid "In C++, the same call can be made using:"
+msgstr ""
+
+#: ../../advanced/pycpp/object.rst:180
+msgid "Unpacking arguments"
+msgstr ""
+
+#: ../../advanced/pycpp/object.rst:182
+msgid ""
+"Unpacking of ``*args`` and ``**kwargs`` is also possible and can be mixed"
+" with other arguments:"
+msgstr ""
+
+#: ../../advanced/pycpp/object.rst:200
+msgid "Generalized unpacking according to PEP448_ is also supported:"
+msgstr ""
+
+#: ../../advanced/pycpp/object.rst:210
+msgid ""
+"The file :file:`tests/test_pytypes.cpp` contains a complete example that "
+"demonstrates passing native Python types in more detail. The file "
+":file:`tests/test_callbacks.cpp` presents a few examples of calling "
+"Python functions from C++, including keywords arguments and unpacking."
+msgstr ""
+
+#: ../../advanced/pycpp/object.rst:220
+msgid "Implicit casting"
+msgstr ""
+
+#: ../../advanced/pycpp/object.rst:222
+msgid ""
+"When using the C++ interface for Python types, or calling Python "
+"functions, objects of type :class:`object` are returned. It is possible "
+"to invoke implicit conversions to subclasses like :class:`dict`. The same"
+" holds for the proxy objects returned by ``operator[]`` or "
+"``obj.attr()``. Casting to subtypes improves code readability and allows "
+"values to be passed to C++ functions that require a specific subtype "
+"rather than a generic :class:`object`."
+msgstr ""
+
+#: ../../advanced/pycpp/object.rst:245
+msgid ""
+"These implicit conversions are available for subclasses of "
+":class:`object`; there is no need to call ``obj.cast()`` explicitly as "
+"for custom classes, see :ref:`casting_back_and_forth`."
+msgstr ""
+
+#: ../../advanced/pycpp/object.rst:250
+msgid ""
+"If a trivial conversion via move constructor is not possible, both "
+"implicit and explicit casting (calling ``obj.cast()``) will attempt a "
+"\"rich\" conversion. For instance, ``py::list env = "
+"os.attr(\"environ\");`` will succeed and is equivalent to the Python code"
+" ``env = list(os.environ)`` that produces a list of the dict keys."
+msgstr ""
+
+#: ../../advanced/pycpp/object.rst:259
+msgid "Handling exceptions"
+msgstr ""
+
+#: ../../advanced/pycpp/object.rst:261
+msgid ""
+"Python exceptions from wrapper classes will be thrown as a "
+"``py::error_already_set``. See :ref:`Handling exceptions from Python in "
+"C++ <handling_python_exceptions_cpp>` for more information on handling "
+"exceptions raised when calling C++ wrapper classes."
+msgstr ""
+
+#: ../../advanced/pycpp/object.rst:269
+msgid "Gotchas"
+msgstr ""
+
+#: ../../advanced/pycpp/object.rst:272
+msgid "Default-Constructed Wrappers"
+msgstr ""
+
+#: ../../advanced/pycpp/object.rst:274
+msgid ""
+"When a wrapper type is default-constructed, it is **not** a valid Python "
+"object (i.e. it is not ``py::none()``). It is simply the same as "
+"``PyObject*`` null pointer. To check for this, use "
+"``static_cast<bool>(my_wrapper)``."
+msgstr ""
+
+#: ../../advanced/pycpp/object.rst:279
+msgid "Assigning py::none() to wrappers"
+msgstr ""
+
+#: ../../advanced/pycpp/object.rst:281
+msgid ""
+"You may be tempted to use types like ``py::str`` and ``py::dict`` in C++ "
+"signatures (either pure C++, or in bound signatures), and assign them "
+"default values of ``py::none()``. However, in a best case scenario, it "
+"will fail fast because ``None`` is not convertible to that type (e.g. "
+"``py::dict``), or in a worse case scenario, it will silently work but "
+"corrupt the types you want to work with (e.g. ``py::str(py::none())`` "
+"will yield ``\"None\"`` in Python)."
+msgstr ""
+

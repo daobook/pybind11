@@ -1,0 +1,72 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2017, Wenzel Jakob
+# This file is distributed under the same license as the pybind11 package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pybind11 2.10.0.dev1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-05-31 12:45+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.10.1\n"
+
+#: ../../advanced/cast/index.rst:4
+msgid "Type conversions"
+msgstr ""
+
+#: ../../advanced/cast/index.rst:6
+msgid ""
+"Apart from enabling cross-language function calls, a fundamental problem "
+"that a binding tool like pybind11 must address is to provide access to "
+"native Python types in C++ and vice versa. There are three fundamentally "
+"different ways to do this—which approach is preferable for a particular "
+"type depends on the situation at hand."
+msgstr ""
+
+#: ../../advanced/cast/index.rst:12
+msgid ""
+"Use a native C++ type everywhere. In this case, the type must be wrapped "
+"using pybind11-generated bindings so that Python can interact with it."
+msgstr ""
+
+#: ../../advanced/cast/index.rst:15
+msgid ""
+"Use a native Python type everywhere. It will need to be wrapped so that "
+"C++ functions can interact with it."
+msgstr ""
+
+#: ../../advanced/cast/index.rst:18
+msgid ""
+"Use a native C++ type on the C++ side and a native Python type on the "
+"Python side. pybind11 refers to this as a *type conversion*."
+msgstr ""
+
+#: ../../advanced/cast/index.rst:21
+msgid ""
+"Type conversions are the most \"natural\" option in the sense that native"
+" (non-wrapped) types are used everywhere. The main downside is that a "
+"copy of the data must be made on every Python ↔ C++ transition: this is "
+"needed since the C++ and Python versions of the same type generally won't"
+" have the same memory layout."
+msgstr ""
+
+#: ../../advanced/cast/index.rst:27
+msgid ""
+"pybind11 can perform many kinds of conversions automatically. An overview"
+" is provided in the table \":ref:`conversion_table`\"."
+msgstr ""
+
+#: ../../advanced/cast/index.rst:30
+msgid ""
+"The following subsections discuss the differences between these options "
+"in more detail. The main focus in this section is on type conversions, "
+"which represent the last case of the above list."
+msgstr ""
+

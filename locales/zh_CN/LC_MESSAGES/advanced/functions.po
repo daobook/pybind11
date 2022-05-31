@@ -1,0 +1,690 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2017, Wenzel Jakob
+# This file is distributed under the same license as the pybind11 package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pybind11 2.10.0.dev1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-05-31 12:45+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.10.1\n"
+
+#: ../../advanced/functions.rst:2
+msgid "Functions"
+msgstr ""
+
+#: ../../advanced/functions.rst:4
+msgid ""
+"Before proceeding with this section, make sure that you are already "
+"familiar with the basics of binding functions and classes, as explained "
+"in :doc:`/basics` and :doc:`/classes`. The following guide is applicable "
+"to both free and member functions, i.e. *methods* in Python."
+msgstr ""
+
+#: ../../advanced/functions.rst:12
+msgid "Return value policies"
+msgstr ""
+
+#: ../../advanced/functions.rst:14
+msgid ""
+"Python and C++ use fundamentally different ways of managing the memory "
+"and lifetime of objects managed by them. This can lead to issues when "
+"creating bindings for functions that return a non-trivial type. Just by "
+"looking at the type information, it is not clear whether Python should "
+"take charge of the returned value and eventually free its resources, or "
+"if this is handled on the C++ side. For this reason, pybind11 provides a "
+"several *return value policy* annotations that can be passed to the "
+":func:`module_::def` and :func:`class_::def` functions. The default "
+"policy is :enum:`return_value_policy::automatic`."
+msgstr ""
+
+#: ../../advanced/functions.rst:24
+msgid ""
+"Return value policies are tricky, and it's very important to get them "
+"right. Just to illustrate what can go wrong, consider the following "
+"simple example:"
+msgstr ""
+
+#: ../../advanced/functions.rst:36
+msgid ""
+"What's going on here? When ``get_data()`` is called from Python, the "
+"return value (a native C++ type) must be wrapped to turn it into a usable"
+" Python type. In this case, the default return value policy "
+"(:enum:`return_value_policy::automatic`) causes pybind11 to assume "
+"ownership of the static ``_data`` instance."
+msgstr ""
+
+#: ../../advanced/functions.rst:41
+msgid ""
+"When Python's garbage collector eventually deletes the Python wrapper, "
+"pybind11 will also attempt to delete the C++ instance (via ``operator "
+"delete()``) due to the implied ownership. At this point, the entire "
+"application will come crashing down, though errors could also be more "
+"subtle and involve silent data corruption."
+msgstr ""
+
+#: ../../advanced/functions.rst:47
+msgid ""
+"In the above example, the policy :enum:`return_value_policy::reference` "
+"should have been specified so that the global data instance is only "
+"*referenced* without any implied transfer of ownership, i.e.:"
+msgstr ""
+
+#: ../../advanced/functions.rst:55
+msgid ""
+"On the other hand, this is not the right policy for many other "
+"situations, where ignoring ownership could lead to resource leaks. As a "
+"developer using pybind11, it's important to be familiar with the "
+"different return value policies, including which situation calls for "
+"which one of them. The following table provides an overview of available "
+"policies:"
+msgstr ""
+
+#: ../../advanced/functions.rst:64
+msgid "Return value policy"
+msgstr ""
+
+#: ../../advanced/functions.rst:64
+msgid "Description"
+msgstr ""
+
+#: ../../advanced/functions.rst:66
+msgid ":enum:`return_value_policy::take_ownership`"
+msgstr ""
+
+#: ../../advanced/functions.rst:66
+msgid ""
+"Reference an existing object (i.e. do not create a new copy) and take "
+"ownership. Python will call the destructor and delete operator when the "
+"object's reference count reaches zero. Undefined behavior ensues when the"
+" C++ side does the same, or when the data was not dynamically allocated."
+msgstr ""
+
+#: ../../advanced/functions.rst:71
+msgid ":enum:`return_value_policy::copy`"
+msgstr ""
+
+#: ../../advanced/functions.rst:71
+msgid ""
+"Create a new copy of the returned object, which will be owned by Python. "
+"This policy is comparably safe because the lifetimes of the two instances"
+" are decoupled."
+msgstr ""
+
+#: ../../advanced/functions.rst:75
+msgid ":enum:`return_value_policy::move`"
+msgstr ""
+
+#: ../../advanced/functions.rst:75
+msgid ""
+"Use ``std::move`` to move the return value contents into a new instance "
+"that will be owned by Python. This policy is comparably safe because the "
+"lifetimes of the two instances (move source and destination) are "
+"decoupled."
+msgstr ""
+
+#: ../../advanced/functions.rst:79
+msgid ":enum:`return_value_policy::reference`"
+msgstr ""
+
+#: ../../advanced/functions.rst:79
+msgid ""
+"Reference an existing object, but do not take ownership. The C++ side is "
+"responsible for managing the object's lifetime and deallocating it when "
+"it is no longer used. Warning: undefined behavior will ensue when the C++"
+" side deletes an object that is still referenced and used by Python."
+msgstr ""
+
+#: ../../advanced/functions.rst:84
+msgid ":enum:`return_value_policy::reference_internal`"
+msgstr ""
+
+#: ../../advanced/functions.rst:84
+msgid ""
+"Indicates that the lifetime of the return value is tied to the lifetime "
+"of a parent object, namely the implicit ``this``, or ``self`` argument of"
+" the called method or property. Internally, this policy works just like "
+":enum:`return_value_policy::reference` but additionally applies a "
+"``keep_alive<0, 1>`` *call policy* (described in the next section) that "
+"prevents the parent object from being garbage collected as long as the "
+"return value is referenced by Python. This is the default policy for "
+"property getters created via ``def_property``, ``def_readwrite``, etc."
+msgstr ""
+
+#: ../../advanced/functions.rst:93
+msgid ":enum:`return_value_policy::automatic`"
+msgstr ""
+
+#: ../../advanced/functions.rst:93
+msgid ""
+"This policy falls back to the policy "
+":enum:`return_value_policy::take_ownership` when the return value is a "
+"pointer. Otherwise, it uses :enum:`return_value_policy::move` or "
+":enum:`return_value_policy::copy` for rvalue and lvalue references, "
+"respectively. See above for a description of what all of these different "
+"policies do. This is the default policy for ``py::class_``-wrapped types."
+msgstr ""
+
+#: ../../advanced/functions.rst:100
+msgid ":enum:`return_value_policy::automatic_reference`"
+msgstr ""
+
+#: ../../advanced/functions.rst:100
+msgid ""
+"As above, but use policy :enum:`return_value_policy::reference` when the "
+"return value is a pointer. This is the default conversion policy for "
+"function arguments when calling Python functions manually from C++ code "
+"(i.e. via ``handle::operator()``) and the casters in ``pybind11/stl.h``. "
+"You probably won't need to use this explicitly."
+msgstr ""
+
+#: ../../advanced/functions.rst:107
+msgid "Return value policies can also be applied to properties:"
+msgstr ""
+
+#: ../../advanced/functions.rst:115
+msgid ""
+"Technically, the code above applies the policy to both the getter and the"
+" setter function, however, the setter doesn't really care about *return* "
+"value policies which makes this a convenient terse syntax. Alternatively,"
+" targeted arguments can be passed through the :class:`cpp_function` "
+"constructor:"
+msgstr ""
+
+#: ../../advanced/functions.rst:130
+msgid ""
+"Code with invalid return value policies might access uninitialized memory"
+" or free data structures multiple times, which can lead to hard-to-debug "
+"non-determinism and segmentation faults, hence it is worth spending the "
+"time to understand all the different options in the table above."
+msgstr ""
+
+#: ../../advanced/functions.rst:137
+msgid ""
+"One important aspect of the above policies is that they only apply to "
+"instances which pybind11 has *not* seen before, in which case the policy "
+"clarifies essential questions about the return value's lifetime and "
+"ownership.  When pybind11 knows the instance already (as identified by "
+"its type and address in memory), it will return the existing Python "
+"object wrapper rather than creating a new copy."
+msgstr ""
+
+#: ../../advanced/functions.rst:146
+msgid ""
+"The next section on :ref:`call_policies` discusses *call policies* that "
+"can be specified *in addition* to a return value policy from the list "
+"above. Call policies indicate reference relationships that can involve "
+"both return values and parameters of functions."
+msgstr ""
+
+#: ../../advanced/functions.rst:153
+msgid ""
+"As an alternative to elaborate call policies and lifetime management "
+"logic, consider using smart pointers (see the section on "
+":ref:`smart_pointers` for details). Smart pointers can tell whether an "
+"object is still referenced from C++ or Python, which generally eliminates"
+" the kinds of inconsistencies that can lead to crashes or undefined "
+"behavior. For functions returning smart pointers, it is not necessary to "
+"specify a return value policy."
+msgstr ""
+
+#: ../../advanced/functions.rst:163
+msgid "Additional call policies"
+msgstr ""
+
+#: ../../advanced/functions.rst:165
+msgid ""
+"In addition to the above return value policies, further *call policies* "
+"can be specified to indicate dependencies between parameters or ensure a "
+"certain state for the function call."
+msgstr ""
+
+#: ../../advanced/functions.rst:170
+msgid "Keep alive"
+msgstr ""
+
+#: ../../advanced/functions.rst:172
+msgid ""
+"In general, this policy is required when the C++ object is any kind of "
+"container and another object is being added to the container. "
+"``keep_alive<Nurse, Patient>`` indicates that the argument with index "
+"``Patient`` should be kept alive at least until the argument with index "
+"``Nurse`` is freed by the garbage collector. Argument indices start at "
+"one, while zero refers to the return value. For methods, index ``1`` "
+"refers to the implicit ``this`` pointer, while regular arguments begin at"
+" index ``2``. Arbitrarily many call policies can be specified. When a "
+"``Nurse`` with value ``None`` is detected at runtime, the call policy "
+"does nothing."
+msgstr ""
+
+#: ../../advanced/functions.rst:181
+msgid ""
+"When the nurse is not a pybind11-registered type, the implementation "
+"internally relies on the ability to create a *weak reference* to the "
+"nurse object. When the nurse object is not a pybind11-registered type and"
+" does not support weak references, an exception will be thrown."
+msgstr ""
+
+#: ../../advanced/functions.rst:186
+msgid ""
+"If you use an incorrect argument index, you will get a ``RuntimeError`` "
+"saying ``Could not activate keep_alive!``. You should review the indices "
+"you're using."
+msgstr ""
+
+#: ../../advanced/functions.rst:189
+msgid ""
+"Consider the following example: here, the binding code for a list append "
+"operation ties the lifetime of the newly added element to the underlying "
+"container:"
+msgstr ""
+
+#: ../../advanced/functions.rst:198
+msgid ""
+"For consistency, the argument indexing is identical for constructors. "
+"Index ``1`` still refers to the implicit ``this`` pointer, i.e. the "
+"object which is being constructed. Index ``0`` refers to the return type "
+"which is presumed to be ``void`` when a constructor is viewed like a "
+"function. The following example ties the lifetime of the constructor "
+"element to the constructed object:"
+msgstr ""
+
+#: ../../advanced/functions.rst:211
+msgid ""
+"``keep_alive`` is analogous to the ``with_custodian_and_ward`` (if Nurse,"
+" Patient != 0) and ``with_custodian_and_ward_postcall`` (if Nurse/Patient"
+" == 0) policies from Boost.Python."
+msgstr ""
+
+#: ../../advanced/functions.rst:216
+msgid "Call guard"
+msgstr ""
+
+#: ../../advanced/functions.rst:218
+msgid ""
+"The ``call_guard<T>`` policy allows any scope guard type ``T`` to be "
+"placed around the function call. For example, this definition:"
+msgstr ""
+
+#: ../../advanced/functions.rst:225
+msgid "is equivalent to the following pseudocode:"
+msgstr ""
+
+#: ../../advanced/functions.rst:234
+msgid ""
+"The only requirement is that ``T`` is default-constructible, but "
+"otherwise any scope guard will work. This is very useful in combination "
+"with ``gil_scoped_release``. See :ref:`gil`."
+msgstr ""
+
+#: ../../advanced/functions.rst:238
+msgid ""
+"Multiple guards can also be specified as ``py::call_guard<T1, T2, "
+"T3...>``. The constructor order is left to right and destruction happens "
+"in reverse."
+msgstr ""
+
+#: ../../advanced/functions.rst:243
+msgid ""
+"The file :file:`tests/test_call_policies.cpp` contains a complete example"
+" that demonstrates using `keep_alive` and `call_guard` in more detail."
+msgstr ""
+
+#: ../../advanced/functions.rst:249
+msgid "Python objects as arguments"
+msgstr ""
+
+#: ../../advanced/functions.rst:251
+msgid ""
+"pybind11 exposes all major Python types using thin C++ wrapper classes. "
+"These wrapper classes can also be used as parameters of functions in "
+"bindings, which makes it possible to directly work with native Python "
+"types on the C++ side. For instance, the following statement iterates "
+"over a Python ``dict``:"
+msgstr ""
+
+#: ../../advanced/functions.rst:265
+msgid "It can be exported:"
+msgstr ""
+
+#: ../../advanced/functions.rst:271
+msgid "And used in Python as usual:"
+msgstr ""
+
+#: ../../advanced/functions.rst:279
+msgid ""
+"For more information on using Python objects in C++, see "
+":doc:`/advanced/pycpp/index`."
+msgstr ""
+
+#: ../../advanced/functions.rst:282
+msgid "Accepting \\*args and \\*\\*kwargs"
+msgstr ""
+
+#: ../../advanced/functions.rst:284
+msgid ""
+"Python provides a useful mechanism to define functions that accept "
+"arbitrary numbers of arguments and keyword arguments:"
+msgstr ""
+
+#: ../../advanced/functions.rst:292
+msgid "Such functions can also be created using pybind11:"
+msgstr ""
+
+#: ../../advanced/functions.rst:305
+msgid ""
+"The class ``py::args`` derives from ``py::tuple`` and ``py::kwargs`` "
+"derives from ``py::dict``."
+msgstr ""
+
+#: ../../advanced/functions.rst:308
+msgid ""
+"You may also use just one or the other, and may combine these with other "
+"arguments.  Note, however, that ``py::kwargs`` must always be the last "
+"argument of the function, and ``py::args`` implies that any further "
+"arguments are keyword-only (see :ref:`keyword_only_arguments`)."
+msgstr ""
+
+#: ../../advanced/functions.rst:313
+msgid ""
+"Please refer to the other examples for details on how to iterate over "
+"these, and on how to cast their entries into C++ objects. A demonstration"
+" is also available in ``tests/test_kwargs_and_defaults.cpp``."
+msgstr ""
+
+#: ../../advanced/functions.rst:319
+msgid ""
+"When combining \\*args or \\*\\*kwargs with :ref:`keyword_args` you "
+"should *not* include ``py::arg`` tags for the ``py::args`` and "
+"``py::kwargs`` arguments."
+msgstr ""
+
+#: ../../advanced/functions.rst:324
+msgid "Default arguments revisited"
+msgstr ""
+
+#: ../../advanced/functions.rst:326
+msgid ""
+"The section on :ref:`default_args` previously discussed basic usage of "
+"default arguments using pybind11. One noteworthy aspect of their "
+"implementation is that default arguments are converted to Python objects "
+"right at declaration time. Consider the following example:"
+msgstr ""
+
+#: ../../advanced/functions.rst:336
+msgid ""
+"In this case, pybind11 must already be set up to deal with values of the "
+"type ``SomeType`` (via a prior instantiation of "
+"``py::class_<SomeType>``), or an exception will be thrown."
+msgstr ""
+
+#: ../../advanced/functions.rst:340
+msgid ""
+"Another aspect worth highlighting is that the \"preview\" of the default "
+"argument in the function signature is generated using the object's "
+"``__repr__`` method. If not available, the signature may not be very "
+"helpful, e.g.:"
+msgstr ""
+
+#: ../../advanced/functions.rst:352
+msgid ""
+"The first way of addressing this is by defining ``SomeType.__repr__``. "
+"Alternatively, it is possible to specify the human-readable preview of "
+"the default argument manually using the ``arg_v`` notation:"
+msgstr ""
+
+#: ../../advanced/functions.rst:361
+msgid ""
+"Sometimes it may be necessary to pass a null pointer value as a default "
+"argument. In this case, remember to cast it to the underlying type in "
+"question, like so:"
+msgstr ""
+
+#: ../../advanced/functions.rst:373
+msgid "Keyword-only arguments"
+msgstr ""
+
+#: ../../advanced/functions.rst:375
+msgid ""
+"Python implements keyword-only arguments by specifying an unnamed ``*`` "
+"argument in a function definition:"
+msgstr ""
+
+#: ../../advanced/functions.rst:389
+msgid ""
+"Pybind11 provides a ``py::kw_only`` object that allows you to implement "
+"the same behaviour by specifying the object between positional and "
+"keyword-only argument annotations when registering the function:"
+msgstr ""
+
+#: ../../advanced/functions.rst:400
+msgid ""
+"A ``py::args`` argument implies that any following arguments are keyword-"
+"only, as if ``py::kw_only()`` had been specified in the same relative "
+"location of the argument list as the ``py::args`` argument.  The "
+"``py::kw_only()`` may be included to be explicit about this, but is not "
+"required."
+msgstr ""
+
+#: ../../advanced/functions.rst:405
+msgid ""
+"This can now be combined with ``py::args``. Before, ``py::args`` could "
+"only occur at the end of the argument list, or immediately before a "
+"``py::kwargs`` argument at the end."
+msgstr ""
+
+#: ../../advanced/functions.rst:412
+msgid "Positional-only arguments"
+msgstr ""
+
+#: ../../advanced/functions.rst:414
+msgid ""
+"Python 3.8 introduced a new positional-only argument syntax, using ``/`` "
+"in the function definition (note that this has been a convention for "
+"CPython positional arguments, such as in ``pow()``, since Python 2). You "
+"can do the same thing in any version of Python using ``py::pos_only()``:"
+msgstr ""
+
+#: ../../advanced/functions.rst:424
+msgid ""
+"You now cannot give argument ``a`` by keyword. This can be combined with "
+"keyword-only arguments, as well."
+msgstr ""
+
+#: ../../advanced/functions.rst:432
+msgid "Non-converting arguments"
+msgstr ""
+
+#: ../../advanced/functions.rst:434
+msgid ""
+"Certain argument types may support conversion from one type to another.  "
+"Some examples of conversions are:"
+msgstr ""
+
+#: ../../advanced/functions.rst:437
+msgid ""
+":ref:`implicit_conversions` declared using "
+"``py::implicitly_convertible<A,B>()``"
+msgstr ""
+
+#: ../../advanced/functions.rst:438
+msgid "Calling a method accepting a double with an integer argument"
+msgstr ""
+
+#: ../../advanced/functions.rst:439
+msgid ""
+"Calling a ``std::complex<float>`` argument with a non-complex python type"
+" (for example, with a float).  (Requires the optional "
+"``pybind11/complex.h`` header)."
+msgstr ""
+
+#: ../../advanced/functions.rst:442
+msgid ""
+"Calling a function taking an Eigen matrix reference with a numpy array of"
+" the wrong type or of an incompatible data layout.  (Requires the "
+"optional ``pybind11/eigen.h`` header)."
+msgstr ""
+
+#: ../../advanced/functions.rst:446
+msgid ""
+"This behaviour is sometimes undesirable: the binding code may prefer to "
+"raise an error rather than convert the argument.  This behaviour can be "
+"obtained through ``py::arg`` by calling the ``.noconvert()`` method of "
+"the ``py::arg`` object, such as:"
+msgstr ""
+
+#: ../../advanced/functions.rst:456
+msgid ""
+"Attempting the call the second function (the one without "
+"``.noconvert()``) with an integer will succeed, but attempting to call "
+"the ``.noconvert()`` version will fail with a ``TypeError``:"
+msgstr ""
+
+#: ../../advanced/functions.rst:472
+msgid ""
+"You may, of course, combine this with the :var:`_a` shorthand notation "
+"(see :ref:`keyword_args`) and/or :ref:`default_args`.  It is also "
+"permitted to omit the argument name by using the ``py::arg()`` "
+"constructor without an argument name, i.e. by specifying "
+"``py::arg().noconvert()``."
+msgstr ""
+
+#: ../../advanced/functions.rst:479
+msgid ""
+"When specifying ``py::arg`` options it is necessary to provide the same "
+"number of options as the bound function has arguments.  Thus if you want "
+"to enable no-convert behaviour for just one of several arguments, you "
+"will need to specify a ``py::arg()`` annotation for each argument with "
+"the no-convert argument modified to ``py::arg().noconvert()``."
+msgstr ""
+
+#: ../../advanced/functions.rst:488
+msgid "Allow/Prohibiting None arguments"
+msgstr ""
+
+#: ../../advanced/functions.rst:490
+msgid ""
+"When a C++ type registered with :class:`py::class_` is passed as an "
+"argument to a function taking the instance as pointer or shared holder "
+"(e.g. ``shared_ptr`` or a custom, copyable holder as described in "
+":ref:`smart_pointers`), pybind allows ``None`` to be passed from Python "
+"which results in calling the C++ function with ``nullptr`` (or an empty "
+"holder) for the argument."
+msgstr ""
+
+#: ../../advanced/functions.rst:496
+msgid ""
+"To explicitly enable or disable this behaviour, using the ``.none`` "
+"method of the :class:`py::arg` object:"
+msgstr ""
+
+#: ../../advanced/functions.rst:512
+msgid ""
+"With the above, the Python call ``bark(None)`` will return the string "
+"``\"(no dog)\"``, while attempting to call ``meow(None)`` will raise a "
+"``TypeError``:"
+msgstr ""
+
+#: ../../advanced/functions.rst:532
+msgid "The default behaviour when the tag is unspecified is to allow ``None``."
+msgstr ""
+
+#: ../../advanced/functions.rst:536
+msgid ""
+"Even when ``.none(true)`` is specified for an argument, ``None`` will be "
+"converted to a ``nullptr`` *only* for custom and :ref:`opaque <opaque>` "
+"types. Pointers to built-in types (``double *``, ``int *``, ...) and STL "
+"types (``std::vector<T> *``, ...; if ``pybind11/stl.h`` is included) are "
+"copied when converted to C++ (see :doc:`/advanced/cast/overview`) and "
+"will not allow ``None`` as argument.  To pass optional argument of these "
+"copied types consider using ``std::optional<T>``"
+msgstr ""
+
+#: ../../advanced/functions.rst:546
+msgid "Overload resolution order"
+msgstr ""
+
+#: ../../advanced/functions.rst:548
+msgid ""
+"When a function or method with multiple overloads is called from Python, "
+"pybind11 determines which overload to call in two passes.  The first pass"
+" attempts to call each overload without allowing argument conversion (as "
+"if every argument had been specified as ``py::arg().noconvert()`` as "
+"described above)."
+msgstr ""
+
+#: ../../advanced/functions.rst:554
+msgid ""
+"If no overload succeeds in the no-conversion first pass, a second pass is"
+" attempted in which argument conversion is allowed (except where "
+"prohibited via an explicit ``py::arg().noconvert()`` attribute in the "
+"function definition)."
+msgstr ""
+
+#: ../../advanced/functions.rst:558
+msgid "If the second pass also fails a ``TypeError`` is raised."
+msgstr ""
+
+#: ../../advanced/functions.rst:560
+msgid ""
+"Within each pass, overloads are tried in the order they were registered "
+"with pybind11. If the ``py::prepend()`` tag is added to the definition, a"
+" function can be placed at the beginning of the overload sequence "
+"instead, allowing user overloads to proceed built in functions."
+msgstr ""
+
+#: ../../advanced/functions.rst:565
+msgid ""
+"What this means in practice is that pybind11 will prefer any overload "
+"that does not require conversion of arguments to an overload that does, "
+"but otherwise prefers earlier-defined overloads to later-defined ones."
+msgstr ""
+
+#: ../../advanced/functions.rst:571
+msgid ""
+"pybind11 does *not* further prioritize based on the number/pattern of "
+"overloaded arguments.  That is, pybind11 does not prioritize a function "
+"requiring one conversion over one requiring three, but only prioritizes "
+"overloads requiring no conversion at all to overloads that require "
+"conversion of at least one argument."
+msgstr ""
+
+#: ../../advanced/functions.rst:579
+msgid "The ``py::prepend()`` tag."
+msgstr ""
+
+#: ../../advanced/functions.rst:582
+msgid "Binding functions with template parameters"
+msgstr ""
+
+#: ../../advanced/functions.rst:584
+msgid "You can bind functions that have template parameters. Here's a function:"
+msgstr ""
+
+#: ../../advanced/functions.rst:591
+msgid ""
+"C++ templates cannot be instantiated at runtime, so you cannot bind the "
+"non-instantiated function:"
+msgstr ""
+
+#: ../../advanced/functions.rst:599
+msgid ""
+"You must bind each instantiated function template separately. You may "
+"bind each instantiation with the same name, which will be treated the "
+"same as an overloaded function:"
+msgstr ""
+
+#: ../../advanced/functions.rst:608
+msgid ""
+"Sometimes it's more clear to bind them with separate names, which is also"
+" an option:"
+msgstr ""
+

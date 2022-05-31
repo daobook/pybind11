@@ -1,0 +1,114 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2017, Wenzel Jakob
+# This file is distributed under the same license as the pybind11 package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pybind11 2.10.0.dev1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-05-31 12:45+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.10.1\n"
+
+#: ../../advanced/cast/functional.rst:2
+msgid "Functional"
+msgstr ""
+
+#: ../../advanced/cast/functional.rst:4
+msgid ""
+"The following features must be enabled by including "
+":file:`pybind11/functional.h`."
+msgstr ""
+
+#: ../../advanced/cast/functional.rst:8
+msgid "Callbacks and passing anonymous functions"
+msgstr ""
+
+#: ../../advanced/cast/functional.rst:10
+msgid ""
+"The C++11 standard brought lambda functions and the generic polymorphic "
+"function wrapper ``std::function<>`` to the C++ programming language, "
+"which enable powerful new ways of working with functions. Lambda "
+"functions come in two flavors: stateless lambda function resemble classic"
+" function pointers that link to an anonymous piece of code, while "
+"stateful lambda functions additionally depend on captured variables that "
+"are stored in an anonymous *lambda closure object*."
+msgstr ""
+
+#: ../../advanced/cast/functional.rst:18
+msgid ""
+"Here is a simple example of a C++ function that takes an arbitrary "
+"function (stateful or stateless) with signature ``int -> int`` as an "
+"argument and runs it with the value 10."
+msgstr ""
+
+#: ../../advanced/cast/functional.rst:28
+msgid ""
+"The example below is more involved: it takes a function of signature "
+"``int -> int`` and returns another function of the same kind. The return "
+"value is a stateful lambda function, which stores the value ``f`` in the "
+"capture object and adds 1 to its return value upon execution."
+msgstr ""
+
+#: ../../advanced/cast/functional.rst:41
+msgid ""
+"This example demonstrates using python named parameters in C++ callbacks "
+"which requires using ``py::cpp_function`` as a wrapper. Usage is similar "
+"to defining methods of classes:"
+msgstr ""
+
+#: ../../advanced/cast/functional.rst:52
+msgid ""
+"After including the extra header file :file:`pybind11/functional.h`, it "
+"is almost trivial to generate binding code for all of these functions."
+msgstr ""
+
+#: ../../advanced/cast/functional.rst:65
+msgid "The following interactive session shows how to call them from Python."
+msgstr ""
+
+#: ../../advanced/cast/functional.rst:85
+msgid ""
+"Keep in mind that passing a function from C++ to Python (or vice versa) "
+"will instantiate a piece of wrapper code that translates function "
+"invocations between the two languages. Naturally, this translation "
+"increases the computational cost of each function call somewhat. A "
+"problematic situation can arise when a function is copied back and forth "
+"between Python and C++ many times in a row, in which case the underlying "
+"wrappers will accumulate correspondingly. The resulting long sequence of "
+"C++ -> Python -> C++ -> ... roundtrips can significantly decrease "
+"performance."
+msgstr ""
+
+#: ../../advanced/cast/functional.rst:95
+msgid ""
+"There is one exception: pybind11 detects case where a stateless function "
+"(i.e. a function pointer or a lambda function without captured variables)"
+" is passed as an argument to another C++ function exposed in Python. In "
+"this case, there is no overhead. Pybind11 will extract the underlying C++"
+" function pointer from the wrapped function to sidestep a potential C++ "
+"-> Python -> C++ roundtrip. This is demonstrated in "
+":file:`tests/test_callbacks.cpp`."
+msgstr ""
+
+#: ../../advanced/cast/functional.rst:104
+msgid ""
+"This functionality is very useful when generating bindings for callbacks "
+"in C++ libraries (e.g. GUI libraries, asynchronous networking libraries, "
+"etc.)."
+msgstr ""
+
+#: ../../advanced/cast/functional.rst:107
+msgid ""
+"The file :file:`tests/test_callbacks.cpp` contains a complete example "
+"that demonstrates how to work with callbacks and anonymous functions in "
+"more detail."
+msgstr ""
+

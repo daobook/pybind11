@@ -1,0 +1,244 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2017, Wenzel Jakob
+# This file is distributed under the same license as the pybind11 package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pybind11 2.10.0.dev1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-05-31 12:45+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.10.1\n"
+
+#: ../../advanced/cast/stl.rst:2
+msgid "STL containers"
+msgstr ""
+
+#: ../../advanced/cast/stl.rst:5
+msgid "Automatic conversion"
+msgstr ""
+
+#: ../../advanced/cast/stl.rst:7
+msgid ""
+"When including the additional header file :file:`pybind11/stl.h`, "
+"conversions between "
+"``std::vector<>``/``std::deque<>``/``std::list<>``/``std::array<>``/``std::valarray<>``,"
+" ``std::set<>``/``std::unordered_set<>``, and "
+"``std::map<>``/``std::unordered_map<>`` and the Python ``list``, ``set`` "
+"and ``dict`` data structures are automatically enabled. The types "
+"``std::pair<>`` and ``std::tuple<>`` are already supported out of the box"
+" with just the core :file:`pybind11/pybind11.h` header."
+msgstr ""
+
+#: ../../advanced/cast/stl.rst:15
+msgid ""
+"The major downside of these implicit conversions is that containers must "
+"be converted (i.e. copied) on every Python->C++ and C++->Python "
+"transition, which can have implications on the program semantics and "
+"performance. Please read the next sections for more details and "
+"alternative approaches that avoid this."
+msgstr ""
+
+#: ../../advanced/cast/stl.rst:22
+msgid "Arbitrary nesting of any of these types is possible."
+msgstr ""
+
+#: ../../advanced/cast/stl.rst:26
+msgid ""
+"The file :file:`tests/test_stl.cpp` contains a complete example that "
+"demonstrates how to pass STL data types in more detail."
+msgstr ""
+
+#: ../../advanced/cast/stl.rst:32
+msgid "C++17 library containers"
+msgstr ""
+
+#: ../../advanced/cast/stl.rst:34
+msgid ""
+"The :file:`pybind11/stl.h` header also includes support for "
+"``std::optional<>`` and ``std::variant<>``. These require a C++17 "
+"compiler and standard library. In C++14 mode, "
+"``std::experimental::optional<>`` is supported if available."
+msgstr ""
+
+#: ../../advanced/cast/stl.rst:38
+msgid ""
+"Various versions of these containers also exist for C++11 (e.g. in "
+"Boost). pybind11 provides an easy way to specialize the ``type_caster`` "
+"for such types:"
+msgstr ""
+
+#: ../../advanced/cast/stl.rst:50
+msgid ""
+"The above should be placed in a header file and included in all "
+"translation units where automatic conversion is needed. Similarly, a "
+"specialization can be provided for custom variant types:"
+msgstr ""
+
+#: ../../advanced/cast/stl.rst:71
+msgid ""
+"The ``visit_helper`` specialization is not required if your "
+"``name::variant`` provides a ``name::visit()`` function. For any other "
+"function name, the specialization must be included to tell pybind11 how "
+"to visit the variant."
+msgstr ""
+
+#: ../../advanced/cast/stl.rst:77
+msgid ""
+"When converting a ``variant`` type, pybind11 follows the same rules as "
+"when determining which function overload to call "
+"(:ref:`overload_resolution`), and so the same caveats hold. In "
+"particular, the order in which the ``variant``'s alternatives are listed "
+"is important, since pybind11 will try conversions in this order. This "
+"means that, for example, when converting ``variant<int, bool>``, the "
+"``bool`` variant will never be selected, as any Python ``bool`` is "
+"already an ``int`` and is convertible to a C++ ``int``. Changing the "
+"order of alternatives (and using ``variant<bool, int>``, in this example)"
+" provides a solution."
+msgstr ""
+
+#: ../../advanced/cast/stl.rst:88
+msgid ""
+"pybind11 only supports the modern implementation of ``boost::variant`` "
+"which makes use of variadic templates. This requires Boost 1.56 or newer."
+msgstr ""
+
+#: ../../advanced/cast/stl.rst:94
+msgid "Making opaque types"
+msgstr ""
+
+#: ../../advanced/cast/stl.rst:96
+msgid ""
+"pybind11 heavily relies on a template matching mechanism to convert "
+"parameters and return values that are constructed from STL data types "
+"such as vectors, linked lists, hash tables, etc. This even works in a "
+"recursive manner, for instance to deal with lists of hash maps of pairs "
+"of elementary and custom types, etc."
+msgstr ""
+
+#: ../../advanced/cast/stl.rst:102
+msgid ""
+"However, a fundamental limitation of this approach is that internal "
+"conversions between Python and C++ types involve a copy operation that "
+"prevents pass-by-reference semantics. What does this mean?"
+msgstr ""
+
+#: ../../advanced/cast/stl.rst:106
+msgid "Suppose we bind the following function"
+msgstr ""
+
+#: ../../advanced/cast/stl.rst:114
+msgid "and call it from Python, the following happens:"
+msgstr ""
+
+#: ../../advanced/cast/stl.rst:123
+msgid ""
+"As you can see, when passing STL data structures by reference, "
+"modifications are not propagated back the Python side. A similar "
+"situation arises when exposing STL data structures using the "
+"``def_readwrite`` or ``def_readonly`` functions:"
+msgstr ""
+
+#: ../../advanced/cast/stl.rst:142
+msgid ""
+"In this case, properties can be read and written in their entirety. "
+"However, an ``append`` operation involving such a list type has no "
+"effect:"
+msgstr ""
+
+#: ../../advanced/cast/stl.rst:155
+msgid ""
+"Finally, the involved copy operations can be costly when dealing with "
+"very large lists. To deal with all of the above situations, pybind11 "
+"provides a macro named ``PYBIND11_MAKE_OPAQUE(T)`` that disables the "
+"template-based conversion machinery of types, thus rendering them "
+"*opaque*. The contents of opaque objects are never inspected or "
+"extracted, hence they *can* be passed by reference. For instance, to turn"
+" ``std::vector<int>`` into an opaque type, add the declaration"
+msgstr ""
+
+#: ../../advanced/cast/stl.rst:167
+msgid ""
+"before any binding code (e.g. invocations to ``class_::def()``, etc.). "
+"This macro must be specified at the top level (and outside of any "
+"namespaces), since it adds a template instantiation of ``type_caster``. "
+"If your binding code consists of multiple compilation units, it must be "
+"present in every file (typically via a common header) preceding any usage"
+" of ``std::vector<int>``. Opaque types must also have a corresponding "
+"``class_`` declaration to associate them with a name in Python, and to "
+"define a set of available operations, e.g.:"
+msgstr ""
+
+#: ../../advanced/cast/stl.rst:189
+msgid ""
+"The file :file:`tests/test_opaque_types.cpp` contains a complete example "
+"that demonstrates how to create and expose opaque types using pybind11 in"
+" more detail."
+msgstr ""
+
+#: ../../advanced/cast/stl.rst:196
+msgid "Binding STL containers"
+msgstr ""
+
+#: ../../advanced/cast/stl.rst:198
+msgid ""
+"The ability to expose STL containers as native Python objects is a fairly"
+" common request, hence pybind11 also provides an optional header file "
+"named :file:`pybind11/stl_bind.h` that does exactly this. The mapped "
+"containers try to match the behavior of their native Python counterparts "
+"as much as possible."
+msgstr ""
+
+#: ../../advanced/cast/stl.rst:203
+msgid "The following example showcases usage of :file:`pybind11/stl_bind.h`:"
+msgstr ""
+
+#: ../../advanced/cast/stl.rst:219
+msgid ""
+"When binding STL containers pybind11 considers the types of the "
+"container's elements to decide whether the container should be confined "
+"to the local module (via the :ref:`module_local` feature).  If the "
+"container element types are anything other than already-bound custom "
+"types bound without ``py::module_local()`` the container binding will "
+"have ``py::module_local()`` applied.  This includes converting types such"
+" as numeric types, strings, Eigen types; and types that have not yet been"
+" bound at the time of the stl container binding.  This module-local "
+"binding is designed to avoid potential conflicts between module bindings "
+"(for example, from two separate modules each attempting to bind "
+"``std::vector<int>`` as a python type)."
+msgstr ""
+
+#: ../../advanced/cast/stl.rst:230
+msgid ""
+"It is possible to override this behavior to force a definition to be "
+"either module-local or global.  To do so, you can pass the attributes "
+"``py::module_local()`` (to make the binding module-local) or "
+"``py::module_local(false)`` (to make the binding global) into the "
+"``py::bind_vector`` or ``py::bind_map`` arguments:"
+msgstr ""
+
+#: ../../advanced/cast/stl.rst:240
+msgid ""
+"Note, however, that such a global binding would make it impossible to "
+"load this module at the same time as any other pybind module that also "
+"attempts to bind the same container type (``std::vector<int>`` in the "
+"above example)."
+msgstr ""
+
+#: ../../advanced/cast/stl.rst:244
+msgid "See :ref:`module_local` for more details on module-local bindings."
+msgstr ""
+
+#: ../../advanced/cast/stl.rst:248
+msgid ""
+"The file :file:`tests/test_stl_binders.cpp` shows how to use the "
+"convenience STL container wrappers."
+msgstr ""
+

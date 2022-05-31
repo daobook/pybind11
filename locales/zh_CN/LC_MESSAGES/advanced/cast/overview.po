@@ -1,0 +1,509 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2017, Wenzel Jakob
+# This file is distributed under the same license as the pybind11 package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pybind11 2.10.0.dev1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-05-31 12:45+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.10.1\n"
+
+#: ../../advanced/cast/overview.rst:2
+msgid "Overview"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:5
+msgid "1. Native type in C++, wrapper in Python"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:6
+msgid ""
+"Exposing a custom C++ type using :class:`py::class_` was covered in "
+"detail in the :doc:`/classes` section. There, the underlying data "
+"structure is always the original C++ class while the :class:`py::class_` "
+"wrapper provides a Python interface. Internally, when an object like this"
+" is sent from C++ to Python, pybind11 will just add the outer wrapper "
+"layer over the native C++ object. Getting it back from Python is just a "
+"matter of peeling off the wrapper."
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:15
+msgid "2. Wrapper in C++, native type in Python"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:16
+msgid ""
+"This is the exact opposite situation. Now, we have a type which is native"
+" to Python, like a ``tuple`` or a ``list``. One way to get this data into"
+" C++ is with the :class:`py::object` family of wrappers. These are "
+"explained in more detail in the :doc:`/advanced/pycpp/object` section. "
+"We'll just give a quick example here:"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:34
+msgid ""
+"The Python ``list`` is not converted in any way -- it's just wrapped in a"
+" C++ :class:`py::list` class. At its core it's still a Python object. "
+"Copying a :class:`py::list` will do the usual reference-counting like in "
+"Python. Returning the object to Python will just remove the thin wrapper."
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:40
+msgid "3. Converting between native C++ and Python types"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:41
+msgid ""
+"In the previous two cases we had a native type in one language and a "
+"wrapper in the other. Now, we have native types on both sides and we "
+"convert between them."
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:56
+msgid ""
+"In this case, pybind11 will construct a new ``std::vector<int>`` and copy"
+" each element from the Python ``list``. The newly constructed object will"
+" be passed to ``print_vector``. The same thing happens in the other "
+"direction: a new ``list`` is made to match the value returned from C++."
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:61
+msgid ""
+"Lots of these conversions are supported out of the box, as shown in the "
+"table below. They are very convenient, but keep in mind that these "
+"conversions are fundamentally based on copying data. This is perfectly "
+"fine for small immutable types but it may become quite expensive for "
+"large data structures. This can be avoided by overriding the automatic "
+"conversion with a custom wrapper (i.e. the above-mentioned approach 1). "
+"This requires some manual effort and more details are available in the "
+":ref:`opaque` section."
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:72
+msgid "List of all builtin conversions"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:74
+msgid ""
+"The following basic data types are supported out of the box (some may "
+"require an additional extension header to be included). To pass other "
+"data structures as arguments and return values, refer to the section on "
+"binding :ref:`classes`."
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:79
+msgid "Data type"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:79
+msgid "Description"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:79
+msgid "Header file"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:81
+msgid "``int8_t``, ``uint8_t``"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:81
+msgid "8-bit integers"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:81 ../../advanced/cast/overview.rst:83
+#: ../../advanced/cast/overview.rst:85 ../../advanced/cast/overview.rst:87
+#: ../../advanced/cast/overview.rst:89 ../../advanced/cast/overview.rst:91
+#: ../../advanced/cast/overview.rst:93 ../../advanced/cast/overview.rst:95
+#: ../../advanced/cast/overview.rst:97 ../../advanced/cast/overview.rst:99
+#: ../../advanced/cast/overview.rst:101 ../../advanced/cast/overview.rst:103
+#: ../../advanced/cast/overview.rst:105 ../../advanced/cast/overview.rst:107
+#: ../../advanced/cast/overview.rst:109 ../../advanced/cast/overview.rst:111
+#: ../../advanced/cast/overview.rst:113 ../../advanced/cast/overview.rst:115
+#: ../../advanced/cast/overview.rst:117 ../../advanced/cast/overview.rst:119
+#: ../../advanced/cast/overview.rst:122 ../../advanced/cast/overview.rst:124
+#: ../../advanced/cast/overview.rst:126
+msgid ":file:`pybind11/pybind11.h`"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:83
+msgid "``int16_t``, ``uint16_t``"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:83
+msgid "16-bit integers"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:85
+msgid "``int32_t``, ``uint32_t``"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:85
+msgid "32-bit integers"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:87
+msgid "``int64_t``, ``uint64_t``"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:87
+msgid "64-bit integers"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:89
+msgid "``ssize_t``, ``size_t``"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:89
+msgid "Platform-dependent size"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:91
+msgid "``float``, ``double``"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:91
+msgid "Floating point types"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:93
+msgid "``bool``"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:93
+msgid "Two-state Boolean type"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:95
+msgid "``char``"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:95
+msgid "Character literal"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:97
+msgid "``char16_t``"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:97
+msgid "UTF-16 character literal"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:99
+msgid "``char32_t``"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:99
+msgid "UTF-32 character literal"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:101
+msgid "``wchar_t``"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:101
+msgid "Wide character literal"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:103
+msgid "``const char *``"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:103
+msgid "UTF-8 string literal"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:105
+msgid "``const char16_t *``"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:105
+msgid "UTF-16 string literal"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:107
+msgid "``const char32_t *``"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:107
+msgid "UTF-32 string literal"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:109
+msgid "``const wchar_t *``"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:109
+msgid "Wide string literal"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:111
+msgid "``std::string``"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:111
+msgid "STL dynamic UTF-8 string"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:113
+msgid "``std::u16string``"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:113
+msgid "STL dynamic UTF-16 string"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:115
+msgid "``std::u32string``"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:115
+msgid "STL dynamic UTF-32 string"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:117
+msgid "``std::wstring``"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:117
+msgid "STL dynamic wide string"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:119
+msgid "``std::string_view``, ``std::u16string_view``, etc."
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:119
+msgid "STL C++17 string views"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:122
+msgid "``std::pair<T1, T2>``"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:122
+msgid "Pair of two custom types"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:124
+msgid "``std::tuple<...>``"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:124
+msgid "Arbitrary tuple of types"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:126
+msgid "``std::reference_wrapper<...>``"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:126
+msgid "Reference type wrapper"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:128
+msgid "``std::complex<T>``"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:128
+msgid "Complex numbers"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:128
+msgid ":file:`pybind11/complex.h`"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:130
+msgid "``std::array<T, Size>``"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:130
+msgid "STL static array"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:130 ../../advanced/cast/overview.rst:132
+#: ../../advanced/cast/overview.rst:134 ../../advanced/cast/overview.rst:136
+#: ../../advanced/cast/overview.rst:138 ../../advanced/cast/overview.rst:140
+#: ../../advanced/cast/overview.rst:142 ../../advanced/cast/overview.rst:144
+#: ../../advanced/cast/overview.rst:146 ../../advanced/cast/overview.rst:148
+#: ../../advanced/cast/overview.rst:150 ../../advanced/cast/overview.rst:152
+msgid ":file:`pybind11/stl.h`"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:132
+msgid "``std::vector<T>``"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:132
+msgid "STL dynamic array"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:134
+msgid "``std::deque<T>``"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:134
+msgid "STL double-ended queue"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:136
+msgid "``std::valarray<T>``"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:136
+msgid "STL value array"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:138
+msgid "``std::list<T>``"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:138
+msgid "STL linked list"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:140
+msgid "``std::map<T1, T2>``"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:140
+msgid "STL ordered map"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:142
+msgid "``std::unordered_map<T1, T2>``"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:142
+msgid "STL unordered map"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:144
+msgid "``std::set<T>``"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:144
+msgid "STL ordered set"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:146
+msgid "``std::unordered_set<T>``"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:146
+msgid "STL unordered set"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:148
+msgid "``std::optional<T>``"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:148
+msgid "STL optional type (C++17)"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:150
+msgid "``std::experimental::optional<T>``"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:150
+msgid "STL optional type (exp.)"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:152
+msgid "``std::variant<...>``"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:152
+msgid "Type-safe union (C++17)"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:154
+msgid "``std::filesystem::path<T>``"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:154
+msgid "STL path (C++17) [#]_"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:154
+msgid ":file:`pybind11/stl/filesystem.h`"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:156
+msgid "``std::function<...>``"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:156
+msgid "STL polymorphic function"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:156
+msgid ":file:`pybind11/functional.h`"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:158
+msgid "``std::chrono::duration<...>``"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:158
+msgid "STL time duration"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:158 ../../advanced/cast/overview.rst:160
+msgid ":file:`pybind11/chrono.h`"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:160
+msgid "``std::chrono::time_point<...>``"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:160
+msgid "STL date/time"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:162
+msgid "``Eigen::Matrix<...>``"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:162
+msgid "Eigen: dense matrix"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:162 ../../advanced/cast/overview.rst:164
+#: ../../advanced/cast/overview.rst:166
+msgid ":file:`pybind11/eigen.h`"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:164
+msgid "``Eigen::Map<...>``"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:164
+msgid "Eigen: mapped memory"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:166
+msgid "``Eigen::SparseMatrix<...>``"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:166
+msgid "Eigen: sparse matrix"
+msgstr ""
+
+#: ../../advanced/cast/overview.rst:169
+msgid ""
+"``std::filesystem::path`` is converted to ``pathlib.Path`` and "
+"``os.PathLike`` is converted to ``std::filesystem::path``."
+msgstr ""
+

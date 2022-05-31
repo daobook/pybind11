@@ -1,0 +1,740 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2017, Wenzel Jakob
+# This file is distributed under the same license as the pybind11 package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pybind11 2.10.0.dev1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-05-31 12:45+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.10.1\n"
+
+#: ../../compiling.rst:4
+msgid "Build systems"
+msgstr ""
+
+#: ../../compiling.rst:9
+msgid "Building with setuptools"
+msgstr ""
+
+#: ../../compiling.rst:11
+msgid ""
+"For projects on PyPI, building with setuptools is the way to go. Sylvain "
+"Corlay has kindly provided an example project which shows how to set up "
+"everything, including automatic generation of documentation using Sphinx."
+" Please refer to the [python_example]_ repository."
+msgstr ""
+
+#: ../../compiling.rst:16
+msgid "https://github.com/pybind/python_example"
+msgstr ""
+
+#: ../../compiling.rst:18
+msgid ""
+"A helper file is provided with pybind11 that can simplify usage with "
+"setuptools."
+msgstr ""
+
+#: ../../compiling.rst:20
+msgid ""
+"To use pybind11 inside your ``setup.py``, you have to have some system to"
+" ensure that ``pybind11`` is installed when you build your package. There"
+" are four possible ways to do this, and pybind11 supports all four: You "
+"can ask all users to install pybind11 beforehand (bad), you can use :ref"
+":`setup_helpers-pep518` (good, but very new and requires Pip 10), :ref"
+":`setup_helpers-setup_requires` (discouraged by Python packagers now that"
+" PEP 518 is available, but it still works everywhere), or you can :ref"
+":`setup_helpers-copy-manually` (always works but you have to manually "
+"sync your copy to get updates)."
+msgstr ""
+
+#: ../../compiling.rst:30
+msgid "An example of a ``setup.py`` using pybind11's helpers:"
+msgstr ""
+
+#: ../../compiling.rst:47
+msgid ""
+"If you want to do an automatic search for the highest supported C++ "
+"standard, that is supported via a ``build_ext`` command override; it will"
+" only affect ``Pybind11Extensions``:"
+msgstr ""
+
+#: ../../compiling.rst:66
+msgid ""
+"If you have single-file extension modules that are directly stored in the"
+" Python source tree (``foo.cpp`` in the same directory as where a "
+"``foo.py`` would be located), you can also generate "
+"``Pybind11Extensions`` using ``setup_helpers.intree_extensions``: "
+"``intree_extensions([\"path/to/foo.cpp\", ...])`` returns a list of "
+"``Pybind11Extensions`` which can be passed to ``ext_modules``, possibly "
+"after further customizing their attributes (``libraries``, "
+"``include_dirs``, etc.).  By doing so, a ``foo.*.so`` extension module "
+"will be generated and made available upon installation."
+msgstr ""
+
+#: ../../compiling.rst:75
+msgid ""
+"``intree_extension`` will automatically detect if you are using a "
+"``src``-style layout (as long as no namespace packages are involved), but"
+" you can also explicitly pass ``package_dir`` to it (as in "
+"``setuptools.setup``)."
+msgstr ""
+
+#: ../../compiling.rst:79
+msgid ""
+"Since pybind11 does not require NumPy when building, a light-weight "
+"replacement for NumPy's parallel compilation distutils tool is included. "
+"Use it like this:"
+msgstr ""
+
+#: ../../compiling.rst:91
+msgid ""
+"The argument is the name of an environment variable to control the number"
+" of threads, such as ``NPY_NUM_BUILD_JOBS`` (as used by NumPy), though "
+"you can set something different if you want; "
+"``CMAKE_BUILD_PARALLEL_LEVEL`` is another choice a user might expect. You"
+" can also pass ``default=N`` to set the default number of threads (0 will"
+" take the number of threads available) and ``max=N``, the maximum number "
+"of threads; if you have a large extension you may want set this to a "
+"memory dependent number."
+msgstr ""
+
+#: ../../compiling.rst:99
+msgid ""
+"If you are developing rapidly and have a lot of C++ files, you may want "
+"to avoid rebuilding files that have not changed. For simple cases were "
+"you are using ``pip install -e .`` and do not have local headers, you can"
+" skip the rebuild if an object file is newer than its source (headers are"
+" not checked!) with the following:"
+msgstr ""
+
+#: ../../compiling.rst:112
+msgid ""
+"If you have a more complex build, you can implement a smarter function "
+"and pass it to ``needs_recompile``, or you can use [Ccache]_ instead. "
+"``CXX=\"cache g++\" pip install -e .`` would be the way to use it with "
+"GCC, for example. Unlike the simple solution, this even works even when "
+"not compiling in editable mode, but it does require Ccache to be "
+"installed."
+msgstr ""
+
+#: ../../compiling.rst:118
+msgid ""
+"Keep in mind that Pip will not even attempt to rebuild if it thinks it "
+"has already built a copy of your code, which it deduces from the version "
+"number. One way to avoid this is to use [setuptools_scm]_, which will "
+"generate a version number that includes the number of commits since your "
+"last tag and a hash for a dirty directory. Another way to force a rebuild"
+" is purge your cache or use Pip's ``--no-cache-dir`` option."
+msgstr ""
+
+#: ../../compiling.rst:125
+msgid "https://ccache.dev"
+msgstr ""
+
+#: ../../compiling.rst:127
+msgid "https://github.com/pypa/setuptools_scm"
+msgstr ""
+
+#: ../../compiling.rst:132
+msgid "PEP 518 requirements (Pip 10+ required)"
+msgstr ""
+
+#: ../../compiling.rst:134
+msgid ""
+"If you use `PEP 518's <https://www.python.org/dev/peps/pep-0518/>`_ "
+"``pyproject.toml`` file, you can ensure that ``pybind11`` is available "
+"during the compilation of your project.  When this file exists, Pip will "
+"make a new virtual environment, download just the packages listed here in"
+" ``requires=``, and build a wheel (binary Python package). It will then "
+"throw away the environment, and install your wheel."
+msgstr ""
+
+#: ../../compiling.rst:141
+msgid "Your ``pyproject.toml`` file will likely look something like this:"
+msgstr ""
+
+#: ../../compiling.rst:151
+msgid ""
+"The main drawback to this method is that a `PEP 517`_ compliant build "
+"tool, such as Pip 10+, is required for this approach to work; older "
+"versions of Pip completely ignore this file. If you distribute binaries "
+"(called wheels in Python) using something like `cibuildwheel`_, remember "
+"that ``setup.py`` and ``pyproject.toml`` are not even contained in the "
+"wheel, so this high Pip requirement is only for source builds, and will "
+"not affect users of your binary wheels. If you are building SDists and "
+"wheels, then `pypa-build`_ is the recommended official tool."
+msgstr ""
+
+#: ../../compiling.rst:167
+msgid "Classic ``setup_requires``"
+msgstr ""
+
+#: ../../compiling.rst:169
+msgid ""
+"If you want to support old versions of Pip with the classic "
+"``setup_requires=[\"pybind11\"]`` keyword argument to setup, which "
+"triggers a two-phase ``setup.py`` run, then you will need to use "
+"something like this to ensure the first pass works (which has not yet "
+"installed the ``setup_requires`` packages, since it can't install "
+"something it does not know about):"
+msgstr ""
+
+#: ../../compiling.rst:183
+msgid ""
+"It doesn't matter that the Extension class is not the enhanced subclass "
+"for the first pass run; and the second pass will have the "
+"``setup_requires`` requirements."
+msgstr ""
+
+#: ../../compiling.rst:187
+msgid ""
+"This is obviously more of a hack than the PEP 518 method, but it supports"
+" ancient versions of Pip."
+msgstr ""
+
+#: ../../compiling.rst:193
+msgid "Copy manually"
+msgstr ""
+
+#: ../../compiling.rst:195
+msgid ""
+"You can also copy ``setup_helpers.py`` directly to your project; it was "
+"designed to be usable standalone, like the old example ``setup.py``. You "
+"can set ``include_pybind11=False`` to skip including the pybind11 package"
+" headers, so you can use it with git submodules and a specific git "
+"version. If you use this, you will need to import from a local file in "
+"``setup.py`` and ensure the helper file is part of your MANIFEST."
+msgstr ""
+
+#: ../../compiling.rst:203
+msgid ""
+"Closely related, if you include pybind11 as a subproject, you can run the"
+" ``setup_helpers.py`` inplace. If loaded correctly, this should even pick"
+" up the correct include for pybind11, though you can turn it off as shown"
+" above if you want to input it manually."
+msgstr ""
+
+#: ../../compiling.rst:208
+msgid ""
+"Suggested usage if you have pybind11 as a submodule in "
+"``extern/pybind11``:"
+msgstr ""
+
+#: ../../compiling.rst:222
+msgid "Added ``setup_helpers`` file."
+msgstr ""
+
+#: ../../compiling.rst:225
+msgid "Building with cppimport"
+msgstr ""
+
+#: ../../compiling.rst:227
+msgid ""
+"[cppimport]_ is a small Python import hook that determines whether there "
+"is a C++ source file whose name matches the requested module. If there "
+"is, the file is compiled as a Python extension using pybind11 and placed "
+"in the same folder as the C++ source file. Python is then able to find "
+"the module and load it."
+msgstr ""
+
+#: ../../compiling.rst:232
+msgid "https://github.com/tbenthompson/cppimport"
+msgstr ""
+
+#: ../../compiling.rst:237
+msgid "Building with CMake"
+msgstr ""
+
+#: ../../compiling.rst:239
+msgid ""
+"For C++ codebases that have an existing CMake-based build system, a "
+"Python extension module can be created with just a few lines of code:"
+msgstr ""
+
+#: ../../compiling.rst:250
+msgid ""
+"This assumes that the pybind11 repository is located in a subdirectory "
+"named :file:`pybind11` and that the code is located in a file named "
+":file:`example.cpp`. The CMake command ``add_subdirectory`` will import "
+"the pybind11 project which provides the ``pybind11_add_module`` function."
+" It will take care of all the details needed to build a Python extension "
+"module on any platform."
+msgstr ""
+
+#: ../../compiling.rst:256
+msgid ""
+"A working sample project, including a way to invoke CMake from "
+":file:`setup.py` for PyPI integration, can be found in the "
+"[cmake_example]_  repository."
+msgstr ""
+
+#: ../../compiling.rst:259
+msgid "https://github.com/pybind/cmake_example"
+msgstr ""
+
+#: ../../compiling.rst:261
+msgid "CMake 3.4+ is required."
+msgstr ""
+
+#: ../../compiling.rst:264
+msgid "Further information can be found at :doc:`cmake/index`."
+msgstr ""
+
+#: ../../compiling.rst:267
+msgid "pybind11_add_module"
+msgstr ""
+
+#: ../../compiling.rst:269
+msgid ""
+"To ease the creation of Python extension modules, pybind11 provides a "
+"CMake function with the following signature:"
+msgstr ""
+
+#: ../../compiling.rst:277
+msgid ""
+"This function behaves very much like CMake's builtin ``add_library`` (in "
+"fact, it's a wrapper function around that command). It will add a library"
+" target called ``<name>`` to be built from the listed source files. In "
+"addition, it will take care of all the Python-specific compiler and "
+"linker flags as well as the OS- and Python-version-specific file "
+"extension. The produced target ``<name>`` can be further manipulated with"
+" regular CMake commands."
+msgstr ""
+
+#: ../../compiling.rst:284
+msgid ""
+"``MODULE`` or ``SHARED`` may be given to specify the type of library. If "
+"no type is given, ``MODULE`` is used by default which ensures the "
+"creation of a Python-exclusive module. Specifying ``SHARED`` will create "
+"a more traditional dynamic library which can also be linked from "
+"elsewhere. ``EXCLUDE_FROM_ALL`` removes this target from the default "
+"build (see CMake docs for details)."
+msgstr ""
+
+#: ../../compiling.rst:290
+msgid ""
+"Since pybind11 is a template library, ``pybind11_add_module`` adds "
+"compiler flags to ensure high quality code generation without bloat "
+"arising from long symbol names and duplication of code in different "
+"translation units. It sets default visibility to *hidden*, which is "
+"required for some pybind11 features and functionality when attempting to "
+"load multiple pybind11 modules compiled under different pybind11 "
+"versions.  It also adds additional flags enabling LTO (Link Time "
+"Optimization) and strip unneeded symbols. See the :ref:`FAQ entry "
+"<faq:symhidden>` for a more detailed explanation. These latter "
+"optimizations are never applied in ``Debug`` mode.  If ``NO_EXTRAS`` is "
+"given, they will always be disabled, even in ``Release`` mode. However, "
+"this will result in code bloat and is generally not recommended."
+msgstr ""
+
+#: ../../compiling.rst:302
+msgid ""
+"As stated above, LTO is enabled by default. Some newer compilers also "
+"support different flavors of LTO such as `ThinLTO`_. Setting ``THIN_LTO``"
+" will cause the function to prefer this flavor if available. The function"
+" falls back to regular LTO if ``-flto=thin`` is not available. If "
+"``CMAKE_INTERPROCEDURAL_OPTIMIZATION`` is set (either ``ON`` or ``OFF``),"
+" then that will be respected instead of the built-in flag search."
+msgstr ""
+
+#: ../../compiling.rst:311
+msgid ""
+"If you want to set the property form on targets or the "
+"``CMAKE_INTERPROCEDURAL_OPTIMIZATION_<CONFIG>`` versions of this, you "
+"should still use ``set(CMAKE_INTERPROCEDURAL_OPTIMIZATION OFF)`` "
+"(otherwise a no-op) to disable pybind11's ipo flags."
+msgstr ""
+
+#: ../../compiling.rst:316
+#, python-format
+msgid ""
+"The ``OPT_SIZE`` flag enables size-based optimization equivalent to the "
+"standard ``/Os`` or ``-Os`` compiler flags and the ``MinSizeRel`` build "
+"type, which avoid optimizations that that can substantially increase the "
+"size of the resulting binary. This flag is particularly useful in "
+"projects that are split into performance-critical parts and associated "
+"bindings. In this case, we can compile the project in release mode (and "
+"hence, optimize performance globally), and specify ``OPT_SIZE`` for the "
+"binding target, where size might be the main concern as performance is "
+"often less critical here. A ~25% size reduction has been observed in "
+"practice. This flag only changes the optimization behavior at a per-"
+"target level and takes precedence over the global CMake build type "
+"(``Release``, ``RelWithDebInfo``) except for ``Debug`` builds, where "
+"optimizations remain disabled."
+msgstr ""
+
+#: ../../compiling.rst:332
+msgid "Configuration variables"
+msgstr ""
+
+#: ../../compiling.rst:334
+msgid ""
+"By default, pybind11 will compile modules with the compiler default or "
+"the minimum standard required by pybind11, whichever is higher.  You can "
+"set the standard explicitly with `CMAKE_CXX_STANDARD "
+"<https://cmake.org/cmake/help/latest/variable/CMAKE_CXX_STANDARD.html>`_:"
+msgstr ""
+
+#: ../../compiling.rst:345
+msgid ""
+"The variables can also be set when calling CMake from the command line "
+"using the ``-D<variable>=<value>`` flag. You can also manually set "
+"``CXX_STANDARD`` on a target or use ``target_compile_features`` on your "
+"targets - anything that CMake supports."
+msgstr ""
+
+#: ../../compiling.rst:350
+msgid ""
+"Classic Python support: The target Python version can be selected by "
+"setting ``PYBIND11_PYTHON_VERSION`` or an exact Python installation can "
+"be specified with ``PYTHON_EXECUTABLE``.  For example:"
+msgstr ""
+
+#: ../../compiling.rst:366
+msgid "find_package vs. add_subdirectory"
+msgstr ""
+
+#: ../../compiling.rst:368
+msgid ""
+"For CMake-based projects that don't include the pybind11 repository "
+"internally, an external installation can be detected through "
+"``find_package(pybind11)``. See the `Config file`_ docstring for details "
+"of relevant CMake variables."
+msgstr ""
+
+#: ../../compiling.rst:380
+msgid ""
+"Note that ``find_package(pybind11)`` will only work correctly if pybind11"
+" has been correctly installed on the system, e. g. after downloading or "
+"cloning the pybind11 repository  :"
+msgstr ""
+
+#: ../../compiling.rst:399
+msgid ""
+"Once detected, the aforementioned ``pybind11_add_module`` can be employed"
+" as before. The function usage and configuration variables are identical "
+"no matter if pybind11 is added as a subdirectory or found as an installed"
+" package. You can refer to the same [cmake_example]_ repository for a "
+"full sample project -- just swap out ``add_subdirectory`` for "
+"``find_package``."
+msgstr ""
+
+#: ../../compiling.rst:411
+msgid "FindPython mode"
+msgstr ""
+
+#: ../../compiling.rst:413
+msgid ""
+"CMake 3.12+ (3.15+ recommended, 3.18.2+ ideal) added a new module called "
+"FindPython that had a highly improved search algorithm and modern targets"
+" and tools. If you use FindPython, pybind11 will detect this and use the "
+"existing targets instead:"
+msgstr ""
+
+#: ../../compiling.rst:429
+msgid ""
+"You can also use the targets (as listed below) with FindPython. If you "
+"define ``PYBIND11_FINDPYTHON``, pybind11 will perform the FindPython step"
+" for you (mostly useful when building pybind11's own tests, or as a way "
+"to change search algorithms from the CMake invocation, with "
+"``-DPYBIND11_FINDPYTHON=ON``."
+msgstr ""
+
+#: ../../compiling.rst:436
+msgid ""
+"If you use FindPython to multi-target Python versions, use the individual"
+" targets listed below, and avoid targets that directly include Python "
+"parts."
+msgstr ""
+
+#: ../../compiling.rst:439
+msgid ""
+"There are `many ways to hint or force a discovery of a specific Python "
+"installation "
+"<https://cmake.org/cmake/help/latest/module/FindPython.html>`_), setting "
+"``Python_ROOT_DIR`` may be the most common one (though with "
+"virtualenv/venv support, and Conda support, this tends to find the "
+"correct Python version more often than the old system did)."
+msgstr ""
+
+#: ../../compiling.rst:447
+msgid ""
+"When the Python libraries (i.e. ``libpythonXX.a`` and ``libpythonXX.so`` "
+"on Unix) are not available, as is the case on a manylinux image, the "
+"``Development`` component will not be resolved by ``FindPython``. When "
+"not using the embedding functionality, CMake 3.18+ allows you to specify "
+"``Development.Module`` instead of ``Development`` to resolve this issue."
+msgstr ""
+
+#: ../../compiling.rst:456
+msgid "Advanced: interface library targets"
+msgstr ""
+
+#: ../../compiling.rst:458
+msgid ""
+"Pybind11 supports modern CMake usage patterns with a set of interface "
+"targets, available in all modes. The targets provided are:"
+msgstr ""
+
+#: ../../compiling.rst:462
+msgid "``pybind11::headers``"
+msgstr ""
+
+#: ../../compiling.rst:462
+msgid "Just the pybind11 headers and minimum compile requirements"
+msgstr ""
+
+#: ../../compiling.rst:465
+msgid "``pybind11::pybind11``"
+msgstr ""
+
+#: ../../compiling.rst:465
+msgid "Python headers + ``pybind11::headers``"
+msgstr ""
+
+#: ../../compiling.rst:468
+msgid "``pybind11::python_link_helper``"
+msgstr ""
+
+#: ../../compiling.rst:468
+msgid "Just the \"linking\" part of pybind11:module"
+msgstr ""
+
+#: ../../compiling.rst:471
+msgid "``pybind11::module``"
+msgstr ""
+
+#: ../../compiling.rst:471
+msgid ""
+"Everything for extension modules - ``pybind11::pybind11`` + "
+"``Python::Module`` (FindPython CMake 3.15+) or "
+"``pybind11::python_link_helper``"
+msgstr ""
+
+#: ../../compiling.rst:474
+msgid "``pybind11::embed``"
+msgstr ""
+
+#: ../../compiling.rst:474
+msgid ""
+"Everything for embedding the Python interpreter - ``pybind11::pybind11`` "
+"+ ``Python::Python`` (FindPython) or Python libs"
+msgstr ""
+
+#: ../../compiling.rst:477
+msgid "``pybind11::lto`` / ``pybind11::thin_lto``"
+msgstr ""
+
+#: ../../compiling.rst:477
+msgid ""
+"An alternative to `INTERPROCEDURAL_OPTIMIZATION` for adding link-time "
+"optimization."
+msgstr ""
+
+#: ../../compiling.rst:480
+msgid "``pybind11::windows_extras``"
+msgstr ""
+
+#: ../../compiling.rst:480
+msgid "``/bigobj`` and ``/mp`` for MSVC."
+msgstr ""
+
+#: ../../compiling.rst:483
+msgid "``pybind11::opt_size``"
+msgstr ""
+
+#: ../../compiling.rst:483
+msgid ""
+"``/Os`` for MSVC, ``-Os`` for other compilers. Does nothing for debug "
+"builds."
+msgstr ""
+
+#: ../../compiling.rst:485
+msgid "Two helper functions are also provided:"
+msgstr ""
+
+#: ../../compiling.rst:488
+msgid "``pybind11_strip(target)``"
+msgstr ""
+
+#: ../../compiling.rst:488
+msgid "Strips a target (uses ``CMAKE_STRIP`` after the target is built)"
+msgstr ""
+
+#: ../../compiling.rst:491
+msgid "``pybind11_extension(target)``"
+msgstr ""
+
+#: ../../compiling.rst:491
+msgid "Sets the correct extension (with SOABI) for a target."
+msgstr ""
+
+#: ../../compiling.rst:493
+msgid ""
+"You can use these targets to build complex applications. For example, the"
+" ``add_python_module`` function is identical to:"
+msgstr ""
+
+#: ../../compiling.rst:516
+msgid ""
+"Instead of setting properties, you can set ``CMAKE_*`` variables to "
+"initialize these correctly."
+msgstr ""
+
+#: ../../compiling.rst:520
+msgid ""
+"Since pybind11 is a metatemplate library, it is crucial that certain "
+"compiler flags are provided to ensure high quality code generation. In "
+"contrast to the ``pybind11_add_module()`` command, the CMake interface "
+"provides a *composable* set of targets to ensure that you retain "
+"flexibility. It can be especially important to provide or set these "
+"properties; the :ref:`FAQ <faq:symhidden>` contains an explanation on why"
+" these are needed."
+msgstr ""
+
+#: ../../compiling.rst:532
+msgid "Advanced: NOPYTHON mode"
+msgstr ""
+
+#: ../../compiling.rst:534
+msgid ""
+"If you want complete control, you can set ``PYBIND11_NOPYTHON`` to "
+"completely disable Python integration (this also happens if you run "
+"``FindPython2`` and ``FindPython3`` without running ``FindPython``). This"
+" gives you complete freedom to integrate into an existing system (like "
+"`Scikit-Build's <https://scikit-build.readthedocs.io>`_ "
+"``PythonExtensions``). ``pybind11_add_module`` and ``pybind11_extension``"
+" will be unavailable, and the targets will be missing any Python specific"
+" behavior."
+msgstr ""
+
+#: ../../compiling.rst:545
+msgid "Embedding the Python interpreter"
+msgstr ""
+
+#: ../../compiling.rst:547
+msgid ""
+"In addition to extension modules, pybind11 also supports embedding Python"
+" into a C++ executable or library. In CMake, simply link with the "
+"``pybind11::embed`` target. It provides everything needed to get the "
+"interpreter running. The Python headers and libraries are attached to the"
+" target. Unlike ``pybind11::module``, there is no need to manually set "
+"any additional properties here. For more information about usage in C++, "
+"see :doc:`/advanced/embedding`."
+msgstr ""
+
+#: ../../compiling.rst:567
+msgid "Building manually"
+msgstr ""
+
+#: ../../compiling.rst:569
+msgid ""
+"pybind11 is a header-only library, hence it is not necessary to link "
+"against any special libraries and there are no intermediate (magic) "
+"translation steps."
+msgstr ""
+
+#: ../../compiling.rst:572
+msgid ""
+"On Linux, you can compile an example such as the one given in "
+":ref:`simple_example` using the following command:"
+msgstr ""
+
+#: ../../compiling.rst:579
+msgid ""
+"The ``python3 -m pybind11 --includes`` command fetches the include paths "
+"for both pybind11 and Python headers. This assumes that pybind11 has been"
+" installed using ``pip`` or ``conda``. If it hasn't, you can also "
+"manually specify ``-I <path-to-pybind11>/include`` together with the "
+"Python includes path ``python3-config --includes``."
+msgstr ""
+
+#: ../../compiling.rst:585
+msgid ""
+"On macOS: the build command is almost the same but it also requires "
+"passing the ``-undefined dynamic_lookup`` flag so as to ignore missing "
+"symbols when building the module:"
+msgstr ""
+
+#: ../../compiling.rst:593
+msgid ""
+"In general, it is advisable to include several additional build "
+"parameters that can considerably reduce the size of the created binary. "
+"Refer to section :ref:`cmake` for a detailed example of a suitable cross-"
+"platform CMake-based build system that works on all platforms including "
+"Windows."
+msgstr ""
+
+#: ../../compiling.rst:600
+msgid ""
+"On Linux and macOS, it's better to (intentionally) not link against "
+"``libpython``. The symbols will be resolved when the extension library is"
+" loaded into a Python binary. This is preferable because you might have "
+"several different installations of a given Python version (e.g. the "
+"system-provided Python, and one that ships with a piece of commercial "
+"software). In this way, the plugin will work with both versions, instead "
+"of possibly importing a second Python library into a process that already"
+" contains one (which will lead to a segfault)."
+msgstr ""
+
+#: ../../compiling.rst:611
+msgid "Building with Bazel"
+msgstr ""
+
+#: ../../compiling.rst:613
+msgid ""
+"You can build with the Bazel build system using the `pybind11_bazel "
+"<https://github.com/pybind/pybind11_bazel>`_ repository."
+msgstr ""
+
+#: ../../compiling.rst:617
+msgid "Generating binding code automatically"
+msgstr ""
+
+#: ../../compiling.rst:619
+msgid ""
+"The ``Binder`` project is a tool for automatic generation of pybind11 "
+"binding code by introspecting existing C++ codebases using LLVM/Clang. "
+"See the [binder]_ documentation for details."
+msgstr ""
+
+#: ../../compiling.rst:623
+msgid "http://cppbinder.readthedocs.io/en/latest/about.html"
+msgstr ""
+
+#: ../../compiling.rst:625
+msgid ""
+"[AutoWIG]_ is a Python library that wraps automatically compiled "
+"libraries into high-level languages. It parses C++ code using LLVM/Clang "
+"technologies and generates the wrappers using the Mako templating engine."
+" The approach is automatic, extensible, and applies to very complex C++ "
+"libraries, composed of thousands of classes or incorporating modern meta-"
+"programming constructs."
+msgstr ""
+
+#: ../../compiling.rst:631
+msgid "https://github.com/StatisKit/AutoWIG"
+msgstr ""
+
+#: ../../compiling.rst:633
+msgid ""
+"[robotpy-build]_ is a is a pure python, cross platform build tool that "
+"aims to simplify creation of python wheels for pybind11 projects, and "
+"provide cross-project dependency management. Additionally, it is able to "
+"autogenerate customizable pybind11-based wrappers by parsing C++ header "
+"files."
+msgstr ""
+
+#: ../../compiling.rst:638
+msgid "https://robotpy-build.readthedocs.io"
+msgstr ""
+

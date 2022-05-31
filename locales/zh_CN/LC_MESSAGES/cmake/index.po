@@ -1,0 +1,377 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2017, Wenzel Jakob
+# This file is distributed under the same license as the pybind11 package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pybind11 2.10.0.dev1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-05-31 12:45+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.10.1\n"
+
+#: ../../cmake/index.rst:2
+msgid "CMake helpers"
+msgstr ""
+
+#: ../../cmake/index.rst:4
+msgid ""
+"Pybind11 can be used with ``add_subdirectory(extern/pybind11)``, or from "
+"an install with ``find_package(pybind11 CONFIG)``. The interface provided"
+" in either case is functionally identical."
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:4
+msgid "pybind11Config.cmake"
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:7
+msgid "Exported variables"
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:9
+msgid "This module sets the following variables in your project:"
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:11
+msgid "``pybind11_FOUND``"
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:12
+msgid "true if pybind11 and all required components found on the system"
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:13
+msgid "``pybind11_VERSION``"
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:14
+msgid "pybind11 version in format Major.Minor.Release"
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:15
+msgid "``pybind11_VERSION_TYPE``"
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:16
+msgid "pybind11 version type (``dev*`` or empty for a release)"
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:17
+msgid "``pybind11_INCLUDE_DIRS``"
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:18
+msgid "Directories where pybind11 and python headers are located."
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:19
+msgid "``pybind11_INCLUDE_DIR``"
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:20
+msgid "Directory where pybind11 headers are located."
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:21
+msgid "``pybind11_DEFINITIONS``"
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:22
+msgid "Definitions necessary to use pybind11, namely USING_pybind11."
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:23
+msgid "``pybind11_LIBRARIES``"
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:24
+msgid "Compile flags and python libraries (as needed) to link against."
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:26
+msgid "``pybind11_LIBRARY``"
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:26
+msgid "Empty."
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:28
+msgid "Available components: None"
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:32
+msgid "Exported targets"
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:34
+msgid ""
+"If pybind11 is found, this module defines the following ``IMPORTED`` "
+"interface library targets:"
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:37
+msgid "``pybind11::module``"
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:38
+msgid "for extension modules."
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:40
+msgid "``pybind11::embed``"
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:40
+msgid "for embedding the Python interpreter."
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:42
+msgid ""
+"Python headers, libraries (as needed by platform), and the C++ standard "
+"are attached to the target."
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:45
+msgid ""
+"Advanced targets are also supplied - these are primary for users building"
+" complex applications, and they are available in all modes:"
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:48
+msgid "``pybind11::headers``"
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:49
+msgid "Just the pybind11 headers and minimum compile requirements."
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:50
+msgid "``pybind11::pybind11``"
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:51
+msgid "Python headers too."
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:52
+msgid "``pybind11::python_link_helper``"
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:53
+msgid "Just the \"linking\" part of ``pybind11:module``, for CMake < 3.15."
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:54
+msgid "``pybind11::thin_lto``"
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:55
+msgid "An alternative to ``INTERPROCEDURAL_OPTIMIZATION``."
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:56
+msgid "``pybind11::lto``"
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:57
+msgid ""
+"An alternative to ``INTERPROCEDURAL_OPTIMIZATION`` (also avoids thin LTO "
+"on clang)."
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:59
+msgid "``pybind11::windows_extras``"
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:59
+msgid "Adds bigobj and mp for MSVC."
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:62
+msgid "Modes"
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:64
+msgid ""
+"There are two modes provided; classic, which is built on the old Python "
+"discovery packages in CMake, or the new FindPython mode, which uses "
+"FindPython from 3.12+ forward (3.15+ _highly_ recommended)."
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:69
+msgid "New FindPython mode"
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:71
+msgid ""
+"To activate this mode, either call ``find_package(Python COMPONENTS "
+"Interpreter Development)`` before finding this package, or set the "
+"``PYBIND11_FINDPYTHON`` variable to ON. In this mode, you can either use "
+"the basic targets, or use the FindPython tools:"
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:91
+msgid ""
+"If you build targets yourself, you may be interested in stripping the "
+"output for reduced size; this is the one other feature that the helper "
+"function gives you."
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:95
+msgid "Classic mode"
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:97
+msgid ""
+"Set PythonLibsNew variables to influence python detection and "
+"CMAKE_CXX_STANDARD to influence standard setting."
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:114
+msgid "Hints"
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:116
+msgid "The following variables can be set to guide the search for this package:"
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:118
+msgid "``pybind11_DIR``"
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:119
+msgid "CMake variable, set to directory containing this Config file."
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:120
+msgid "``CMAKE_PREFIX_PATH``"
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:121
+msgid "CMake variable, set to root directory of this package."
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:122
+msgid "``PATH``"
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:123
+msgid "Environment variable, set to bin directory of this package."
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:126
+msgid "``CMAKE_DISABLE_FIND_PACKAGE_pybind11``"
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:125
+msgid ""
+"CMake variable, disables ``find_package(pybind11)`` when not "
+"``REQUIRED``, perhaps to force internal build."
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:129
+msgid "Commands"
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:132
+msgid "pybind11_add_module"
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:134
+msgid ""
+"This module defines the following commands to assist with creating Python"
+" modules:"
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:144
+msgid ""
+"Add a module and setup all helpers. You can select the type of the "
+"library; the default is ``MODULE``. There are several options:"
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:147
+msgid "``OPT_SIZE``"
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:148
+msgid "Optimize for size, even if the ``CMAKE_BUILD_TYPE`` is not ``MinSizeRel``."
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:150
+msgid "``THIN_LTO``"
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:150
+msgid ""
+"Use thin TLO instead of regular if there's a choice (pybind11's selection"
+" is disabled if ``CMAKE_INTERPROCEDURAL_OPTIMIZATIONS`` is set)."
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:152
+msgid "``WITHOUT_SOABI``"
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:153
+msgid "Disable the SOABI component (``PYBIND11_NEWPYTHON`` mode only)."
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:155
+msgid "``NO_EXTRAS``"
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:155
+msgid "Disable all extras, exit immediately after making the module."
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:158
+msgid "pybind11_strip"
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:164
+msgid ""
+"Strip a target after building it (linux/macOS), called by "
+"``pybind11_add_module``."
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:167
+msgid "pybind11_extension"
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:173
+msgid ""
+"Sets the Python extension name correctly for Python on your platform, "
+"called by ``pybind11_add_module``."
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:177
+msgid "pybind11_find_import(module)"
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:183
+msgid ""
+"See if a module is installed. Use the registered name (the one on PyPI). "
+"You can specify a ``VERSION``, and you can specify ``REQUIRED`` or "
+"``QUIET``. Only available if ``NOPYTHON`` mode is not active.  Sets "
+"``module_VERSION`` and ``module_FOUND``. Caches the result once a valid "
+"install is found."
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:189
+msgid "Suggested usage"
+msgstr ""
+
+#: ../../../tools/pybind11Config.cmake.in:191
+msgid ""
+"Using ``find_package`` with version info is not recommended except for "
+"release versions."
+msgstr ""
+

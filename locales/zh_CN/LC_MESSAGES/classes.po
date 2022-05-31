@@ -1,0 +1,349 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2017, Wenzel Jakob
+# This file is distributed under the same license as the pybind11 package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pybind11 2.10.0.dev1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-05-31 12:45+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.10.1\n"
+
+#: ../../classes.rst:4
+msgid "Object-oriented code"
+msgstr ""
+
+#: ../../classes.rst:7
+msgid "Creating bindings for a custom type"
+msgstr ""
+
+#: ../../classes.rst:9
+msgid ""
+"Let's now look at a more complex example where we'll create bindings for "
+"a custom C++ data structure named ``Pet``. Its definition is given below:"
+msgstr ""
+
+#: ../../classes.rst:22
+msgid "The binding code for ``Pet`` looks as follows:"
+msgstr ""
+
+#: ../../classes.rst:37
+msgid ""
+":class:`class_` creates bindings for a C++ *class* or *struct*-style data"
+" structure. :func:`init` is a convenience function that takes the types "
+"of a constructor's parameters as template arguments and wraps the "
+"corresponding constructor (see the :ref:`custom_constructors` section for"
+" details). An interactive Python session demonstrating this example is "
+"shown below:"
+msgstr ""
+
+#: ../../classes.rst:58
+msgid ""
+"Static member functions can be bound in the same way using "
+":func:`class_::def_static`."
+msgstr ""
+
+#: ../../classes.rst:62
+msgid "Keyword and default arguments"
+msgstr ""
+
+#: ../../classes.rst:63
+msgid ""
+"It is possible to specify keyword and default arguments using the syntax "
+"discussed in the previous chapter. Refer to the sections "
+":ref:`keyword_args` and :ref:`default_args` for details."
+msgstr ""
+
+#: ../../classes.rst:68
+msgid "Binding lambda functions"
+msgstr ""
+
+#: ../../classes.rst:70
+msgid ""
+"Note how ``print(p)`` produced a rather useless summary of our data "
+"structure in the example above:"
+msgstr ""
+
+#: ../../classes.rst:77
+msgid ""
+"To address this, we could bind a utility function that returns a human-"
+"readable summary to the special method slot named ``__repr__``. "
+"Unfortunately, there is no suitable functionality in the ``Pet`` data "
+"structure, and it would be nice if we did not have to change it. This can"
+" easily be accomplished by binding a Lambda function instead:"
+msgstr ""
+
+#: ../../classes.rst:95
+msgid ""
+"Both stateless [#f1]_ and stateful lambda closures are supported by "
+"pybind11. With the above change, the same Python code now produces the "
+"following output:"
+msgstr ""
+
+#: ../../classes.rst:103
+msgid ""
+"Stateless closures are those with an empty pair of brackets ``[]`` as the"
+" capture object."
+msgstr ""
+
+#: ../../classes.rst:108
+msgid "Instance and static fields"
+msgstr ""
+
+#: ../../classes.rst:110
+msgid ""
+"We can also directly expose the ``name`` field using the "
+":func:`class_::def_readwrite` method. A similar "
+":func:`class_::def_readonly` method also exists for ``const`` fields."
+msgstr ""
+
+#: ../../classes.rst:121
+msgid "This makes it possible to write"
+msgstr ""
+
+#: ../../classes.rst:132
+msgid ""
+"Now suppose that ``Pet::name`` was a private internal variable that can "
+"only be accessed via setters and getters."
+msgstr ""
+
+#: ../../classes.rst:146
+msgid ""
+"In this case, the method :func:`class_::def_property` "
+"(:func:`class_::def_property_readonly` for read-only data) can be used to"
+" provide a field-like interface within Python that will transparently "
+"call the setter and getter functions:"
+msgstr ""
+
+#: ../../classes.rst:158
+msgid ""
+"Write only properties can be defined by passing ``nullptr`` as the input "
+"for the read function."
+msgstr ""
+
+#: ../../classes.rst:163
+msgid ""
+"Similar functions :func:`class_::def_readwrite_static`, "
+":func:`class_::def_readonly_static` :func:`class_::def_property_static`, "
+"and :func:`class_::def_property_readonly_static` are provided for binding"
+" static variables and properties. Please also see the section on "
+":ref:`static_properties` in the advanced part of the documentation."
+msgstr ""
+
+#: ../../classes.rst:170
+msgid "Dynamic attributes"
+msgstr ""
+
+#: ../../classes.rst:172
+msgid "Native Python classes can pick up new attributes dynamically:"
+msgstr ""
+
+#: ../../classes.rst:183
+msgid ""
+"By default, classes exported from C++ do not support this and the only "
+"writable attributes are the ones explicitly defined using "
+":func:`class_::def_readwrite` or :func:`class_::def_property`."
+msgstr ""
+
+#: ../../classes.rst:193
+msgid "Trying to set any other attribute results in an error:"
+msgstr ""
+
+#: ../../classes.rst:202
+msgid ""
+"To enable dynamic attributes for C++ classes, the "
+":class:`py::dynamic_attr` tag must be added to the :class:`py::class_` "
+"constructor:"
+msgstr ""
+
+#: ../../classes.rst:211
+msgid "Now everything works as expected:"
+msgstr ""
+
+#: ../../classes.rst:221
+msgid ""
+"Note that there is a small runtime cost for a class with dynamic "
+"attributes. Not only because of the addition of a ``__dict__``, but also "
+"because of more expensive garbage collection tracking which must be "
+"activated to resolve possible circular references. Native Python classes "
+"incur this same cost by default, so this is not anything to worry about. "
+"By default, pybind11 classes are more efficient than native Python "
+"classes. Enabling dynamic attributes just brings them on par."
+msgstr ""
+
+#: ../../classes.rst:232
+msgid "Inheritance and automatic downcasting"
+msgstr ""
+
+#: ../../classes.rst:234
+msgid ""
+"Suppose now that the example consists of two data structures with an "
+"inheritance relationship:"
+msgstr ""
+
+#: ../../classes.rst:249
+msgid ""
+"There are two different ways of indicating a hierarchical relationship to"
+" pybind11: the first specifies the C++ base class as an extra template "
+"parameter of the :class:`class_`:"
+msgstr ""
+
+#: ../../classes.rst:264
+msgid ""
+"Alternatively, we can also assign a name to the previously bound ``Pet`` "
+":class:`class_` object and reference it when binding the ``Dog`` class:"
+msgstr ""
+
+#: ../../classes.rst:278
+msgid ""
+"Functionality-wise, both approaches are equivalent. Afterwards, instances"
+" will expose fields and methods of both types:"
+msgstr ""
+
+#: ../../classes.rst:289
+msgid ""
+"The C++ classes defined above are regular non-polymorphic types with an "
+"inheritance relationship. This is reflected in Python:"
+msgstr ""
+
+#: ../../classes.rst:305
+msgid ""
+"The function returned a ``Dog`` instance, but because it's a non-"
+"polymorphic type behind a base pointer, Python only sees a ``Pet``. In "
+"C++, a type is only considered polymorphic if it has at least one virtual"
+" function and pybind11 will automatically recognize this:"
+msgstr ""
+
+#: ../../classes.rst:337
+msgid ""
+"Given a pointer to a polymorphic base, pybind11 performs automatic "
+"downcasting to the actual derived type. Note that this goes beyond the "
+"usual situation in C++: we don't just get access to the virtual functions"
+" of the base, we get the concrete derived type including functions and "
+"attributes that the base type may not even be aware of."
+msgstr ""
+
+#: ../../classes.rst:345
+msgid ""
+"For more information about polymorphic behavior see "
+":ref:`overriding_virtuals`."
+msgstr ""
+
+#: ../../classes.rst:349
+msgid "Overloaded methods"
+msgstr ""
+
+#: ../../classes.rst:351
+msgid ""
+"Sometimes there are several overloaded C++ methods with the same name "
+"taking different kinds of input arguments:"
+msgstr ""
+
+#: ../../classes.rst:366
+msgid ""
+"Attempting to bind ``Pet::set`` will cause an error since the compiler "
+"does not know which method the user intended to select. We can "
+"disambiguate by casting them to function pointers. Binding multiple "
+"functions to the same Python name automatically creates a chain of "
+"function overloads that will be tried in sequence."
+msgstr ""
+
+#: ../../classes.rst:379
+msgid "The overload signatures are also visible in the method's docstring:"
+msgstr ""
+
+#: ../../classes.rst:400
+msgid ""
+"If you have a C++14 compatible compiler [#cpp14]_, you can use an "
+"alternative syntax to cast the overloaded function:"
+msgstr ""
+
+#: ../../classes.rst:409
+msgid ""
+"Here, ``py::overload_cast`` only requires the parameter types to be "
+"specified. The return type and class are deduced. This avoids the "
+"additional noise of ``void (Pet::*)()`` as seen in the raw cast. If a "
+"function is overloaded based on constness, the ``py::const_`` tag should "
+"be used:"
+msgstr ""
+
+#: ../../classes.rst:425
+msgid ""
+"If you prefer the ``py::overload_cast`` syntax but have a C++11 "
+"compatible compiler only, you can use ``py::detail::overload_cast_impl`` "
+"with an additional set of parentheses:"
+msgstr ""
+
+#: ../../classes.rst:437
+msgid "A compiler which supports the ``-std=c++14`` flag."
+msgstr ""
+
+#: ../../classes.rst:441
+msgid ""
+"To define multiple overloaded constructors, simply declare one after the "
+"other using the ``.def(py::init<...>())`` syntax. The existing machinery "
+"for specifying keyword and default arguments also works."
+msgstr ""
+
+#: ../../classes.rst:446
+msgid "Enumerations and internal types"
+msgstr ""
+
+#: ../../classes.rst:448
+msgid ""
+"Let's now suppose that the example class contains internal types like "
+"enumerations, e.g.:"
+msgstr ""
+
+#: ../../classes.rst:469
+msgid "The binding code for this example looks as follows:"
+msgstr ""
+
+#: ../../classes.rst:490
+msgid ""
+"To ensure that the nested types ``Kind`` and ``Attributes`` are created "
+"within the scope of ``Pet``, the ``pet`` :class:`class_` instance must be"
+" supplied to the :class:`enum_` and :class:`class_` constructor. The "
+":func:`enum_::export_values` function exports the enum entries into the "
+"parent scope, which should be skipped for newer C++11-style strongly "
+"typed enums."
+msgstr ""
+
+#: ../../classes.rst:504
+msgid ""
+"The entries defined by the enumeration type are exposed in the "
+"``__members__`` property:"
+msgstr ""
+
+#: ../../classes.rst:511
+msgid ""
+"The ``name`` property returns the name of the enum value as a unicode "
+"string."
+msgstr ""
+
+#: ../../classes.rst:515
+msgid ""
+"It is also possible to use ``str(enum)``, however these accomplish "
+"different goals. The following shows how these two approaches differ."
+msgstr ""
+
+#: ../../classes.rst:531
+msgid ""
+"When the special tag ``py::arithmetic()`` is specified to the ``enum_`` "
+"constructor, pybind11 creates an enumeration that also supports "
+"rudimentary arithmetic and bit-level operations like comparisons, and, "
+"or, xor, negation, etc."
+msgstr ""
+
+#: ../../classes.rst:541
+msgid "By default, these are omitted to conserve space."
+msgstr ""
+

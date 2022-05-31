@@ -1,0 +1,184 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2017, Wenzel Jakob
+# This file is distributed under the same license as the pybind11 package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pybind11 2.10.0.dev1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-05-31 12:45+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.10.1\n"
+
+#: ../../advanced/smart_ptrs.rst:2
+msgid "Smart pointers"
+msgstr ""
+
+#: ../../advanced/smart_ptrs.rst:5
+msgid "std::unique_ptr"
+msgstr ""
+
+#: ../../advanced/smart_ptrs.rst:7
+msgid ""
+"Given a class ``Example`` with Python bindings, it's possible to return "
+"instances wrapped in C++11 unique pointers, like so"
+msgstr ""
+
+#: ../../advanced/smart_ptrs.rst:18
+msgid ""
+"In other words, there is nothing special that needs to be done. While "
+"returning unique pointers in this way is allowed, it is *illegal* to use "
+"them as function arguments. For instance, the following function "
+"signature cannot be processed by pybind11."
+msgstr ""
+
+#: ../../advanced/smart_ptrs.rst:27
+msgid ""
+"The above signature would imply that Python needs to give up ownership of"
+" an object that is passed to this function, which is generally not "
+"possible (for instance, the object might be referenced elsewhere)."
+msgstr ""
+
+#: ../../advanced/smart_ptrs.rst:32
+msgid "std::shared_ptr"
+msgstr ""
+
+#: ../../advanced/smart_ptrs.rst:34
+msgid ""
+"The binding generator for classes, :class:`class_`, can be passed a "
+"template type that denotes a special *holder* type that is used to manage"
+" references to the object.  If no such holder type template argument is "
+"given, the default for a type named ``Type`` is "
+"``std::unique_ptr<Type>``, which means that the object is deallocated "
+"when Python's reference count goes to zero."
+msgstr ""
+
+#: ../../advanced/smart_ptrs.rst:40
+msgid ""
+"It is possible to switch to other types of reference counting wrappers or"
+" smart pointers, which is useful in codebases that rely on them. For "
+"instance, the following snippet causes ``std::shared_ptr`` to be used "
+"instead."
+msgstr ""
+
+#: ../../advanced/smart_ptrs.rst:48
+msgid ""
+"Note that any particular class can only be associated with a single "
+"holder type."
+msgstr ""
+
+#: ../../advanced/smart_ptrs.rst:50
+msgid ""
+"One potential stumbling block when using holder types is that they need "
+"to be applied consistently. Can you guess what's broken about the "
+"following binding code?"
+msgstr ""
+
+#: ../../advanced/smart_ptrs.rst:74
+msgid ""
+"The following Python code will cause undefined behavior (and likely a "
+"segmentation fault)."
+msgstr ""
+
+#: ../../advanced/smart_ptrs.rst:83
+msgid ""
+"The problem is that ``Parent::get_child()`` returns a pointer to an "
+"instance of ``Child``, but the fact that this instance is already managed"
+" by ``std::shared_ptr<...>`` is lost when passing raw pointers. In this "
+"case, pybind11 will create a second independent ``std::shared_ptr<...>`` "
+"that also claims ownership of the pointer. In the end, the object will be"
+" freed **twice** since these shared pointers have no way of knowing about"
+" each other."
+msgstr ""
+
+#: ../../advanced/smart_ptrs.rst:90
+msgid "There are two ways to resolve this issue:"
+msgstr ""
+
+#: ../../advanced/smart_ptrs.rst:92
+msgid ""
+"For types that are managed by a smart pointer class, never use raw "
+"pointers in function arguments or return values. In other words: always "
+"consistently wrap pointers into their designated holder types (such as "
+"``std::shared_ptr<...>``). In this case, the signature of ``get_child()``"
+" should be modified as follows:"
+msgstr ""
+
+#: ../../advanced/smart_ptrs.rst:102
+msgid ""
+"Adjust the definition of ``Child`` by specifying "
+"``std::enable_shared_from_this<T>`` (see cppreference_ for details) as a "
+"base class. This adds a small bit of information to ``Child`` that allows"
+" pybind11 to realize that there is already an existing "
+"``std::shared_ptr<...>`` and communicate with it. In this case, the "
+"declaration of ``Child`` should look as follows:"
+msgstr ""
+
+#: ../../advanced/smart_ptrs.rst:118
+msgid "Custom smart pointers"
+msgstr ""
+
+#: ../../advanced/smart_ptrs.rst:120
+msgid ""
+"pybind11 supports ``std::unique_ptr`` and ``std::shared_ptr`` right out "
+"of the box. For any other custom smart pointer, transparent conversions "
+"can be enabled using a macro invocation similar to the following. It must"
+" be declared at the top namespace level before any binding code:"
+msgstr ""
+
+#: ../../advanced/smart_ptrs.rst:129
+msgid ""
+"The first argument of :func:`PYBIND11_DECLARE_HOLDER_TYPE` should be a "
+"placeholder name that is used as a template parameter of the second "
+"argument. Thus, feel free to use any identifier, but use it consistently "
+"on both sides; also, don't use the name of a type that already exists in "
+"your codebase."
+msgstr ""
+
+#: ../../advanced/smart_ptrs.rst:134
+msgid ""
+"The macro also accepts a third optional boolean parameter that is set to "
+"false by default. Specify"
+msgstr ""
+
+#: ../../advanced/smart_ptrs.rst:141
+msgid ""
+"if ``SmartPtr<T>`` can always be initialized from a ``T*`` pointer "
+"without the risk of inconsistencies (such as multiple independent "
+"``SmartPtr`` instances believing that they are the sole owner of the "
+"``T*`` pointer). A common situation where ``true`` should be passed is "
+"when the ``T`` instances use *intrusive* reference counting."
+msgstr ""
+
+#: ../../advanced/smart_ptrs.rst:147
+msgid "Please take a look at the :ref:`macro_notes` before using this feature."
+msgstr ""
+
+#: ../../advanced/smart_ptrs.rst:149
+msgid ""
+"By default, pybind11 assumes that your custom smart pointer has a "
+"standard interface, i.e. provides a ``.get()`` member function to access "
+"the underlying raw pointer. If this is not the case, pybind11's "
+"``holder_helper`` must be specialized:"
+msgstr ""
+
+#: ../../advanced/smart_ptrs.rst:167
+msgid ""
+"The above specialization informs pybind11 that the custom ``SmartPtr`` "
+"class provides ``.get()`` functionality via ``.getPointer()``."
+msgstr ""
+
+#: ../../advanced/smart_ptrs.rst:172
+msgid ""
+"The file :file:`tests/test_smart_ptr.cpp` contains a complete example "
+"that demonstrates how to work with custom reference-counting holder types"
+" in more detail."
+msgstr ""
+

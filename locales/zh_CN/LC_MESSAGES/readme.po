@@ -1,0 +1,352 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2017, Wenzel Jakob
+# This file is distributed under the same license as the pybind11 package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pybind11 2.10.0.dev1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-05-31 12:45+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.10.1\n"
+
+msgid "pybind11 logo"
+msgstr ""
+
+#: ../../readme.rst:4
+msgid "**pybind11 — Seamless operability between C++11 and Python**"
+msgstr ""
+
+#: ../../readme.rst:6
+msgid ""
+"|Latest Documentation Status| |Stable Documentation Status| |Gitter chat|"
+" |GitHub Discussions| |CI| |Build status|"
+msgstr ""
+
+#: ../../readme.rst
+msgid "Latest Documentation Status"
+msgstr ""
+
+#: ../../readme.rst
+msgid "Stable Documentation Status"
+msgstr ""
+
+#: ../../readme.rst
+msgid "Gitter chat"
+msgstr ""
+
+#: ../../readme.rst
+msgid "GitHub Discussions"
+msgstr ""
+
+#: ../../readme.rst
+msgid "CI"
+msgstr ""
+
+#: ../../readme.rst
+msgid "Build status"
+msgstr ""
+
+#: ../../readme.rst:8
+msgid "|Repology| |PyPI package| |Conda-forge| |Python Versions|"
+msgstr ""
+
+#: ../../readme.rst
+msgid "Repology"
+msgstr ""
+
+#: ../../readme.rst
+msgid "PyPI package"
+msgstr ""
+
+#: ../../readme.rst
+msgid "Conda-forge"
+msgstr ""
+
+#: ../../readme.rst
+msgid "Python Versions"
+msgstr ""
+
+#: ../../readme.rst:10
+msgid ""
+"`Setuptools example <https://github.com/pybind/python_example>`_ • "
+"`Scikit-build example <https://github.com/pybind/scikit_build_example>`_ "
+"• `CMake example <https://github.com/pybind/cmake_example>`_"
+msgstr ""
+
+#: ../../readme.rst:17
+msgid ""
+"**pybind11** is a lightweight header-only library that exposes C++ types "
+"in Python and vice versa, mainly to create Python bindings of existing "
+"C++ code. Its goals and syntax are similar to the excellent `Boost.Python"
+" <http://www.boost.org/doc/libs/1_58_0/libs/python/doc/>`_ library by "
+"David Abrahams: to minimize boilerplate code in traditional extension "
+"modules by inferring type information using compile-time introspection."
+msgstr ""
+
+#: ../../readme.rst:25
+msgid ""
+"The main issue with Boost.Python—and the reason for creating such a "
+"similar project—is Boost. Boost is an enormously large and complex suite "
+"of utility libraries that works with almost every C++ compiler in "
+"existence. This compatibility has its cost: arcane template tricks and "
+"workarounds are necessary to support the oldest and buggiest of compiler "
+"specimens. Now that C++11-compatible compilers are widely available, this"
+" heavy machinery has become an excessively large and unnecessary "
+"dependency."
+msgstr ""
+
+#: ../../readme.rst:34
+msgid ""
+"Think of this library as a tiny self-contained version of Boost.Python "
+"with everything stripped away that isn't relevant for binding generation."
+" Without comments, the core header files only require ~4K lines of code "
+"and depend on Python (3.6+, or PyPy) and the C++ standard library. This "
+"compact implementation was possible thanks to some of the new C++11 "
+"language features (specifically: tuples, lambda functions and variadic "
+"templates). Since its creation, this library has grown beyond "
+"Boost.Python in many ways, leading to dramatically simpler binding code "
+"in many common situations."
+msgstr ""
+
+#: ../../readme.rst:44
+msgid ""
+"Tutorial and reference documentation is provided at "
+"`pybind11.readthedocs.io <https://pybind11.readthedocs.io/en/latest>`_. A"
+" PDF version of the manual is available `here "
+"<https://pybind11.readthedocs.io/_/downloads/en/latest/pdf/>`_. And the "
+"source code is always available at `github.com/pybind/pybind11 "
+"<https://github.com/pybind/pybind11>`_."
+msgstr ""
+
+#: ../../readme.rst:53
+msgid "Core features"
+msgstr ""
+
+#: ../../readme.rst:56
+msgid "pybind11 can map the following core C++ features to Python:"
+msgstr ""
+
+#: ../../readme.rst:58
+msgid ""
+"Functions accepting and returning custom data structures per value, "
+"reference, or pointer"
+msgstr ""
+
+#: ../../readme.rst:60
+msgid "Instance methods and static methods"
+msgstr ""
+
+#: ../../readme.rst:61
+msgid "Overloaded functions"
+msgstr ""
+
+#: ../../readme.rst:62
+msgid "Instance attributes and static attributes"
+msgstr ""
+
+#: ../../readme.rst:63
+msgid "Arbitrary exception types"
+msgstr ""
+
+#: ../../readme.rst:64
+msgid "Enumerations"
+msgstr ""
+
+#: ../../readme.rst:65
+msgid "Callbacks"
+msgstr ""
+
+#: ../../readme.rst:66
+msgid "Iterators and ranges"
+msgstr ""
+
+#: ../../readme.rst:67
+msgid "Custom operators"
+msgstr ""
+
+#: ../../readme.rst:68
+msgid "Single and multiple inheritance"
+msgstr ""
+
+#: ../../readme.rst:69
+msgid "STL data structures"
+msgstr ""
+
+#: ../../readme.rst:70
+msgid "Smart pointers with reference counting like ``std::shared_ptr``"
+msgstr ""
+
+#: ../../readme.rst:71
+msgid "Internal references with correct reference counting"
+msgstr ""
+
+#: ../../readme.rst:72
+msgid ""
+"C++ classes with virtual (and pure virtual) methods can be extended in "
+"Python"
+msgstr ""
+
+#: ../../readme.rst:76
+msgid "Goodies"
+msgstr ""
+
+#: ../../readme.rst:78
+msgid ""
+"In addition to the core functionality, pybind11 provides some extra "
+"goodies:"
+msgstr ""
+
+#: ../../readme.rst:81
+msgid ""
+"Python 3.6+, and PyPy3 7.3 are supported with an implementation-agnostic "
+"interface (pybind11 2.9 was the last version to support Python 2 and "
+"3.5)."
+msgstr ""
+
+#: ../../readme.rst:84
+msgid ""
+"It is possible to bind C++11 lambda functions with captured variables. "
+"The lambda capture data is stored inside the resulting Python function "
+"object."
+msgstr ""
+
+#: ../../readme.rst:88
+msgid ""
+"pybind11 uses C++11 move constructors and move assignment operators "
+"whenever possible to efficiently transfer custom data types."
+msgstr ""
+
+#: ../../readme.rst:91
+msgid ""
+"It's easy to expose the internal storage of custom data types through "
+"Pythons' buffer protocols. This is handy e.g. for fast conversion between"
+" C++ matrix classes like Eigen and NumPy without expensive copy "
+"operations."
+msgstr ""
+
+#: ../../readme.rst:96
+msgid ""
+"pybind11 can automatically vectorize functions so that they are "
+"transparently applied to all entries of one or more NumPy array "
+"arguments."
+msgstr ""
+
+#: ../../readme.rst:100
+msgid ""
+"Python's slice-based access and assignment operations can be supported "
+"with just a few lines of code."
+msgstr ""
+
+#: ../../readme.rst:103
+msgid ""
+"Everything is contained in just a few header files; there is no need to "
+"link against any additional libraries."
+msgstr ""
+
+#: ../../readme.rst:106
+msgid ""
+"Binaries are generally smaller by a factor of at least 2 compared to "
+"equivalent bindings generated by Boost.Python. A recent pybind11 "
+"conversion of PyRosetta, an enormous Boost.Python binding project, "
+"`reported "
+"<https://graylab.jhu.edu/Sergey/2016.RosettaCon/PyRosetta-4.pdf>`_ a "
+"binary size reduction of **5.4x** and compile time reduction by **5.8x**."
+msgstr ""
+
+#: ../../readme.rst:113
+msgid ""
+"Function signatures are precomputed at compile time (using "
+"``constexpr``), leading to smaller binaries."
+msgstr ""
+
+#: ../../readme.rst:116
+msgid ""
+"With little extra effort, C++ types can be pickled and unpickled similar "
+"to regular Python objects."
+msgstr ""
+
+#: ../../readme.rst:120
+msgid "Supported compilers"
+msgstr ""
+
+#: ../../readme.rst:122
+msgid "Clang/LLVM 3.3 or newer (for Apple Xcode's clang, this is 5.0.0 or newer)"
+msgstr ""
+
+#: ../../readme.rst:124
+msgid "GCC 4.8 or newer"
+msgstr ""
+
+#: ../../readme.rst:125
+msgid "Microsoft Visual Studio 2017 or newer"
+msgstr ""
+
+#: ../../readme.rst:126
+msgid "Intel classic C++ compiler 18 or newer (ICC 20.2 tested in CI)"
+msgstr ""
+
+#: ../../readme.rst:127
+msgid "Cygwin/GCC (previously tested on 2.5.1)"
+msgstr ""
+
+#: ../../readme.rst:128
+msgid "NVCC (CUDA 11.0 tested in CI)"
+msgstr ""
+
+#: ../../readme.rst:129
+msgid "NVIDIA PGI (20.9 tested in CI)"
+msgstr ""
+
+#: ../../readme.rst:132
+msgid "About"
+msgstr ""
+
+#: ../../readme.rst:134
+msgid ""
+"This project was created by `Wenzel Jakob "
+"<http://rgl.epfl.ch/people/wjakob>`_. Significant features and/or "
+"improvements to the code were contributed by Jonas Adler, Lori A. Burns, "
+"Sylvain Corlay, Eric Cousineau, Aaron Gokaslan, Ralf Grosse-Kunstleve, "
+"Trent Houliston, Axel Huebl, @hulucc, Yannick Jadoul, Sergey Lyskov Johan"
+" Mabille, Tomasz Miąsko, Dean Moldovan, Ben Pritchard, Jason Rhinelander,"
+" Boris Schäling, Pim Schellart, Henry Schreiner, Ivan Smirnov, Boris "
+"Staletic, and Patrick Stewart."
+msgstr ""
+
+#: ../../readme.rst:142
+msgid ""
+"We thank Google for a generous financial contribution to the continuous "
+"integration infrastructure used by this project."
+msgstr ""
+
+#: ../../readme.rst:147
+msgid "Contributing"
+msgstr ""
+
+#: ../../readme.rst:149
+msgid ""
+"See the `contributing guide "
+"<https://github.com/pybind/pybind11/blob/master/.github/CONTRIBUTING.md>`_"
+" for information on building and contributing to pybind11."
+msgstr ""
+
+#: ../../readme.rst:154
+msgid "License"
+msgstr ""
+
+#: ../../readme.rst:156
+msgid ""
+"pybind11 is provided under a BSD-style license that can be found in the "
+"`LICENSE <https://github.com/pybind/pybind11/blob/master/LICENSE>`_ file."
+" By using, distributing, or contributing to this project, you agree to "
+"the terms and conditions of this license."
+msgstr ""
+

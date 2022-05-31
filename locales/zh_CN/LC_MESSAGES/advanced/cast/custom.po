@@ -1,0 +1,67 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2017, Wenzel Jakob
+# This file is distributed under the same license as the pybind11 package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pybind11 2.10.0.dev1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-05-31 12:45+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.10.1\n"
+
+#: ../../advanced/cast/custom.rst:2
+msgid "Custom type casters"
+msgstr ""
+
+#: ../../advanced/cast/custom.rst:4
+msgid ""
+"In very rare cases, applications may require custom type casters that "
+"cannot be expressed using the abstractions provided by pybind11, thus "
+"requiring raw Python C API calls. This is fairly advanced usage and "
+"should only be pursued by experts who are familiar with the intricacies "
+"of Python reference counting."
+msgstr ""
+
+#: ../../advanced/cast/custom.rst:9
+msgid ""
+"The following snippets demonstrate how this works for a very simple "
+"``inty`` type that that should be convertible from Python types that "
+"provide a ``__int__(self)`` method."
+msgstr ""
+
+#: ../../advanced/cast/custom.rst:21
+msgid ""
+"The following Python snippet demonstrates the intended usage from the "
+"Python side:"
+msgstr ""
+
+#: ../../advanced/cast/custom.rst:34
+msgid ""
+"To register the necessary conversion routines, it is necessary to add an "
+"instantiation of the ``pybind11::detail::type_caster<T>`` template. "
+"Although this is an implementation detail, adding an instantiation of "
+"this type is explicitly allowed."
+msgstr ""
+
+#: ../../advanced/cast/custom.rst:85
+msgid ""
+"A ``type_caster<T>`` defined with ``PYBIND11_TYPE_CASTER(T, ...)`` "
+"requires that ``T`` is default-constructible (``value`` is first default "
+"constructed and then ``load()`` assigns to it)."
+msgstr ""
+
+#: ../../advanced/cast/custom.rst:91
+msgid ""
+"When using custom type casters, it's important to declare them "
+"consistently in every compilation unit of the Python extension module. "
+"Otherwise, undefined behavior can ensue."
+msgstr ""
+

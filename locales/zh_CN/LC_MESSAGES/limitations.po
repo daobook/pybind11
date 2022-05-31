@@ -1,0 +1,136 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2017, Wenzel Jakob
+# This file is distributed under the same license as the pybind11 package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pybind11 2.10.0.dev1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-05-31 12:45+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.10.1\n"
+
+#: ../../limitations.rst:2
+msgid "Limitations"
+msgstr ""
+
+#: ../../limitations.rst:5
+msgid "Design choices"
+msgstr ""
+
+#: ../../limitations.rst:7
+msgid ""
+"pybind11 strives to be a general solution to binding generation, but it "
+"also has certain limitations:"
+msgstr ""
+
+#: ../../limitations.rst:10
+msgid ""
+"pybind11 casts away ``const``-ness in function arguments and return "
+"values. This is in line with the Python language, which has no concept of"
+" ``const`` values. This means that some additional care is needed to "
+"avoid bugs that would be caught by the type checker in a traditional C++ "
+"program."
+msgstr ""
+
+#: ../../limitations.rst:15
+msgid ""
+"The NumPy interface ``pybind11::array`` greatly simplifies accessing "
+"numerical data from C++ (and vice versa), but it's not a full-blown array"
+" class like ``Eigen::Array`` or ``boost.multi_array``. ``Eigen`` objects "
+"are directly supported, however, with ``pybind11/eigen.h``."
+msgstr ""
+
+#: ../../limitations.rst:20
+msgid ""
+"Large but useful features could be implemented in pybind11 but would lead"
+" to a significant increase in complexity. Pybind11 strives to be simple "
+"and compact. Users who require large new features are encouraged to write"
+" an extension to pybind11; see `pybind11_json "
+"<https://github.com/pybind/pybind11_json>`_ for an example."
+msgstr ""
+
+#: ../../limitations.rst:28
+msgid "Known bugs"
+msgstr ""
+
+#: ../../limitations.rst:30
+msgid ""
+"These are issues that hopefully will one day be fixed, but currently are "
+"unsolved. If you know how to help with one of these issues, contributions"
+" are welcome!"
+msgstr ""
+
+#: ../../limitations.rst:34
+msgid ""
+"Intel 20.2 is currently having an issue with the test suite. `#2573 "
+"<https://github.com/pybind/pybind11/pull/2573>`_"
+msgstr ""
+
+#: ../../limitations.rst:37
+msgid ""
+"Debug mode Python does not support 1-5 tests in the test suite currently."
+" `#2422 <https://github.com/pybind/pybind11/pull/2422>`_"
+msgstr ""
+
+#: ../../limitations.rst:40
+msgid "PyPy3 7.3.1 and 7.3.2 have issues with several tests on 32-bit Windows."
+msgstr ""
+
+#: ../../limitations.rst:43
+msgid "Known limitations"
+msgstr ""
+
+#: ../../limitations.rst:45
+msgid ""
+"These are issues that are probably solvable, but have not been fixed yet."
+" A clean, well written patch would likely be accepted to solve them."
+msgstr ""
+
+#: ../../limitations.rst:48
+msgid ""
+"Type casters are not kept alive recursively. `#2527 "
+"<https://github.com/pybind/pybind11/issues/2527>`_ One consequence is "
+"that containers of ``char *`` are currently not supported. `#2245 "
+"<https://github.com/pybind/pybind11/issues/2245>`_"
+msgstr ""
+
+#: ../../limitations.rst:53
+msgid ""
+"The ``cpptest`` does not run on Windows with Python 3.8 or newer, due to "
+"DLL loader changes. User code that is correctly installed should not be "
+"affected. `#2560 <https://github.com/pybind/pybind11/issue/2560>`_"
+msgstr ""
+
+#: ../../limitations.rst:58
+msgid "Python 3.9.0 warning"
+msgstr ""
+
+#: ../../limitations.rst:60
+msgid ""
+"Combining older versions of pybind11 (< 2.6.0) with Python on exactly "
+"3.9.0 will trigger undefined behavior that typically manifests as crashes"
+" during interpreter shutdown (but could also destroy your data. **You "
+"have been warned**)."
+msgstr ""
+
+#: ../../limitations.rst:65
+msgid ""
+"This issue was `fixed in Python "
+"<https://github.com/python/cpython/pull/22670>`_. As a mitigation for "
+"this bug, pybind11 2.6.0 or newer includes a workaround specifically when"
+" Python 3.9.0 is detected at runtime, leaking about 50 bytes of memory "
+"when a callback function is garbage collected.  For reference, the "
+"pybind11 test suite has about 2,000 such callbacks, but only 49 are "
+"garbage collected before the end-of-process. Wheels (even if built with "
+"Python 3.9.0) will correctly avoid the leak when run in Python 3.9.1, and"
+" this does not affect other 3.X versions."
+msgstr ""
+
