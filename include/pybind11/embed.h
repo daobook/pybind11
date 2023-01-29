@@ -86,8 +86,27 @@ inline wchar_t *widen_chars(const char *safe_arg) {
     return widened_arg;
 }
 
-/// Python 2.x/3.x-compatible version of `PySys_SetArgv`
-inline void set_interpreter_argv(int argc, const char *const *argv, bool add_program_dir_to_path) {
+inline void precheck_interpreter() {
+    if (Py_IsInitialized() != 0) {
+        pybind11_fail("The interpreter is already running");
+    }
+}
+
+#if !defined(PYBIND11_PYCONFIG_SUPPORT_PY_VERSION_HEX)
+#    define PYBIND11_PYCONFIG_SUPPORT_PY_VERSION_HEX (0x03080000)
+#endif
+
+#if PY_VERSION_HEX < PYBIND11_PYCONFIG_SUPPORT_PY_VERSION_HEX
+inline void initialize_interpreter_pre_pyconfig(bool init_signal_handlers,
+                                                int argc,
+                                                const char *const *argv,
+                                                bool add_program_dir_to_path) {
+    detail::precheck_interpreter();
+    Py_InitializeEx(init_signal_handlers ? 1 : 0);
+#    if defined(WITH_THREAD) && PY_VERSION_HEX < 0x03070000
+    PyEval_InitThreads();
+#    endif
+
     // Before it was special-cased in python 3.8, passing an empty or null argv
     // caused a segfault, so we have to reimplement the special case ourselves.
     bool special_case = (argv == nullptr || argc <= 0);
@@ -101,10 +120,10 @@ inline void set_interpreter_argv(int argc, const char *const *argv, bool add_pro
     auto argv_size = static_cast<size_t>(argc);
     // SetArgv* on python 3 takes wchar_t, so we have to convert.
     std::unique_ptr<wchar_t *[]> widened_argv(new wchar_t *[argv_size]);
-    std::vector<std::unique_ptr<wchar_t[], wide_char_arg_deleter>> widened_argv_entries;
+    std::vector<std::unique_ptr<wchar_t[], detail::wide_char_arg_deleter>> widened_argv_entries;
     widened_argv_entries.reserve(argv_size);
     for (size_t ii = 0; ii < argv_size; ++ii) {
-        widened_argv_entries.emplace_back(widen_chars(safe_argv[ii]));
+        widened_argv_entries.emplace_back(detail::widen_chars(safe_argv[ii]));
         if (!widened_argv_entries.back()) {
             // A null here indicates a character-encoding failure or the python
             // interpreter out of memory. Give up.
@@ -114,10 +133,42 @@ inline void set_interpreter_argv(int argc, const char *const *argv, bool add_pro
     }
 
     auto *pysys_argv = widened_argv.get();
+
     PySys_SetArgvEx(argc, pysys_argv, static_cast<int>(add_program_dir_to_path));
 }
+#endif
 
 PYBIND11_NAMESPACE_END(detail)
+
+#if PY_VERSION_HEX >= PYBIND11_PYCONFIG_SUPPORT_PY_VERSION_HEX
+inline void initialize_interpreter(PyConfig *config,
+                                   int argc = 0,
+                                   const char *const *argv = nullptr,
+                                   bool add_program_dir_to_path = true) {
+    detail::precheck_interpreter();
+    PyStatus status = PyConfig_SetBytesArgv(config, argc, const_cast<char *const *>(argv));
+    if (PyStatus_Exception(status) != 0) {
+        // A failure here indicates a character-encoding failure or the python
+        // interpreter out of memory. Give up.
+        PyConfig_Clear(config);
+        throw std::runtime_error(PyStatus_IsError(status) != 0 ? status.err_msg
+                                                               : "Failed to prepare CPython");
+    }
+    status = Py_InitializeFromConfig(config);
+    if (PyStatus_Exception(status) != 0) {
+        PyConfig_Clear(config);
+        throw std::runtime_error(PyStatus_IsError(status) != 0 ? status.err_msg
+                                                               : "Failed to init CPython");
+    }
+    if (add_program_dir_to_path) {
+        PyRun_SimpleString("import sys, os.path; "
+                           "sys.path.insert(0, "
+                           "os.path.abspath(os.path.dirname(sys.argv[0])) "
+                           "if sys.argv and os.path.exists(sys.argv[0]) else '')");
+    }
+    PyConfig_Clear(config);
+}
+#endif
 
 /** \rst
     Initialize the Python interpreter. No other pybind11 or CPython API functions can be
@@ -142,13 +193,17 @@ inline void initialize_interpreter(bool init_signal_handlers = true,
                                    int argc = 0,
                                    const char *const *argv = nullptr,
                                    bool add_program_dir_to_path = true) {
-    if (Py_IsInitialized() != 0) {
-        pybind11_fail("The interpreter is already running");
-    }
-
-    Py_InitializeEx(init_signal_handlers ? 1 : 0);
-
-    detail::set_interpreter_argv(argc, argv, add_program_dir_to_path);
+#if PY_VERSION_HEX < PYBIND11_PYCONFIG_SUPPORT_PY_VERSION_HEX
+    detail::initialize_interpreter_pre_pyconfig(
+        init_signal_handlers, argc, argv, add_program_dir_to_path);
+#else
+    PyConfig config;
+    PyConfig_InitIsolatedConfig(&config);
+    config.isolated = 0;
+    config.use_environment = 1;
+    config.install_signal_handlers = init_signal_handlers ? 1 : 0;
+    initialize_interpreter(&config, argc, argv, add_program_dir_to_path);
+#endif
 }
 
 /** \rst
@@ -234,6 +289,15 @@ public:
                                 bool add_program_dir_to_path = true) {
         initialize_interpreter(init_signal_handlers, argc, argv, add_program_dir_to_path);
     }
+
+#if PY_VERSION_HEX >= PYBIND11_PYCONFIG_SUPPORT_PY_VERSION_HEX
+    explicit scoped_interpreter(PyConfig *config,
+                                int argc = 0,
+                                const char *const *argv = nullptr,
+                                bool add_program_dir_to_path = true) {
+        initialize_interpreter(config, argc, argv, add_program_dir_to_path);
+    }
+#endif
 
     scoped_interpreter(const scoped_interpreter &) = delete;
     scoped_interpreter(scoped_interpreter &&other) noexcept { other.is_valid = false; }

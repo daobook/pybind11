@@ -345,9 +345,11 @@ struct type_record {
 
         bases.append((PyObject *) base_info->type);
 
-        if (base_info->type->tp_dictoffset != 0) {
-            dynamic_attr = true;
-        }
+#if PY_VERSION_HEX < 0x030B0000
+        dynamic_attr |= base_info->type->tp_dictoffset != 0;
+#else
+        dynamic_attr |= (base_info->type->tp_flags & Py_TPFLAGS_MANAGED_DICT) != 0;
+#endif
 
         if (caster) {
             base_info->implicit_casts.emplace_back(type, caster);
@@ -397,7 +399,7 @@ struct process_attribute<doc> : process_attribute_default<doc> {
 template <>
 struct process_attribute<const char *> : process_attribute_default<const char *> {
     static void init(const char *d, function_record *r) { r->doc = const_cast<char *>(d); }
-    static void init(const char *d, type_record *r) { r->doc = const_cast<char *>(d); }
+    static void init(const char *d, type_record *r) { r->doc = d; }
 };
 template <>
 struct process_attribute<char *> : process_attribute<const char *> {};
