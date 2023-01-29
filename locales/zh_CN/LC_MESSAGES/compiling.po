@@ -19,11 +19,11 @@ msgstr ""
 
 #: ../../compiling.rst:4
 msgid "Build systems"
-msgstr ""
+msgstr "构建系统"
 
 #: ../../compiling.rst:9
 msgid "Building with setuptools"
-msgstr ""
+msgstr "使用 setuptools 构建"
 
 #: ../../compiling.rst:11
 msgid ""
@@ -252,13 +252,14 @@ msgstr ""
 
 #: ../../compiling.rst:237
 msgid "Building with CMake"
-msgstr ""
+msgstr "使用 CMake 构建"
 
 #: ../../compiling.rst:239
 msgid ""
 "For C++ codebases that have an existing CMake-based build system, a "
 "Python extension module can be created with just a few lines of code:"
 msgstr ""
+"对于拥有现有基于 cmake 构建系统的 C++ 代码库，只需几行代码就可以创建 Python 扩展模块："
 
 #: ../../compiling.rst:250
 msgid ""
@@ -269,6 +270,9 @@ msgid ""
 " It will take care of all the details needed to build a Python extension "
 "module on any platform."
 msgstr ""
+"这里假设 pybind11 存储库位于名为 :file:`pybind11` 的子目录中，并且代码位于名为 example.cpp 的文件中。"
+"CMake命令 ``add_subdirectory`` 将导入 pybind11 项目，该项目提供 ``pybind11_add_module`` 函数。"
+"它将处理在任何平台上构建 Python 扩展模块所需的所有细节。"
 
 #: ../../compiling.rst:256
 msgid ""
@@ -276,6 +280,7 @@ msgid ""
 ":file:`setup.py` for PyPI integration, can be found in the "
 "[cmake_example]_  repository."
 msgstr ""
+"可以在 [cmake_example]_ 存储库中找到工作示例项目，其中包括从 :file:`setup.py` 调用 CMake 进行 PyPI 集成的方法。"
 
 #: ../../compiling.rst:259
 msgid "https://github.com/pybind/cmake_example"
@@ -283,11 +288,11 @@ msgstr ""
 
 #: ../../compiling.rst:261
 msgid "CMake 3.4+ is required."
-msgstr ""
+msgstr "需要 CMake 3.4+。"
 
 #: ../../compiling.rst:264
 msgid "Further information can be found at :doc:`cmake/index`."
-msgstr ""
+msgstr "更多信息见 :doc:`cmake/index`。"
 
 #: ../../compiling.rst:267
 msgid "pybind11_add_module"
@@ -634,7 +639,7 @@ msgstr ""
 
 #: ../../compiling.rst:567
 msgid "Building manually"
-msgstr ""
+msgstr "手动构建"
 
 #: ../../compiling.rst:569
 msgid ""
@@ -642,12 +647,14 @@ msgid ""
 "against any special libraries and there are no intermediate (magic) "
 "translation steps."
 msgstr ""
+"pybind11 是仅头文件的库，因此不需要链接到任何特殊的库，也没有中间（魔法）翻译步骤。"
 
 #: ../../compiling.rst:572
 msgid ""
 "On Linux, you can compile an example such as the one given in "
 ":ref:`simple_example` using the following command:"
 msgstr ""
+"在 Linux 上，你可以使用以下命令编译类似 :ref:`simple_example` 中给出的例子："
 
 #: ../../compiling.rst:579
 msgid ""
@@ -657,6 +664,9 @@ msgid ""
 "manually specify ``-I <path-to-pybind11>/include`` together with the "
 "Python includes path ``python3-config --includes``."
 msgstr ""
+"``python3 -m pybind11 --includes`` 命令获取 pybind11 和 Python 头文件的 include 路径。"
+"这假设 pybind11 已经使用 ``pip`` 或 ``conda`` 安装。"
+"如果没有，你也可以手动指定 ``-I <path-to-pybind11>/include`` 以及 Python 包含路径 ``python3-config --includes``。"
 
 #: ../../compiling.rst:585
 msgid ""
@@ -664,6 +674,7 @@ msgid ""
 "passing the ``-undefined dynamic_lookup`` flag so as to ignore missing "
 "symbols when building the module:"
 msgstr ""
+"在 macOS 上构建命令几乎相同，但它也需要传递 ``-undefined dynamic_lookup`` 标志，以便在构建模块时忽略缺失的符号："
 
 #: ../../compiling.rst:593
 msgid ""
@@ -673,6 +684,8 @@ msgid ""
 "platform CMake-based build system that works on all platforms including "
 "Windows."
 msgstr ""
+"一般来说，最好包含几个额外的构建参数，这些参数可以大大减小创建的二进制文件的大小。"
+"有关适用于包括 Windows 在内的所有平台的基于 CMake 的跨平台构建系统的详细示例，请参阅使用 :ref:`cmake` 一节。"
 
 #: ../../compiling.rst:600
 msgid ""
@@ -685,20 +698,25 @@ msgid ""
 "of possibly importing a second Python library into a process that already"
 " contains one (which will lead to a segfault)."
 msgstr ""
+"在 Linux 和 macOS 上，最好（有意地）不要链接 ``libpython``。"
+"当扩展库加载到 Python 二进制文件中时，符号将被解析。"
+"这是可取的，因为你可能有几个不同的安装给定的 Python 版本（例如，系统提供的 Python，和附带商业软件的 Python）。"
+"通过这种方式，扩展可以同时使用两个版本，而不是可能将第二个 Python 库导入到已经包含 Python 库的进程中（这会导致 segfault）。"
 
 #: ../../compiling.rst:611
 msgid "Building with Bazel"
-msgstr ""
+msgstr "使用 Bazel 构建"
 
 #: ../../compiling.rst:613
 msgid ""
 "You can build with the Bazel build system using the `pybind11_bazel "
 "<https://github.com/pybind/pybind11_bazel>`_ repository."
 msgstr ""
+"您可以使用 `pybind11_bazel <https://github.com/pybind/pybind11_bazel>`_ 存储库使用 Bazel 构建系统进行构建。"
 
 #: ../../compiling.rst:617
 msgid "Generating binding code automatically"
-msgstr ""
+msgstr "自动生成绑定代码"
 
 #: ../../compiling.rst:619
 msgid ""
@@ -706,6 +724,8 @@ msgid ""
 "binding code by introspecting existing C++ codebases using LLVM/Clang. "
 "See the [binder]_ documentation for details."
 msgstr ""
+"``Binder`` 项目是通过使用 LLVM/Clang 自省现有 C++ 代码库自动生成 pybind11 绑定代码的工具。"
+"有关详细信息，请参阅 [binder]_ 文档。"
 
 #: ../../compiling.rst:623
 msgid "http://cppbinder.readthedocs.io/en/latest/about.html"
@@ -720,6 +740,9 @@ msgid ""
 "libraries, composed of thousands of classes or incorporating modern meta-"
 "programming constructs."
 msgstr ""
+"[AutoWIG]_ 是 Python 库，它将自动编译的库包装成高级语言。"
+"它使用 LLVM/Clang 技术解析 C++ 代码，并使用 Mako 模板引擎生成包装器。"
+"这种方法是自动的、可扩展的，并适用于非常复杂的 C++ 库，由数千个类组成或包含现代元编程结构。"
 
 #: ../../compiling.rst:631
 msgid "https://github.com/StatisKit/AutoWIG"
@@ -733,6 +756,8 @@ msgid ""
 "autogenerate customizable pybind11-based wrappers by parsing C++ header "
 "files."
 msgstr ""
+"[robotpy-build]_ 是纯 python 的跨平台构建工具，旨在简化 pybind11 项目的 python 轮子的创建，并提供跨项目依赖关系管理。"
+"此外，它还能够通过解析 C++ 头文件自动生成基于 pybind11 的可定制包装器。"
 
 #: ../../compiling.rst:638
 msgid "https://robotpy-build.readthedocs.io"
