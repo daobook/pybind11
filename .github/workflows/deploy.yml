@@ -58,7 +58,7 @@ jobs:
       # build with: sphinx-build -nW --keep-going -b html . ./_build/html
       - name: 🔧 Build HTML
         run: |
-          invoke doc --opts "-j 8"
+          invoke doc --opts "-j 4"
 
       - name: Setup Pages
         uses: actions/configure-pages@main
@@ -66,7 +66,7 @@ jobs:
         uses: actions/upload-pages-artifact@v1
         with:
           # Upload entire repository
-          path: 'docs/_build/html/'
+          path: 'docs/.build/html/'
       - name: 🚀 Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@main
