@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) 2017, Wenzel Jakob
 # This file is distributed under the same license as the pybind11 package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+# xinetzone <xinzone@outlook.com>, 2023.
 #
 #, fuzzy
 msgid ""
@@ -19,17 +19,18 @@ msgstr ""
 
 #: ../../classes.rst:4
 msgid "Object-oriented code"
-msgstr ""
+msgstr "面向对象的编码"
 
 #: ../../classes.rst:7
 msgid "Creating bindings for a custom type"
-msgstr ""
+msgstr "为自定义类型创建绑定"
 
 #: ../../classes.rst:9
 msgid ""
 "Let's now look at a more complex example where we'll create bindings for "
 "a custom C++ data structure named ``Pet``. Its definition is given below:"
 msgstr ""
+"现在让看更复杂的例子，将为名为 ``Pet`` 的自定义 C++ 数据结构创建绑定。其定义如下："
 
 #: ../../classes.rst:22
 msgid "The binding code for ``Pet`` looks as follows:"
