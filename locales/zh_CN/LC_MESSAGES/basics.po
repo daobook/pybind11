@@ -82,6 +82,7 @@ msgid ""
 "This will create a Visual Studio project, compile and run the target, all"
 " from the command line."
 msgstr ""
+"这将创建 Visual Studio 项目，编译并运行 target，所有这些都来自命令行。"
 
 #: ../../basics.rst:59
 msgid ""
@@ -90,6 +91,8 @@ msgid ""
 "or **x86_64**). You can specify **x86_64** as the target architecture for"
 " the generated Visual Studio project using ``cmake -A x64 ..``."
 msgstr ""
+"如果所有测试都失败，请确保 Python 二进制文件和测试用例被编译为相同的处理器类型和位（即 **i386** 或 **x86_64**）。"
+"您可以使用 ``cmake -A x64 ..`` 为生成的 Visual Studio 项目指定 **x86_64** 作为 target 架构。"
 
 #: ../../basics.rst:66
 msgid ""
@@ -97,6 +100,8 @@ msgid ""
 "skip the tutorial and look at the test cases in the :file:`tests` "
 "directory, which exercise all features of pybind11."
 msgstr ""
+"已经熟悉 Boost.Python 的高级用户可能希望跳过本教程，并查看 :file:`tests` 目录中的测试用例，"
+"这些用例将测试 pybind11 的所有特性。"
 
 #: ../../basics.rst:71
 msgid "Header and namespace conventions"
@@ -194,6 +199,8 @@ msgid ""
 ":ref:`building_manually`. For complete cross-platform compilation "
 "instructions, refer to the :ref:`compiling` page."
 msgstr ""
+"有关 Linux 和 macOS 上所需的编译器标志的详细信息，请参见 :ref:`building_manually`。"
+"要获得完整的跨平台编译说明，请参阅 :ref:`compiling` 页面。"
 
 #: ../../basics.rst:151
 msgid ""
@@ -204,6 +211,10 @@ msgid ""
 " `cmake_example`_ uses CMake (which may be preferable for existing C++ "
 "projects)."
 msgstr ""
+"`python_example`_ 和 `cmake_example`_ 存储库也是很好的入门资料。"
+"它们都是跨平台构建系统的完整项目示例。"
+"两者之间唯一的区别是 `python_example`_ 使用 Python 的 ``setuptools`` 来构建模块，"
+"而 `cmake_example`_  使用 CMake（对于现有的 C++ 项目可能更可取）。"
 
 #: ../../basics.rst:160
 msgid ""
@@ -212,16 +223,19 @@ msgid ""
 "current directory, the following interactive Python session shows how to "
 "load and execute the example:"
 msgstr ""
+"构建上述 C++ 代码将生成可导入 Python 的二进制模块文件。"
+"假设编译后的模块位于当前目录中，下面的交互式 Python 会话显示如何加载和执行的示例："
 
 #: ../../basics.rst:179
 msgid "Keyword arguments"
-msgstr ""
+msgstr "关键字参数"
 
 #: ../../basics.rst:181
 msgid ""
 "With a simple code modification, it is possible to inform Python about "
 "the names of the arguments (\"i\" and \"j\" in this case)."
 msgstr ""
+"通过简单的代码修改，就可以通知 Python 参数的名称（在本例中是 \"i\" 和 \"j\"）。"
 
 #: ../../basics.rst:189
 msgid ""
@@ -230,16 +244,19 @@ msgid ""
 " we can now call the function using keyword arguments, which is a more "
 "readable alternative particularly for functions taking many parameters:"
 msgstr ""
+":class:`arg` 是几个特殊标记类之一，可用于将元数据传递到 :func:`module_::def`。"
+"使用修改后的绑定代码，现在可以使用关键字参数调用函数，这是更可读的替代方法，特别是对于接受多个形参的函数："
 
 #: ../../basics.rst:200
 msgid ""
 "The keyword names also appear in the function signatures within the "
 "documentation."
 msgstr ""
+"关键字名称也会出现在文档中的函数签名中。"
 
 #: ../../basics.rst:214
 msgid "A shorter notation for named arguments is also available:"
-msgstr ""
+msgstr "也可以使用更短的命名参数符号："
 
 #: ../../basics.rst:224
 msgid ""
@@ -249,14 +266,17 @@ msgid ""
 "bring in anything else from the ``pybind11`` namespace except for "
 "literals."
 msgstr ""
+"后缀 :var:`_a` 形成了 c++ 11 literal，相当于 :class:`arg`。"
+"注意，必须首先使用 ``using namespace pybind11::literals`` 使 literal 算子在指令中可见。"
+"除了 literal，这不会从 ``pybind11`` 名称空间引入其他任何东西。"
 
 #: ../../basics.rst:232
 msgid "Default arguments"
-msgstr ""
+msgstr "默认参数"
 
 #: ../../basics.rst:234
 msgid "Suppose now that the function to be bound has default arguments, e.g.:"
-msgstr ""
+msgstr "假设现在要绑定的函数有默认参数，例如："
 
 #: ../../basics.rst:242
 msgid ""
@@ -264,18 +284,20 @@ msgid ""
 "since they are not part of the function's type information. However, they"
 " are simple to specify using an extension of :class:`arg`:"
 msgstr ""
+"不幸的是，pybind11 不能自动提取这些参数，因为它们不是函数类型信息的一部分。"
+"但是，使用 :class:`arg` 的扩展来指定它们很简单："
 
 #: ../../basics.rst:251
 msgid "The default values also appear within the documentation."
-msgstr ""
+msgstr "默认值也会出现在文档中。"
 
 #: ../../basics.rst:265
 msgid "The shorthand notation is also available for default arguments:"
-msgstr ""
+msgstr "简写符号也可用于默认参数："
 
 #: ../../basics.rst:275
 msgid "Exporting variables"
-msgstr ""
+msgstr "导出变量"
 
 #: ../../basics.rst:277
 msgid ""
@@ -284,14 +306,16 @@ msgid ""
 "later) are automatically converted when assigned as attributes, and can "
 "be explicitly converted using the function ``py::cast``."
 msgstr ""
+"要从 C++ 中导出值，使用 ``attr`` 函数将其注册到模块中，如下所示。"
+"内置类型和通用对象（稍后会详细介绍）在被赋值为属性时自动转换，并且可以使用函数 ``py::cast`` 显式转换。"
 
 #: ../../basics.rst:290
 msgid "These are then accessible from Python:"
-msgstr ""
+msgstr "然后可以从 Python 中访问："
 
 #: ../../basics.rst:303
 msgid "Supported data types"
-msgstr ""
+msgstr "支持的数据类型"
 
 #: ../../basics.rst:305
 msgid ""
@@ -300,4 +324,5 @@ msgid ""
 " general. For a full overview, see the :doc:`advanced/cast/index` "
 "section."
 msgstr ""
-
+"大量的数据类型得到了开箱即用的支持，可以无缝地用作函数参数、返回值或普通使用 ``py::cast``。"
+"有关完整的概述，请参阅 :doc:`advanced/cast/index` 一节。"

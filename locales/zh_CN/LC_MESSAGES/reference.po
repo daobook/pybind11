@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pybind11 2.10.0.dev1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-31 12:45+0800\n"
+"POT-Creation-Date: 2023-01-29 20:28+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.10.1\n"
+"Generated-By: Babel 2.6.0\n"
 
 #: ../../reference.rst:5
 msgid ""
@@ -32,16 +32,16 @@ msgstr ""
 msgid "Macros"
 msgstr ""
 
-#: ../../../<breathe>:1
+#: ../../<breathe>:1
 msgid ""
 "This macro creates the entry point that will be invoked when the Python "
 "interpreter imports an extension module. The module name is given as the "
-"fist argument and it should not be in quotes. The second macro argument "
+"first argument and it should not be in quotes. The second macro argument "
 "defines a variable of type `py::module_` which can be used to initialize "
 "the module."
 msgstr ""
 
-#: ../../../<breathe>:1
+#: ../../<breathe>:1
 msgid ""
 "The entry point is marked as \"maybe unused\" to aid dead-code detection "
 "analysis: since the entry point is typically only looked up at runtime "
@@ -97,7 +97,7 @@ msgid ""
 "a error_already_set exception is thrown."
 msgstr ""
 
-#: ../../../<breathe>:1
+#: ../../<breathe>:1
 msgid ""
 "Assuming the Python object is a function or implements the ``__call__`` "
 "protocol, ``operator()`` invokes the underlying function, passing an "
@@ -105,7 +105,7 @@ msgid ""
 " need to be converted back into a Python object using `handle::cast()`."
 msgstr ""
 
-#: ../../../<breathe>:1
+#: ../../<breathe>:1
 msgid ""
 "When some of the arguments cannot be converted to Python objects, the "
 "function will throw a `cast_error` exception. When the Python function "
@@ -125,11 +125,11 @@ msgid ""
 "automatic reference counting features."
 msgstr ""
 
-#: ../../../<breathe>:1
+#: ../../<breathe>:1
 msgid "Holds a reference to a Python object (no reference counting)"
 msgstr ""
 
-#: ../../../<breathe>:1
+#: ../../<breathe>:1
 msgid ""
 "The `handle` class is a thin wrapper around an arbitrary Python object "
 "(i.e. a ``PyObject *`` in Python's C API). It does not perform any "
@@ -137,7 +137,7 @@ msgid ""
 " various Python API functions."
 msgstr ""
 
-#: ../../../<breathe>:1
+#: ../../<breathe>:1
 msgid ""
 "The `object` class inherits from `handle` and adds automatic reference "
 "counting features."
@@ -182,11 +182,11 @@ msgid ""
 " is much easier to get reference counting right at the first attempt."
 msgstr ""
 
-#: ../../../<breathe>:1
+#: ../../<breathe>:1
 msgid "Holds a reference to a Python object (with reference counting)"
 msgstr ""
 
-#: ../../../<breathe>:1
+#: ../../<breathe>:1
 msgid ""
 "Like `handle`, the `object` class is a thin wrapper around an arbitrary "
 "Python object (i.e. a ``PyObject *`` in Python's C API). In contrast to "
@@ -210,7 +210,7 @@ msgid ""
 " object."
 msgstr ""
 
-#: ../../../<breathe>:1
+#: ../../<breathe>:1
 msgid ""
 "Declare that a `handle` or ``PyObject *`` is a certain type and borrow "
 "the reference. The target type ``T`` must be `object` or one of its "
@@ -224,7 +224,7 @@ msgid ""
 "must be already be a `str`"
 msgstr ""
 
-#: ../../../<breathe>:1
+#: ../../<breathe>:1
 msgid "Like `reinterpret_borrow`, but steals the reference."
 msgstr ""
 
@@ -241,7 +241,7 @@ msgid ""
 "For details on the Extra&& ... extra argument, see section extras."
 msgstr ""
 
-#: ../../../<breathe>:1
+#: ../../<breathe>:1
 msgid ""
 "Create and return a new Python submodule with the given name and "
 "docstring. This also works recursively, i.e."
@@ -254,19 +254,19 @@ msgid ""
 "will, in most cases, break things."
 msgstr ""
 
-#: ../../../<breathe>:1
+#: ../../<breathe>:1
 msgid ""
 "Adds an object to the module using the given name.  Throws if an object "
 "with the given name already exists."
 msgstr ""
 
-#: ../../../<breathe>:1
+#: ../../<breathe>:1
 msgid ""
 "``overwrite`` should almost always be false: attempting to overwrite "
 "objects that pybind11 has established will, in most cases, break things."
 msgstr ""
 
-#: ../../../<breathe>
+#: ../../<breathe>
 msgid "Public Static Functions"
 msgstr ""
 
@@ -275,27 +275,27 @@ msgid ""
 "extension.def should point to a statically allocated module_def."
 msgstr ""
 
-#: ../../../<breathe>:1
+#: ../../<breathe>:1
 msgid ""
 "Create a new top-level module that can be used as the main module of a C "
 "extension."
 msgstr ""
 
-#: ../../../<breathe>:1
+#: ../../<breathe>:1
 msgid "``def`` should point to a statically allocated module_def."
 msgstr ""
 
-#: ../../../<breathe> ../../reference.rst
+#: ../../<breathe> ../../reference.rst
 msgid "Functions"
 msgstr ""
 
-#: ../../../<breathe>:1
+#: ../../<breathe>:1
 msgid ""
 "Wraps a Python iterator so that it can also be used as a C++ input "
 "iterator"
 msgstr ""
 
-#: ../../../<breathe>:1
+#: ../../<breathe>:1
 msgid ""
 "Caveat: copying an iterator does not (and cannot) clone the internal "
 "state of the Python iterable. This also applies to the post-increment "
@@ -303,7 +303,7 @@ msgid ""
 " using ``operator*()``."
 msgstr ""
 
-#: ../../../<breathe>:1
+#: ../../<breathe>:1
 msgid ""
 "The value which marks the end of the iteration. ``it == "
 "iterator::sentinel()`` is equivalent to catching ``StopIteration`` in "
@@ -322,27 +322,27 @@ msgid ""
 "memoryview(const object& obj) instead of this constructor."
 msgstr ""
 
-#: ../../../<breathe>:1
+#: ../../<breathe>:1
 msgid "Creates ``memoryview`` from ``buffer_info``."
 msgstr ""
 
-#: ../../../<breathe>:1
+#: ../../<breathe>:1
 msgid ""
 "``buffer_info`` must be created from ``buffer::request()``. Otherwise "
 "throws an exception."
 msgstr ""
 
-#: ../../../<breathe>:1
+#: ../../<breathe>:1
 msgid ""
 "For creating a ``memoryview`` from objects that support buffer protocol, "
 "use ``memoryview(const object& obj)`` instead of this constructor."
 msgstr ""
 
-#: ../../../<breathe>:1
+#: ../../<breathe>:1
 msgid "Creates ``memoryview`` from static buffer."
 msgstr ""
 
-#: ../../../<breathe>:1
+#: ../../<breathe>:1
 msgid ""
 "This method is meant for providing a ``memoryview`` for C/C++ buffer not "
 "managed by Python. The caller is responsible for managing the lifetime of"
@@ -350,37 +350,37 @@ msgid ""
 "here."
 msgstr ""
 
-#: ../../../<breathe>:1
+#: ../../<breathe>:1
 msgid "See also: Python C API documentation for `PyMemoryView_FromBuffer`_."
 msgstr ""
 
-#: ../../../<breathe>
+#: ../../<breathe>
 msgid "参数"
 msgstr ""
 
-#: ../../../<breathe>:1
+#: ../../<breathe>:1
 msgid "Pointer to the buffer."
 msgstr ""
 
-#: ../../../<breathe>:1
+#: ../../<breathe>:1
 msgid "Byte size of an element."
 msgstr ""
 
-#: ../../../<breathe>:1
+#: ../../<breathe>:1
 msgid ""
 "Pointer to the null-terminated format string. For homogeneous Buffers, "
 "this should be set to ``format_descriptor<T>::value``."
 msgstr ""
 
-#: ../../../<breathe>:1
+#: ../../<breathe>:1
 msgid "Shape of the tensor (1 entry per dimension)."
 msgstr ""
 
-#: ../../../<breathe>:1
+#: ../../<breathe>:1
 msgid "Number of bytes between adjacent entries (for each per dimension)."
 msgstr ""
 
-#: ../../../<breathe>:1
+#: ../../<breathe>:1
 msgid "Flag to indicate if the underlying storage may be written to."
 msgstr ""
 
@@ -392,11 +392,11 @@ msgid ""
 "PyMemoryView_FromBuffer."
 msgstr ""
 
-#: ../../../<breathe>:1
+#: ../../<breathe>:1
 msgid "Creates ``memoryview`` from static memory."
 msgstr ""
 
-#: ../../../<breathe>:1
+#: ../../<breathe>:1
 msgid ""
 "This method is meant for providing a ``memoryview`` for C/C++ buffer not "
 "managed by Python. The caller is responsible for managing the lifetime of"
@@ -411,17 +411,17 @@ msgstr ""
 msgid "Passing extra arguments to ``def`` or ``class_``"
 msgstr ""
 
-#: ../../../<breathe>:1
+#: ../../<breathe>:1
 msgid ""
 "A call policy which places one or more guard variables (``Ts...``) around"
 " the function call."
 msgstr ""
 
-#: ../../../<breathe>:1
+#: ../../<breathe>:1
 msgid "For example, this definition:"
 msgstr ""
 
-#: ../../../<breathe>:1
+#: ../../<breathe>:1
 msgid "is equivalent to the following pseudocode:"
 msgstr ""
 
@@ -433,7 +433,7 @@ msgstr ""
 msgid "Embedding the interpreter"
 msgstr ""
 
-#: ../../../<breathe>:1
+#: ../../<breathe>:1
 msgid ""
 "Add a new module to the table of builtins for the interpreter. Must be "
 "defined in global scope. The first macro parameter is the name of the "
@@ -453,13 +453,13 @@ msgid ""
 "normal behavior of throwing exceptions on errors.)The remaining optional "
 "parameters, argc, argv, and add_program_dir_to_path are used to populate "
 "sys.argv and sys.path. See the PySys_SetArgvEx documentation for "
-"details./media/pc/data/4tb/lxw/books/pybind11/docs/reference.rst:1: "
-"(INFO/1) No directive entry for \"replace\" in module "
+"details./media/pc/data/lxw/ai/pybind11/docs/reference.rst:1: (INFO/1) No "
+"directive entry for \"replace\" in module "
 "\"docutils.parsers.rst.languages.zh_cn\". Using English fallback for "
 "directive \"replace\".PySys_SetArgvEx documentation"
 msgstr ""
 
-#: ../../../<breathe>:1
+#: ../../<breathe>:1
 msgid ""
 "Initialize the Python interpreter. No other pybind11 or CPython API "
 "functions can be called before this is done; with the exception of "
@@ -469,7 +469,7 @@ msgid ""
 "interpreter has already been initialized is a fatal error."
 msgstr ""
 
-#: ../../../<breathe>:1
+#: ../../<breathe>:1
 msgid ""
 "If initializing the Python interpreter fails, then the program is "
 "terminated.  (This is controlled by the CPython runtime and is an "
@@ -477,21 +477,21 @@ msgid ""
 "errors.)"
 msgstr ""
 
-#: ../../../<breathe>:1
+#: ../../<breathe>:1
 msgid ""
 "The remaining optional parameters, `argc`, `argv`, and "
 "`add_program_dir_to_path` are used to populate ``sys.argv`` and "
 "``sys.path``. See the |PySys_SetArgvEx documentation|_ for details."
 msgstr ""
 
-#: ../../../<breathe>:1
+#: ../../<breathe>:1
 msgid ""
 "Shut down the Python interpreter. No pybind11 or CPython API functions "
 "can be called after this. In addition, pybind11 objects must not outlive "
 "the interpreter:"
 msgstr ""
 
-#: ../../../<breathe>:1
+#: ../../<breathe>:1
 msgid ""
 "The interpreter can be restarted by calling `initialize_interpreter` "
 "again. Modules created using pybind11 can be safely re-initialized. "
@@ -502,14 +502,14 @@ msgid ""
 "created global data."
 msgstr ""
 
-#: ../../../<breathe>:1
+#: ../../<breathe>:1
 msgid ""
 "Scope guard version of `initialize_interpreter` and "
 "`finalize_interpreter`. This a move-only guard and only a single instance"
 " can exist."
 msgstr ""
 
-#: ../../../<breathe>:1
+#: ../../<breathe>:1
 msgid ""
 "See `initialize_interpreter` for a discussion of its constructor "
 "arguments."
@@ -519,34 +519,34 @@ msgstr ""
 msgid "Redirecting C++ streams"
 msgstr ""
 
-#: ../../../<breathe>:1
+#: ../../<breathe>:1
 msgid "This a move-only guard that redirects output."
 msgstr ""
 
-#: ../../../<breathe>:1
+#: ../../<breathe>:1
 msgid ""
 "You can explicitly pass the c++ stream and the python object, for example"
 " to guard stderr instead."
 msgstr ""
 
-#: ../../../<breathe>:1
+#: ../../<breathe>:1
 msgid ""
 "Like `scoped_ostream_redirect`, but redirects cerr by default. This class"
 " is provided primary to make ``py::call_guard`` easier to make."
 msgstr ""
 
-#: ../../../<breathe>:1
+#: ../../<breathe>:1
 msgid ""
 "This is a helper function to add a C++ redirect context manager to Python"
 " instead of using a C++ guard. To use it, add the following to your "
 "binding code:"
 msgstr ""
 
-#: ../../../<breathe>:1
+#: ../../<breathe>:1
 msgid "You now have a Python context manager that redirects your output:"
 msgstr ""
 
-#: ../../../<breathe>:1
+#: ../../<breathe>:1
 msgid "This manager can optionally be told which streams to operate on:"
 msgstr ""
 
@@ -567,7 +567,7 @@ msgstr ""
 msgid "See :doc:`/classes` and :doc:`/advanced/classes` for more detail."
 msgstr ""
 
-#: ../../../<breathe>:1
+#: ../../<breathe>:1
 msgid ""
 "Macro to populate the virtual method in the trampoline class. This macro "
 "tries to look up the method from the Python side, deals with the "
@@ -582,7 +582,7 @@ msgid ""
 "PYBIND11_OVERRIDE, except that it throws if no override can be found."
 msgstr ""
 
-#: ../../../<breathe>:1
+#: ../../<breathe>:1
 msgid ""
 "Macro to populate the virtual method in the trampoline class. This macro "
 "tries to look up a method named 'fn' from the Python side, deals with the"
@@ -598,22 +598,22 @@ msgid ""
 "found."
 msgstr ""
 
-#: ../../../<breathe>
+#: ../../<breathe>
 msgid "this_ptr"
 msgstr ""
 
-#: ../../../<breathe>:1
+#: ../../<breathe>:1
 msgid ""
 "The pointer to the object the overridden method should be retrieved for. "
 "This should be the first non-trampoline class encountered in the "
 "inheritance chain."
 msgstr ""
 
-#: ../../../<breathe>
+#: ../../<breathe>
 msgid "name"
 msgstr ""
 
-#: ../../../<breathe>:1
+#: ../../<breathe>:1
 msgid "The name of the overridden Python method to retrieve."
 msgstr ""
 
@@ -621,7 +621,7 @@ msgstr ""
 msgid "返回"
 msgstr ""
 
-#: ../../../<breathe>:1
+#: ../../<breathe>:1
 msgid ""
 "The Python method by this name from the object or an empty function "
 "wrapper."
@@ -634,4 +634,46 @@ msgstr ""
 #: ../../reference.rst:128
 msgid "Literals"
 msgstr ""
+
+#~ msgid ""
+#~ "This macro creates the entry point "
+#~ "that will be invoked when the "
+#~ "Python interpreter imports an extension "
+#~ "module. The module name is given "
+#~ "as the fist argument and it should"
+#~ " not be in quotes. The second "
+#~ "macro argument defines a variable of "
+#~ "type `py::module_` which can be used "
+#~ "to initialize the module."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Initialize the Python interpreter. No "
+#~ "other pybind11 or CPython API functions"
+#~ " can be called before this is "
+#~ "done; with the exception of "
+#~ "PYBIND11_EMBEDDED_MODULE. The optional "
+#~ "init_signal_handlers parameter can be used "
+#~ "to skip the registration of signal "
+#~ "handlers (see the Python documentation "
+#~ "for details). Calling this function "
+#~ "again after the interpreter has already"
+#~ " been initialized is a fatal error.If"
+#~ " initializing the Python interpreter fails,"
+#~ " then the program is terminated.  "
+#~ "(This is controlled by the CPython "
+#~ "runtime and is an exception to "
+#~ "pybind11's normal behavior of throwing "
+#~ "exceptions on errors.)The remaining optional"
+#~ " parameters, argc, argv, and "
+#~ "add_program_dir_to_path are used to populate"
+#~ " sys.argv and sys.path. See the "
+#~ "PySys_SetArgvEx documentation for "
+#~ "details./media/pc/data/4tb/lxw/books/pybind11/docs/reference.rst:1:"
+#~ " (INFO/1) No directive entry for "
+#~ "\"replace\" in module "
+#~ "\"docutils.parsers.rst.languages.zh_cn\". Using English"
+#~ " fallback for directive "
+#~ "\"replace\".PySys_SetArgvEx documentation"
+#~ msgstr ""
 

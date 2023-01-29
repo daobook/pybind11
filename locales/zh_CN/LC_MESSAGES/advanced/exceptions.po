@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pybind11 2.10.0.dev1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-31 12:45+0800\n"
+"POT-Creation-Date: 2023-01-29 20:28+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.10.1\n"
+"Generated-By: Babel 2.6.0\n"
 
 #: ../../advanced/exceptions.rst:2
 msgid "Exceptions"
@@ -320,7 +320,7 @@ msgstr ""
 
 #: ../../advanced/exceptions.rst:180
 msgid ""
-"Note that ``libc++`` and ``libstdc++`` `behave differently "
+"Note that ``libc++`` and ``libstdc++`` `behave differently under macOS "
 "<https://stackoverflow.com/questions/19496643/using-clang-fvisibility-"
 "hidden-and-typeinfo-and-type-erasure/28827430>`_ with "
 "``-fvisibility=hidden``. Therefore exceptions that are used across ABI "
@@ -329,11 +329,11 @@ msgid ""
 "under `GCC Wiki <https://gcc.gnu.org/wiki/Visibility>`_."
 msgstr ""
 
-#: ../../advanced/exceptions.rst:186
+#: ../../advanced/exceptions.rst:189
 msgid "Local vs Global Exception Translators"
 msgstr ""
 
-#: ../../advanced/exceptions.rst:188
+#: ../../advanced/exceptions.rst:191
 msgid ""
 "When a global exception translator is registered, it will be applied "
 "across all modules in the reverse order of registration. This can create "
@@ -341,15 +341,15 @@ msgid ""
 "translated."
 msgstr ""
 
-#: ../../advanced/exceptions.rst:192
+#: ../../advanced/exceptions.rst:195
 msgid "If module1 has the following translator:"
 msgstr ""
 
-#: ../../advanced/exceptions.rst:204
+#: ../../advanced/exceptions.rst:207
 msgid "and module2 has the following similar translator:"
 msgstr ""
 
-#: ../../advanced/exceptions.rst:216
+#: ../../advanced/exceptions.rst:219
 msgid ""
 "then which translator handles the invalid_argument will be determined by "
 "the order that module1 and module2 are imported. Since exception "
@@ -358,7 +358,7 @@ msgid ""
 "applied."
 msgstr ""
 
-#: ../../advanced/exceptions.rst:221
+#: ../../advanced/exceptions.rst:224
 msgid ""
 "If there are multiple pybind11 modules that share exception types (either"
 " standard built-in or custom) loaded into a single python instance and "
@@ -366,7 +366,7 @@ msgid ""
 "should be used."
 msgstr ""
 
-#: ../../advanced/exceptions.rst:226
+#: ../../advanced/exceptions.rst:229
 msgid ""
 "Changing the previous example to use "
 "``register_local_exception_translator`` would mean that when "
@@ -375,11 +375,11 @@ msgid ""
 "the same."
 msgstr ""
 
-#: ../../advanced/exceptions.rst:234
+#: ../../advanced/exceptions.rst:237
 msgid "Handling exceptions from Python in C++"
 msgstr ""
 
-#: ../../advanced/exceptions.rst:236
+#: ../../advanced/exceptions.rst:239
 msgid ""
 "When C++ calls Python functions, such as in a callback function or when "
 "manipulating Python objects, and Python raises an ``Exception``, pybind11"
@@ -390,42 +390,42 @@ msgid ""
 "them in C++)."
 msgstr ""
 
-#: ../../advanced/exceptions.rst:246
+#: ../../advanced/exceptions.rst:249
 msgid "Exception raised in Python"
 msgstr ""
 
-#: ../../advanced/exceptions.rst:246
+#: ../../advanced/exceptions.rst:249
 msgid "Thrown as C++ exception type"
 msgstr ""
 
-#: ../../advanced/exceptions.rst:248
+#: ../../advanced/exceptions.rst:251
 msgid "Any Python ``Exception``"
 msgstr ""
 
-#: ../../advanced/exceptions.rst:248
+#: ../../advanced/exceptions.rst:251
 msgid ":class:`pybind11::error_already_set`"
 msgstr ""
 
-#: ../../advanced/exceptions.rst:251
+#: ../../advanced/exceptions.rst:254
 msgid "For example:"
 msgstr ""
 
-#: ../../advanced/exceptions.rst:270
+#: ../../advanced/exceptions.rst:273
 msgid ""
 "Note that C++ to Python exception translation does not apply here, since "
 "that is a method for translating C++ exceptions to Python, not vice "
 "versa. The error raised from Python is always ``error_already_set``."
 msgstr ""
 
-#: ../../advanced/exceptions.rst:274
+#: ../../advanced/exceptions.rst:277
 msgid "This example illustrates this behavior:"
 msgstr ""
 
-#: ../../advanced/exceptions.rst:302
+#: ../../advanced/exceptions.rst:305
 msgid "Handling errors from the Python C API"
 msgstr ""
 
-#: ../../advanced/exceptions.rst:304
+#: ../../advanced/exceptions.rst:307
 msgid ""
 "Where possible, use :ref:`pybind11 wrappers <wrappers>` instead of "
 "calling the Python C API directly. When calling the Python C API "
@@ -433,7 +433,7 @@ msgid ""
 "follow the pybind11 error protocol, which is outlined here."
 msgstr ""
 
-#: ../../advanced/exceptions.rst:309
+#: ../../advanced/exceptions.rst:312
 msgid ""
 "After calling the Python C API, if Python returns an error, ``throw "
 "py::error_already_set();``, which allows pybind11 to deal with the "
@@ -441,40 +441,40 @@ msgid ""
 " to the error setting functions such as ``PyErr_SetString``."
 msgstr ""
 
-#: ../../advanced/exceptions.rst:322
+#: ../../advanced/exceptions.rst:325
 msgid ""
 "Alternately, to ignore the error, call `PyErr_Clear "
 "<https://docs.python.org/3/c-api/exceptions.html#c.PyErr_Clear>`_."
 msgstr ""
 
-#: ../../advanced/exceptions.rst:325
+#: ../../advanced/exceptions.rst:328
 msgid ""
 "Any Python error must be thrown or cleared, or Python/pybind11 will be "
 "left in an invalid state."
 msgstr ""
 
-#: ../../advanced/exceptions.rst:329
+#: ../../advanced/exceptions.rst:332
 msgid "Chaining exceptions ('raise from')"
 msgstr ""
 
-#: ../../advanced/exceptions.rst:331
+#: ../../advanced/exceptions.rst:334
 msgid ""
 "Python has a mechanism for indicating that exceptions were caused by "
 "other exceptions:"
 msgstr ""
 
-#: ../../advanced/exceptions.rst:341
+#: ../../advanced/exceptions.rst:344
 msgid ""
 "To do a similar thing in pybind11, you can use the ``py::raise_from`` "
 "function. It sets the current python error indicator, so to continue "
 "propagating the exception you should ``throw py::error_already_set()``."
 msgstr ""
 
-#: ../../advanced/exceptions.rst:359
+#: ../../advanced/exceptions.rst:362
 msgid "Handling unraisable exceptions"
 msgstr ""
 
-#: ../../advanced/exceptions.rst:361
+#: ../../advanced/exceptions.rst:364
 msgid ""
 "If a Python function invoked from a C++ destructor or any function marked"
 " ``noexcept(true)`` (collectively, \"noexcept functions\") throws an "
@@ -484,7 +484,7 @@ msgid ""
 "immediately."
 msgstr ""
 
-#: ../../advanced/exceptions.rst:367
+#: ../../advanced/exceptions.rst:370
 msgid ""
 "Similarly, Python exceptions raised in a class's ``__del__`` method do "
 "not propagate, but are logged by Python as an unraisable error. In Python"
@@ -493,7 +493,7 @@ msgid ""
 "auditing event is logged."
 msgstr ""
 
-#: ../../advanced/exceptions.rst:373
+#: ../../advanced/exceptions.rst:376
 msgid ""
 "Any noexcept function should have a try-catch block that traps "
 "class:`error_already_set` (or any other exception that can occur). Note "
@@ -504,4 +504,18 @@ msgid ""
 "approach is to convert them to Python exceptions and then "
 "``discard_as_unraisable`` as shown below."
 msgstr ""
+
+#~ msgid ""
+#~ "Note that ``libc++`` and ``libstdc++`` "
+#~ "`behave differently "
+#~ "<https://stackoverflow.com/questions/19496643/using-clang-"
+#~ "fvisibility-hidden-and-typeinfo-and-"
+#~ "type-erasure/28827430>`_ with ``-fvisibility=hidden``."
+#~ " Therefore exceptions that are used "
+#~ "across ABI boundaries need to be "
+#~ "explicitly exported, as exercised in "
+#~ "``tests/test_exceptions.h``. See also: \"Problems"
+#~ " with C++ exceptions\" under `GCC "
+#~ "Wiki <https://gcc.gnu.org/wiki/Visibility>`_."
+#~ msgstr ""
 

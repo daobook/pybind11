@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pybind11 2.10.0.dev1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-31 12:45+0800\n"
+"POT-Creation-Date: 2023-01-29 20:28+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.10.1\n"
+"Generated-By: Babel 2.6.0\n"
 
 #: ../../advanced/misc.rst:2
 msgid "Miscellaneous"
@@ -54,30 +54,102 @@ msgstr ""
 
 #: ../../advanced/misc.rst:42
 msgid ""
-"When calling a C++ function from Python, the GIL is always held. The "
-"classes :class:`gil_scoped_release` and :class:`gil_scoped_acquire` can "
-"be used to acquire and release the global interpreter lock in the body of"
-" a C++ function call. In this way, long-running C++ code can be "
-"parallelized using multiple Python threads. Taking "
-":ref:`overriding_virtuals` as an example, this could be realized as "
-"follows (important changes highlighted):"
+"The Python C API dictates that the Global Interpreter Lock (GIL) must "
+"always be held by the current thread to safely access Python objects. As "
+"a result, when Python calls into C++ via pybind11 the GIL must be held, "
+"and pybind11 will never implicitly release the GIL."
 msgstr ""
 
-#: ../../advanced/misc.rst:87
+#: ../../advanced/misc.rst:57
+msgid ""
+"pybind11 will ensure that the GIL is held when it knows that it is "
+"calling Python code. For example, if a Python callback is passed to C++ "
+"code via ``std::function``, when C++ code calls the function the built-in"
+" wrapper will acquire the GIL before calling the Python callback. "
+"Similarly, the ``PYBIND11_OVERRIDE`` family of macros will acquire the "
+"GIL before calling back into Python."
+msgstr ""
+
+#: ../../advanced/misc.rst:64
+msgid ""
+"When writing C++ code that is called from other C++ code, if that code "
+"accesses Python state, it must explicitly acquire and release the GIL."
+msgstr ""
+
+#: ../../advanced/misc.rst:67
+msgid ""
+"The classes :class:`gil_scoped_release` and :class:`gil_scoped_acquire` "
+"can be used to acquire and release the global interpreter lock in the "
+"body of a C++ function call. In this way, long-running C++ code can be "
+"parallelized using multiple Python threads, **but great care must be "
+"taken** when any :class:`gil_scoped_release` appear: if there is any way "
+"that the C++ code can access Python objects, :class:`gil_scoped_acquire` "
+"should be used to reacquire the GIL. Taking :ref:`overriding_virtuals` as"
+" an example, this could be realized as follows (important changes "
+"highlighted):"
+msgstr ""
+
+#: ../../advanced/misc.rst:113
 msgid ""
 "The ``call_go`` wrapper can also be simplified using the ``call_guard`` "
 "policy (see :ref:`call_policies`) which yields the same result:"
 msgstr ""
 
-#: ../../advanced/misc.rst:96
+#: ../../advanced/misc.rst:122
+msgid "Common Sources Of Global Interpreter Lock Errors"
+msgstr ""
+
+#: ../../advanced/misc.rst:124
+msgid ""
+"Failing to properly hold the Global Interpreter Lock (GIL) is one of the "
+"more common sources of bugs within code that uses pybind11. If you are "
+"running into GIL related errors, we highly recommend you consult the "
+"following checklist."
+msgstr ""
+
+#: ../../advanced/misc.rst:129
+msgid ""
+"Do you have any global variables that are pybind11 objects or invoke "
+"pybind11 functions in either their constructor or destructor? You are "
+"generally not allowed to invoke any Python function in a global static "
+"context. We recommend using lazy initialization and then intentionally "
+"leaking at the end of the program."
+msgstr ""
+
+#: ../../advanced/misc.rst:134
+msgid ""
+"Do you have any pybind11 objects that are members of other C++ "
+"structures? One commonly overlooked requirement is that pybind11 objects "
+"have to increase their reference count whenever their copy constructor is"
+" called. Thus, you need to be holding the GIL to invoke the copy "
+"constructor of any C++ class that has a pybind11 member. This can "
+"sometimes be very tricky to track for complicated programs Think "
+"carefully when you make a pybind11 object a member in another struct."
+msgstr ""
+
+#: ../../advanced/misc.rst:141
+msgid ""
+"C++ destructors that invoke Python functions can be particularly "
+"troublesome as destructors can sometimes get invoked in weird and "
+"unexpected circumstances as a result of exceptions."
+msgstr ""
+
+#: ../../advanced/misc.rst:145
+msgid ""
+"You should try running your code in a debug build. That will enable "
+"additional assertions within pybind11 that will throw exceptions on "
+"certain GIL handling errors (reference counting operations)."
+msgstr ""
+
+#: ../../advanced/misc.rst:150
 msgid "Binding sequence data types, iterators, the slicing protocol, etc."
 msgstr ""
 
-#: ../../advanced/misc.rst:98
+#: ../../advanced/misc.rst:152
 msgid "Please refer to the supplemental example for details."
 msgstr ""
 
-#: ../../advanced/misc.rst:102
+#: ../../advanced/misc.rst:156
 msgid ""
 "The file :file:`tests/test_sequences_and_iterators.cpp` contains a "
 "complete example that shows how to bind a sequence data type, including "
@@ -85,11 +157,11 @@ msgid ""
 "protocol and other kinds of useful operations."
 msgstr ""
 
-#: ../../advanced/misc.rst:109
+#: ../../advanced/misc.rst:163
 msgid "Partitioning code over multiple extension modules"
 msgstr ""
 
-#: ../../advanced/misc.rst:111
+#: ../../advanced/misc.rst:165
 msgid ""
 "It's straightforward to split binding code over multiple extension "
 "modules, while referencing types that are declared elsewhere. Everything "
@@ -98,7 +170,7 @@ msgid ""
 "Recall the basic example from Section :ref:`inheritance`."
 msgstr ""
 
-#: ../../advanced/misc.rst:127
+#: ../../advanced/misc.rst:181
 msgid ""
 "Suppose now that ``Pet`` bindings are defined in a module named "
 "``basic``, whereas the ``Dog`` bindings are defined somewhere else. The "
@@ -107,7 +179,7 @@ msgid ""
 "constructor of ``class_<Dog>``. However, it can be acquired as follows:"
 msgstr ""
 
-#: ../../advanced/misc.rst:141
+#: ../../advanced/misc.rst:195
 msgid ""
 "Alternatively, you can specify the base class as a template parameter "
 "option to ``class_``, which performs an automated lookup of the "
@@ -116,11 +188,11 @@ msgid ""
 "pybind11 binding code of the module ``basic`` has been executed:"
 msgstr ""
 
-#: ../../advanced/misc.rst:155
+#: ../../advanced/misc.rst:209
 msgid "Naturally, both methods will fail when there are cyclic dependencies."
 msgstr ""
 
-#: ../../advanced/misc.rst:157
+#: ../../advanced/misc.rst:211
 msgid ""
 "Note that pybind11 code compiled with hidden-by-default symbol visibility"
 " (e.g. via the command line flag ``-fvisibility=hidden`` on GCC/Clang), "
@@ -130,7 +202,7 @@ msgid ""
 "multiple extension modules; pybind11 provides a macro to do just this:"
 msgstr ""
 
-#: ../../advanced/misc.rst:170
+#: ../../advanced/misc.rst:224
 msgid ""
 "Note also that it is possible (although would rarely be required) to "
 "share arbitrary C++ objects between extension modules at runtime. "
@@ -141,7 +213,7 @@ msgid ""
 "version. Consider the following example:"
 msgstr ""
 
-#: ../../advanced/misc.rst:183
+#: ../../advanced/misc.rst:237
 msgid ""
 "If the above snippet was used in several separately compiled extension "
 "modules, the first one to be imported would create a ``MyData`` instance "
@@ -150,15 +222,15 @@ msgid ""
 "pointer."
 msgstr ""
 
-#: ../../advanced/misc.rst:188
+#: ../../advanced/misc.rst:242
 msgid "https://docs.python.org/3/extending/extending.html#using-capsules"
 msgstr ""
 
-#: ../../advanced/misc.rst:191
+#: ../../advanced/misc.rst:245
 msgid "Module Destructors"
 msgstr ""
 
-#: ../../advanced/misc.rst:193
+#: ../../advanced/misc.rst:247
 msgid ""
 "pybind11 does not provide an explicit mechanism to invoke cleanup code at"
 " module destruction time. In rare cases where such functionality is "
@@ -166,7 +238,7 @@ msgid ""
 "references with a destruction callback."
 msgstr ""
 
-#: ../../advanced/misc.rst:206
+#: ../../advanced/misc.rst:260
 msgid ""
 "This approach has the potential downside that instances of classes "
 "exposed within the module may still be alive when the cleanup callback is"
@@ -174,14 +246,14 @@ msgid ""
 "application)."
 msgstr ""
 
-#: ../../advanced/misc.rst:210
+#: ../../advanced/misc.rst:264
 msgid ""
 "Alternatively, the capsule may also be stashed within a type object, "
 "which ensures that it not called before all instances of that type have "
 "been collected:"
 msgstr ""
 
-#: ../../advanced/misc.rst:219
+#: ../../advanced/misc.rst:273
 msgid ""
 "Both approaches also expose a potentially dangerous ``_cleanup`` "
 "attribute in Python, which may be undesirable from an API standpoint (a "
@@ -190,22 +262,22 @@ msgid ""
 "a cleanup callback:"
 msgstr ""
 
-#: ../../advanced/misc.rst:240
+#: ../../advanced/misc.rst:294
 msgid ""
 "PyPy does not garbage collect objects when the interpreter exits. An "
 "alternative approach (which also works on CPython) is to use the "
 ":py:mod:`atexit` module [#f7]_, for example:"
 msgstr ""
 
-#: ../../advanced/misc.rst:251
+#: ../../advanced/misc.rst:305
 msgid "https://docs.python.org/3/library/atexit.html"
 msgstr ""
 
-#: ../../advanced/misc.rst:255
+#: ../../advanced/misc.rst:309
 msgid "Generating documentation using Sphinx"
 msgstr ""
 
-#: ../../advanced/misc.rst:257
+#: ../../advanced/misc.rst:311
 msgid ""
 "Sphinx [#f4]_ has the ability to inspect the signatures and documentation"
 " strings in pybind11-based extension modules to automatically generate "
@@ -214,7 +286,7 @@ msgid ""
 "approach."
 msgstr ""
 
-#: ../../advanced/misc.rst:262
+#: ../../advanced/misc.rst:316
 msgid ""
 "There are two potential gotchas when using this approach: first, make "
 "sure that the resulting strings do not contain any :kbd:`TAB` characters,"
@@ -225,7 +297,7 @@ msgid ""
 "indented consistently, i.e.:"
 msgstr ""
 
-#: ../../advanced/misc.rst:286
+#: ../../advanced/misc.rst:340
 msgid ""
 "By default, pybind11 automatically generates and prepends a signature to "
 "the docstring of a function registered with ``module_::def()`` and "
@@ -235,7 +307,22 @@ msgid ""
 " allows you to selectively suppress auto-generated signatures:"
 msgstr ""
 
-#: ../../advanced/misc.rst:301
+#: ../../advanced/misc.rst:355
+msgid ""
+"pybind11 also appends all members of an enum to the resulting enum "
+"docstring. This default behavior can be disabled by using the "
+"``disable_enum_members_docstring()`` function of the ``options`` class."
+msgstr ""
+
+#: ../../advanced/misc.rst:359
+msgid ""
+"With ``disable_user_defined_docstrings()`` all user defined docstrings of"
+" ``module_::def()``, ``class_::def()`` and ``enum_()`` are disabled, but "
+"the function signatures and enum members are included in the docstring, "
+"unless they are disabled separately."
+msgstr ""
+
+#: ../../advanced/misc.rst:364
 msgid ""
 "Note that changes to the settings affect only function bindings created "
 "during the lifetime of the ``options`` instance. When it goes out of "
@@ -243,19 +330,19 @@ msgid ""
 "restored to prevent unwanted side effects."
 msgstr ""
 
-#: ../../advanced/misc.rst:305
+#: ../../advanced/misc.rst:368
 msgid "http://www.sphinx-doc.org"
 msgstr ""
 
-#: ../../advanced/misc.rst:306
+#: ../../advanced/misc.rst:369
 msgid "http://github.com/pybind/python_example"
 msgstr ""
 
-#: ../../advanced/misc.rst:311
+#: ../../advanced/misc.rst:374
 msgid "Avoiding C++ types in docstrings"
 msgstr ""
 
-#: ../../advanced/misc.rst:313
+#: ../../advanced/misc.rst:376
 msgid ""
 "Docstrings are generated at the time of the declaration, e.g. when "
 "``.def(...)`` is called. At this point parameter and return types should "
@@ -264,10 +351,25 @@ msgid ""
 "will be used instead to generate the signature in the docstring:"
 msgstr ""
 
-#: ../../advanced/misc.rst:325
+#: ../../advanced/misc.rst:388
 msgid ""
 "This limitation can be circumvented by ensuring that C++ classes are "
 "registered with pybind11 before they are used as a parameter or return "
 "type of a function:"
 msgstr ""
+
+#~ msgid ""
+#~ "When calling a C++ function from "
+#~ "Python, the GIL is always held. "
+#~ "The classes :class:`gil_scoped_release` and "
+#~ ":class:`gil_scoped_acquire` can be used to "
+#~ "acquire and release the global "
+#~ "interpreter lock in the body of a"
+#~ " C++ function call. In this way, "
+#~ "long-running C++ code can be "
+#~ "parallelized using multiple Python threads."
+#~ " Taking :ref:`overriding_virtuals` as an "
+#~ "example, this could be realized as "
+#~ "follows (important changes highlighted):"
+#~ msgstr ""
 
