@@ -37,7 +37,7 @@ jobs:
       - name: 🐍 Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: "3.11"
+          python-version: "3.9"
           cache: "pip"
           cache-dependency-path: "pyproject.toml"
       - name: 🔧 Build HTML
@@ -55,7 +55,7 @@ jobs:
         uses: actions/upload-pages-artifact@v1
         with:
           # Upload entire repository
-          path: 'docs/.build/html/'
+          path: 'docs/.build/html'
       - name: 🚀 Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@main
